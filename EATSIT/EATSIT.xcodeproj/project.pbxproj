@@ -15,6 +15,7 @@
 		817F53842FB79BE300D75CA7 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53832FB79BD500D75CA7 /* DatabaseManager.swift */; };
 		817F53862FB79C3100D75CA7 /* RestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53852FB79C2F00D75CA7 /* RestaurantViewModel.swift */; };
 		817F53902FB7A22D00D75CA7 /* RestaurantMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F538F2FB7A22B00D75CA7 /* RestaurantMapView.swift */; };
+		817F53922FB7A47F00D75CA7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53912FB7A47B00D75CA7 /* LocationManager.swift */; };
 		81B0F9372FB73F260019ADDE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9362FB73F260019ADDE /* ContentView.swift */; };
 		81B0F9392FB73F270019ADDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81B0F9382FB73F270019ADDE /* Assets.xcassets */; };
 		81B0F9642FB742B00019ADDE /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9632FB742AD0019ADDE /* MainTabView.swift */; };
@@ -71,6 +72,7 @@
 		817F53832FB79BD500D75CA7 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		817F53852FB79C2F00D75CA7 /* RestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewModel.swift; sourceTree = "<group>"; };
 		817F538F2FB7A22B00D75CA7 /* RestaurantMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantMapView.swift; sourceTree = "<group>"; };
+		817F53912FB7A47B00D75CA7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		81B0F9312FB73F260019ADDE /* EATSIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EATSIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B0F9362FB73F260019ADDE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		81B0F9382FB73F270019ADDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 		81B0F95E2FB7408D0019ADDE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				817F53912FB7A47B00D75CA7 /* LocationManager.swift */,
 				817F53832FB79BD500D75CA7 /* DatabaseManager.swift */,
 				817F53642FB78BEE00D75CA7 /* LocalizationManager.swift */,
 			);
@@ -423,6 +426,7 @@
 				81B0F99B2FB756B70019ADDE /* BasketView.swift in Sources */,
 				817F53652FB78C1B00D75CA7 /* LocalizationManager.swift in Sources */,
 				81B0F9A72FB75B140019ADDE /* Order.swift in Sources */,
+				817F53922FB7A47F00D75CA7 /* LocationManager.swift in Sources */,
 				817F53672FB78C2E00D75CA7 /* LanguageView.swift in Sources */,
 				81B0F9992FB7548B0019ADDE /* CartViewModel.swift in Sources */,
 				81B0F9732FB7459E0019ADDE /* RestaurantCardView.swift in Sources */,
@@ -617,6 +621,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs your location to find the nearest restaurant.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -648,6 +653,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs your location to find the nearest restaurant.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

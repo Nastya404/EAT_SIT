@@ -13,6 +13,8 @@ struct RestaurantMapView: View {
     // MARK: - Properties
 
     @StateObject private var viewModel = HomeViewModel()
+    @StateObject private var locationManager = LocationManager()
+    @State private var nearestRestaurant: Restaurant?
 
     @State private var cameraPosition: MapCameraPosition = .region(
         MKCoordinateRegion(
@@ -31,45 +33,133 @@ struct RestaurantMapView: View {
 
     var body: some View {
 
-        Map(position: $cameraPosition) {
+        ZStack(alignment: .bottom) {
 
-            ForEach(viewModel.restaurants) { restaurant in
+            Map(position: $cameraPosition) {
 
-                Annotation(
-                    restaurant.name,
-                    coordinate: CLLocationCoordinate2D(
-                        latitude: restaurant.latitude,
-                        longitude: restaurant.longitude
-                    )
-                ) {
+                ForEach(viewModel.restaurants) { restaurant in
 
-                    NavigationLink {
+                    Annotation(
+                        restaurant.name,
+                        coordinate: CLLocationCoordinate2D(
+                            latitude: restaurant.latitude,
+                            longitude: restaurant.longitude
+                        )
+                    ) {
 
-                        RestaurantView(restaurant: restaurant)
+                        NavigationLink {
 
-                    } label: {
+                            RestaurantView(restaurant: restaurant)
 
-                        VStack(spacing: 4) {
+                        } label: {
 
-                            Image(systemName: "fork.knife.circle.fill")
-                                .font(.system(size: 34))
-                                .foregroundStyle(.orange)
+                            VStack(spacing: 4) {
 
-                            Text(restaurant.name)
-                                .font(.caption)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.primary)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-                                .background(Color.white)
-                                .clipShape(Capsule())
+                                Image(systemName: "fork.knife.circle.fill")
+                                    .font(.system(size: 34))
+                                    .foregroundStyle(
+                                        nearestRestaurant?.id == restaurant.id
+                                            ? .green
+                                            : .orange
+                                    )
+
+                                Text(restaurant.name)
+                                    .font(.caption)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.primary)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background(Color.white)
+                                    .clipShape(Capsule())
+                            }
                         }
                     }
                 }
             }
+
+            bottomPanel
         }
         .navigationTitle("Map")
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    // MARK: - Bottom Panel
+
+    private var bottomPanel: some View {
+
+        VStack(spacing: 12) {
+
+            if let nearestRestaurant {
+
+                Text("Nearest restaurant: \(nearestRestaurant.name)")
+                    .font(.headline)
+                    .foregroundStyle(.green)
+            }
+
+            Button {
+
+                findNearestRestaurant()
+
+            } label: {
+
+                HStack {
+
+                    Image(systemName: "location.fill")
+                    Text("Find nearest restaurant")
+                }
+                .font(.headline)
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.orange)
+                .clipShape(RoundedRectangle(cornerRadius: 18))
+            }
+        }
+        .padding(20)
+        .background(.ultraThinMaterial)
+    }
+
+    // MARK: - Methods
+
+    private func findNearestRestaurant() {
+
+        locationManager.requestLocation()
+
+        guard let userLocation = locationManager.userLocation else {
+            return
+        }
+
+        nearestRestaurant = viewModel.restaurants.min { first, second in
+
+            let firstLocation = CLLocation(
+                latitude: first.latitude,
+                longitude: first.longitude
+            )
+
+            let secondLocation = CLLocation(
+                latitude: second.latitude,
+                longitude: second.longitude
+            )
+
+            return firstLocation.distance(from: userLocation)
+                < secondLocation.distance(from: userLocation)
+        }
+
+        if let nearestRestaurant {
+
+            cameraPosition = .region(
+                MKCoordinateRegion(
+                    center: CLLocationCoordinate2D(
+                        latitude: nearestRestaurant.latitude,
+                        longitude: nearestRestaurant.longitude
+                    ),
+                    span: MKCoordinateSpan(
+                        latitudeDelta: 0.01,
+                        longitudeDelta: 0.01
+                    )
+                )
+            )
+        }
     }
 }
 
