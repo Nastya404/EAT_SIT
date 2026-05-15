@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		817F53632FB78BBE00D75CA7 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53622FB78BBB00D75CA7 /* AppLanguage.swift */; };
+		817F53652FB78C1B00D75CA7 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53642FB78BEE00D75CA7 /* LocalizationManager.swift */; };
+		817F53672FB78C2E00D75CA7 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53662FB78C2D00D75CA7 /* LanguageView.swift */; };
+		817F536A2FB78D3900D75CA7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 817F53682FB78D3900D75CA7 /* Localizable.strings */; };
 		81B0F9372FB73F260019ADDE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9362FB73F260019ADDE /* ContentView.swift */; };
 		81B0F9392FB73F270019ADDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81B0F9382FB73F270019ADDE /* Assets.xcassets */; };
 		81B0F9642FB742B00019ADDE /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9632FB742AD0019ADDE /* MainTabView.swift */; };
@@ -52,6 +56,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		817F53622FB78BBB00D75CA7 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
+		817F53642FB78BEE00D75CA7 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
+		817F53662FB78C2D00D75CA7 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
+		817F53692FB78D3900D75CA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		817F536B2FB78D5E00D75CA7 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		817F536C2FB78D6A00D75CA7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		81B0F9312FB73F260019ADDE /* EATSIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EATSIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B0F9362FB73F260019ADDE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		81B0F9382FB73F270019ADDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -155,6 +165,7 @@
 		81B0F95C2FB7406F0019ADDE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				817F53662FB78C2D00D75CA7 /* LanguageView.swift */,
 				81B0F9A42FB759020019ADDE /* CheckoutView.swift */,
 				81B0F99A2FB756B40019ADDE /* BasketView.swift */,
 				81B0F97C2FB74EF20019ADDE /* DishDetailsView.swift */,
@@ -180,6 +191,7 @@
 		81B0F95E2FB7408D0019ADDE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				817F53642FB78BEE00D75CA7 /* LocalizationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -200,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				81B0F9382FB73F270019ADDE /* Assets.xcassets */,
+				817F53682FB78D3900D75CA7 /* Localizable.strings */,
 			);
 			path = "Resources ";
 			sourceTree = "<group>";
@@ -215,6 +228,7 @@
 		81B0F9622FB740F40019ADDE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				817F53622FB78BBB00D75CA7 /* AppLanguage.swift */,
 				81B0F9AC2FB75F220019ADDE /* ProfileOption.swift */,
 				81B0F9A62FB75B120019ADDE /* Order.swift */,
 				81B0F99E2FB758A60019ADDE /* PaymentMethod.swift */,
@@ -326,6 +340,8 @@
 			knownRegions = (
 				en,
 				Base,
+				pl,
+				ru,
 			);
 			mainGroup = 81B0F9282FB73F260019ADDE;
 			minimizedProjectReferenceProxies = 1;
@@ -347,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81B0F9392FB73F270019ADDE /* Assets.xcassets in Resources */,
+				817F536A2FB78D3900D75CA7 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,7 +398,9 @@
 				81B0F9AF2FB75FBA0019ADDE /* ProfileOptionRowView.swift in Sources */,
 				81B0F9AB2FB75C330019ADDE /* OrderCardView.swift in Sources */,
 				81B0F99B2FB756B70019ADDE /* BasketView.swift in Sources */,
+				817F53652FB78C1B00D75CA7 /* LocalizationManager.swift in Sources */,
 				81B0F9A72FB75B140019ADDE /* Order.swift in Sources */,
+				817F53672FB78C2E00D75CA7 /* LanguageView.swift in Sources */,
 				81B0F9992FB7548B0019ADDE /* CartViewModel.swift in Sources */,
 				81B0F9732FB7459E0019ADDE /* RestaurantCardView.swift in Sources */,
 				81B0F97B2FB74E850019ADDE /* DishCustomization.swift in Sources */,
@@ -390,6 +409,7 @@
 				81B0F99D2FB7570C0019ADDE /* BasketItemView.swift in Sources */,
 				81B0F96D2FB743380019ADDE /* ProfileView.swift in Sources */,
 				81B0F9712FB7457B0019ADDE /* MockData.swift in Sources */,
+				817F53632FB78BBE00D75CA7 /* AppLanguage.swift in Sources */,
 				81B0F9642FB742B00019ADDE /* MainTabView.swift in Sources */,
 				81B0F9792FB74D410019ADDE /* DishRowView.swift in Sources */,
 				81B0F9972FB754240019ADDE /* CartItem.swift in Sources */,
@@ -427,12 +447,26 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		817F53682FB78D3900D75CA7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				817F53692FB78D3900D75CA7 /* en */,
+				817F536B2FB78D5E00D75CA7 /* pl */,
+				817F536C2FB78D6A00D75CA7 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		81B0F9502FB73F270019ADDE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -496,6 +530,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

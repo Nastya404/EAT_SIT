@@ -1,0 +1,42 @@
+/* 
+  Localizable.strings
+  EATSIT
+
+  Created by Shamruk_Polina on 15.05.2026.
+  
+*/
+
+"tab.home" = "Главная";
+"tab.orders" = "Заказы";
+"tab.profile" = "Профиль";
+
+"profile.title" = "Профиль";
+"profile.orders" = "Заказы";
+"profile.reviews" = "Отзывы";
+"profile.points" = "Баллы";
+"profile.logout" = "Выйти";
+"profile.paymentMethods" = "Способы оплаты";
+"profile.deliveryAddresses" = "Адреса доставки";
+"profile.notifications" = "Уведомления";
+"profile.language" = "Язык";
+"profile.help" = "Помощь и поддержка";
+
+"language.title" = "Язык";
+
+"home.deliveringTo" = "ДОСТАВКА ПО АДРЕСУ";
+"home.address" = "Дом";
+"home.question" = "Что хотите заказать сегодня? 🍔";
+"home.search" = "Поиск ресторанов или блюд";
+"home.category.pizza" = "🍕 Пицца";
+"home.category.sushi" = "🍣 Суши";
+"home.category.burgers" = "🍔 Бургеры";
+"home.category.healthy" = "🥗 Здоровое";
+"home.category.desserts" = "🍰 Десерты";
+"home.popularNearYou" = "🔥 Популярное рядом";
+"home.seeAll" = "Все";
+
+"orders.title" = "Мои заказы";
+"orders.subtitle" = "Отслеживайте и повторяйте заказы";
+"orders.pastOrders" = "ПРОШЛЫЕ ЗАКАЗЫ";
+"orders.emptyTitle" = "Заказов пока нет";
+"orders.emptySubtitle" = "Здесь появятся ваши завершённые заказы.";

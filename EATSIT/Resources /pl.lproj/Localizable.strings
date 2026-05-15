@@ -1,0 +1,42 @@
+/* 
+  Localizable.strings
+  EATSIT
+
+  Created by Shamruk_Polina on 15.05.2026.
+  
+*/
+
+"tab.home" = "Główna";
+"tab.orders" = "Zamówienia";
+"tab.profile" = "Profil";
+
+"profile.title" = "Profil";
+"profile.orders" = "Zamówienia";
+"profile.reviews" = "Opinie";
+"profile.points" = "Punkty";
+"profile.logout" = "Wyloguj";
+"profile.paymentMethods" = "Metody płatności";
+"profile.deliveryAddresses" = "Adresy dostawy";
+"profile.notifications" = "Powiadomienia";
+"profile.language" = "Język";
+"profile.help" = "Pomoc i wsparcie";
+
+"language.title" = "Język";
+
+"home.deliveringTo" = "DOSTAWA DO";
+"home.address" = "Dom";
+"home.question" = "Na co masz dziś ochotę? 🍔";
+"home.search" = "Szukaj restauracji lub dań";
+"home.category.pizza" = "🍕 Pizza";
+"home.category.sushi" = "🍣 Sushi";
+"home.category.burgers" = "🍔 Burgery";
+"home.category.healthy" = "🥗 Zdrowe";
+"home.category.desserts" = "🍰 Desery";
+"home.popularNearYou" = "🔥 Popularne w pobliżu";
+"home.seeAll" = "Zobacz wszystkie";
+
+"orders.title" = "Moje zamówienia";
+"orders.subtitle" = "Śledź i zamawiaj ponownie";
+"orders.pastOrders" = "POPRZEDNIE ZAMÓWIENIA";
+"orders.emptyTitle" = "Brak zamówień";
+"orders.emptySubtitle" = "Tutaj pojawią się zakończone zamówienia.";

@@ -17,23 +17,20 @@ struct MainTabView: View {
 
             HomeView()
                 .tabItem {
-
                     Image(systemName: "house.fill")
-                    Text("Home")
+                    Text("tab.home")
                 }
 
             OrdersView()
                 .tabItem {
-
                     Image(systemName: "list.clipboard.fill")
-                    Text("Orders")
+                    Text("tab.orders")
                 }
 
             ProfileView()
                 .tabItem {
-
                     Image(systemName: "person.fill")
-                    Text("Profile")
+                    Text("tab.profile")
                 }
         }
         .tint(.orange)
@@ -43,6 +40,5 @@ struct MainTabView: View {
 // MARK: - Preview
 
 #Preview {
-
     MainTabView()
 }

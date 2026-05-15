@@ -45,7 +45,7 @@ struct ProfileOptionRowView: View {
 
     private var titleView: some View {
 
-        Text(option.title)
+        Text(LocalizedStringKey(option.titleKey))
             .font(.headline)
     }
 

@@ -1,0 +1,42 @@
+/* 
+  Localizable.strings
+  EATSIT
+
+  Created by Shamruk_Polina on 15.05.2026.
+  
+*/
+
+"tab.home" = "Home";
+"tab.orders" = "Orders";
+"tab.profile" = "Profile";
+
+"profile.title" = "Profile";
+"profile.orders" = "Orders";
+"profile.reviews" = "Reviews";
+"profile.points" = "Points";
+"profile.logout" = "Log Out";
+"profile.paymentMethods" = "Payment Methods";
+"profile.deliveryAddresses" = "Delivery Addresses";
+"profile.notifications" = "Notifications";
+"profile.language" = "Language";
+"profile.help" = "Help & Support";
+
+"language.title" = "Language";
+
+"home.deliveringTo" = "DELIVERING TO";
+"home.address" = "Home";
+"home.question" = "What are you craving today? 🍔";
+"home.search" = "Search for restaurants or dishes";
+"home.category.pizza" = "🍕 Pizza";
+"home.category.sushi" = "🍣 Sushi";
+"home.category.burgers" = "🍔 Burgers";
+"home.category.healthy" = "🥗 Healthy";
+"home.category.desserts" = "🍰 Desserts";
+"home.popularNearYou" = "🔥 Popular Near You";
+"home.seeAll" = "See all";
+
+"orders.title" = "My Orders";
+"orders.subtitle" = "Track and reorder your meals";
+"orders.pastOrders" = "PAST ORDERS";
+"orders.emptyTitle" = "No orders yet";
+"orders.emptySubtitle" = "Your completed orders will appear here.";

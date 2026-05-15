@@ -14,6 +14,7 @@ struct EATSITApp: App {
 
     @StateObject private var cartViewModel = CartViewModel()
     @StateObject private var orderViewModel = OrderViewModel()
+    @StateObject private var localizationManager = LocalizationManager()
 
     // MARK: - Body
 
@@ -24,6 +25,8 @@ struct EATSITApp: App {
             ContentView()
                 .environmentObject(cartViewModel)
                 .environmentObject(orderViewModel)
+                .environmentObject(localizationManager)
+                .environment(\.locale, Locale(identifier: localizationManager.selectedLanguage.rawValue))
         }
     }
 }

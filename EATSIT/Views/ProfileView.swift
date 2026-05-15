@@ -37,7 +37,7 @@ struct ProfileView: View {
 
         HStack {
 
-            Text("Profile")
+            Text("profile.title")
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
@@ -87,11 +87,11 @@ struct ProfileView: View {
 
         HStack {
 
-            statisticItem(title: "Orders", value: "24")
+            statisticItem(titleKey: "profile.orders", value: "24")
             Divider()
-            statisticItem(title: "Reviews", value: "8")
+            statisticItem(titleKey: "profile.reviews", value: "8")
             Divider()
-            statisticItem(title: "Points", value: "320")
+            statisticItem(titleKey: "profile.points", value: "320")
         }
         .frame(height: 72)
         .padding()
@@ -107,7 +107,22 @@ struct ProfileView: View {
 
             ForEach(MockData.profileOptions) { option in
 
-                ProfileOptionRowView(option: option)
+                if option.titleKey == "profile.language" {
+
+                    NavigationLink {
+
+                        LanguageView()
+
+                    } label: {
+
+                        ProfileOptionRowView(option: option)
+                    }
+                    .buttonStyle(.plain)
+
+                } else {
+
+                    ProfileOptionRowView(option: option)
+                }
 
                 if option.id != MockData.profileOptions.last?.id {
                     Divider()
@@ -130,7 +145,7 @@ struct ProfileView: View {
             HStack {
 
                 Image(systemName: "rectangle.portrait.and.arrow.right")
-                Text("Log Out")
+                Text("profile.logout")
             }
             .font(.headline)
             .foregroundStyle(.red)
@@ -143,7 +158,7 @@ struct ProfileView: View {
 
     // MARK: - Methods
 
-    private func statisticItem(title: String, value: String) -> some View {
+    private func statisticItem(titleKey: String, value: String) -> some View {
 
         VStack(spacing: 6) {
 
@@ -151,7 +166,7 @@ struct ProfileView: View {
                 .font(.title2)
                 .fontWeight(.bold)
 
-            Text(title)
+            Text(LocalizedStringKey(titleKey))
                 .font(.caption)
                 .foregroundStyle(.gray)
         }
@@ -159,9 +174,6 @@ struct ProfileView: View {
     }
 }
 
-// MARK: - Preview
-
 #Preview {
-
     ProfileView()
 }

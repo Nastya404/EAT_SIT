@@ -13,6 +13,6 @@ struct ProfileOption: Identifiable {
 
     let id = UUID()
 
-    let title: String
+    let titleKey: String
     let iconName: String
 }

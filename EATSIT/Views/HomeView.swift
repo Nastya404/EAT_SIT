@@ -12,13 +12,12 @@ struct HomeView: View {
     // MARK: - Properties
 
     private let categories = [
-        "🍕 Pizza",
-        "🍣 Sushi",
-        "🍔 Burgers",
-        "🥗 Healthy",
-        "🍰 Desserts"
+        "home.category.pizza",
+        "home.category.sushi",
+        "home.category.burgers",
+        "home.category.healthy",
+        "home.category.desserts"
     ]
-
     // MARK: - Body
 
     var body: some View {
@@ -47,7 +46,7 @@ struct HomeView: View {
 
         VStack(alignment: .leading, spacing: 8) {
 
-            Text("DELIVERING TO")
+            Text("home.deliveringTo")
                 .font(.caption)
                 .foregroundStyle(.gray)
 
@@ -56,7 +55,7 @@ struct HomeView: View {
                 Image(systemName: "location.fill")
                     .foregroundStyle(.orange)
 
-                Text("Home")
+                Text("home.address")
                     .font(.title3)
                     .fontWeight(.bold)
 
@@ -70,7 +69,7 @@ struct HomeView: View {
                     .foregroundStyle(.orange)
             }
 
-            Text("What are you craving today? 🍔")
+            Text("home.question")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.top, 16)
@@ -86,7 +85,7 @@ struct HomeView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.gray)
 
-            Text("Search for restaurants or dishes")
+            Text("home.search")
                 .foregroundStyle(.gray.opacity(0.7))
 
             Spacer()
@@ -112,18 +111,18 @@ struct HomeView: View {
 
                 ForEach(categories, id: \.self) { category in
 
-                    Text(category)
+                    Text(LocalizedStringKey(category))
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 12)
                         .background(
-                            category.contains("Pizza")
+                            category == "home.category.pizza"
                             ? Color.orange
                             : Color.white
                         )
                         .foregroundStyle(
-                            category.contains("Pizza")
+                            category == "home.category.pizza"
                             ? .white
                             : .gray
                         )
@@ -141,13 +140,13 @@ struct HomeView: View {
 
             HStack {
 
-                Text("🔥 Popular Near You")
+                Text("home.popularNearYou")
                     .font(.title2)
                     .fontWeight(.bold)
 
                 Spacer()
 
-                Text("See all")
+                Text("home.seeAll")
                     .fontWeight(.semibold)
                     .foregroundStyle(.orange)
             }

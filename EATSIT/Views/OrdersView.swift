@@ -46,11 +46,11 @@ struct OrdersView: View {
 
             VStack(alignment: .leading, spacing: 6) {
 
-                Text("My Orders")
+                Text("orders.title")
                     .font(.largeTitle)
                     .fontWeight(.bold)
 
-                Text("Track and reorder your meals")
+                Text("orders.subtitle")
                     .font(.subheadline)
                     .foregroundStyle(.gray)
             }
@@ -80,14 +80,14 @@ struct OrdersView: View {
                         .fill(Color.gray.opacity(0.35))
                         .frame(width: 8, height: 8)
 
-                    Text("PAST ORDERS")
+                    Text("orders.pastOrders")
                         .font(.headline)
                         .foregroundStyle(.gray)
                 }
 
                 Spacer()
 
-                Text("See all")
+                Text("home.seeAll")
                     .fontWeight(.semibold)
                     .foregroundStyle(.orange)
             }
@@ -109,11 +109,11 @@ struct OrdersView: View {
                 .font(.system(size: 54))
                 .foregroundStyle(.orange)
 
-            Text("No orders yet")
+            Text("orders.emptyTitle")
                 .font(.title2)
                 .fontWeight(.bold)
 
-            Text("Your completed orders will appear here.")
+            Text("orders.emptySubtitle")
                 .foregroundStyle(.gray)
                 .multilineTextAlignment(.center)
         }

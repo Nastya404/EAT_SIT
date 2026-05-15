@@ -186,27 +186,27 @@ struct MockData {
     static let profileOptions: [ProfileOption] = [
 
         ProfileOption(
-            title: "Payment Methods",
+            titleKey: "profile.paymentMethods",
             iconName: "creditcard.fill"
         ),
 
         ProfileOption(
-            title: "Delivery Addresses",
+            titleKey: "profile.deliveryAddresses",
             iconName: "location.fill"
         ),
 
         ProfileOption(
-            title: "Notifications",
+            titleKey: "profile.notifications",
             iconName: "bell.fill"
         ),
 
         ProfileOption(
-            title: "Language",
+            titleKey: "profile.language",
             iconName: "globe"
         ),
 
         ProfileOption(
-            title: "Help & Support",
+            titleKey: "profile.help",
             iconName: "questionmark.circle.fill"
         )
     ]
