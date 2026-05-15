@@ -9,9 +9,19 @@ import SwiftUI
 
 @main
 struct EATSITApp: App {
+
+    // MARK: - Properties
+
+    @StateObject private var cartViewModel = CartViewModel()
+
+    // MARK: - Body
+
     var body: some Scene {
+
         WindowGroup {
+
             ContentView()
+                .environmentObject(cartViewModel)
         }
     }
 }

@@ -13,6 +13,8 @@ struct DishRowView: View {
 
     let dish: Dish
 
+    @EnvironmentObject private var cartViewModel: CartViewModel
+
     // MARK: - Body
 
     var body: some View {
@@ -68,6 +70,14 @@ struct DishRowView: View {
 
         Button {
 
+            let item = CartItem(
+                dish: dish,
+                quantity: 1,
+                selectedToppings: []
+            )
+
+            cartViewModel.addItem(item)
+
         } label: {
 
             Image(systemName: "plus")
@@ -87,4 +97,5 @@ struct DishRowView: View {
     DishRowView(
         dish: MockData.dishes[0]
     )
+    .environmentObject(CartViewModel())
 }

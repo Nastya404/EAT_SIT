@@ -13,6 +13,8 @@ struct DishDetailsView: View {
 
     let dish: Dish
 
+    @EnvironmentObject private var cartViewModel: CartViewModel
+
     @State private var quantity = 1
     @State private var selectedCustomizations: Set<UUID> = []
 
@@ -20,6 +22,12 @@ struct DishDetailsView: View {
         MockData.customizations
             .filter { selectedCustomizations.contains($0.id) }
             .reduce(0) { $0 + $1.price }
+    }
+
+    private var selectedToppings: [DishCustomization] {
+        MockData.customizations.filter {
+            selectedCustomizations.contains($0.id)
+        }
     }
 
     private var totalPrice: Double {
@@ -216,6 +224,14 @@ struct DishDetailsView: View {
 
         Button {
 
+            let item = CartItem(
+                dish: dish,
+                quantity: quantity,
+                selectedToppings: selectedToppings
+            )
+
+            cartViewModel.addItem(item)
+
         } label: {
 
             Text("Add to Basket — $\(totalPrice, specifier: "%.2f")")
@@ -265,5 +281,6 @@ struct DishDetailsView: View {
         DishDetailsView(
             dish: MockData.dishes[0]
         )
+        .environmentObject(CartViewModel())
     }
 }

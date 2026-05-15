@@ -140,7 +140,9 @@ struct RestaurantView: View {
 
     private var basketButton: some View {
 
-        Button {
+        NavigationLink {
+
+            BasketView()
 
         } label: {
 
@@ -150,7 +152,7 @@ struct RestaurantView: View {
 
                 Spacer()
 
-                Text("$34.46")
+                Text("Open")
             }
             .fontWeight(.bold)
             .foregroundStyle(.white)
