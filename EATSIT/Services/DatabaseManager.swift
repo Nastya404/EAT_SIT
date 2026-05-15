@@ -81,9 +81,35 @@ final class DatabaseManager {
             FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)
         );
         """
+        
+        let createOrdersTable = """
+        CREATE TABLE IF NOT EXISTS orders (
+            id TEXT PRIMARY KEY,
+            delivery_address TEXT NOT NULL,
+            comment TEXT,
+            payment_method TEXT NOT NULL,
+            total_price REAL NOT NULL,
+            status TEXT NOT NULL,
+            created_at REAL NOT NULL
+        );
+        """
+
+        let createOrderItemsTable = """
+        CREATE TABLE IF NOT EXISTS order_items (
+            id TEXT PRIMARY KEY,
+            order_id TEXT NOT NULL,
+            dish_id TEXT NOT NULL,
+            quantity INTEGER NOT NULL,
+            total_price REAL NOT NULL,
+            FOREIGN KEY (order_id) REFERENCES orders(id),
+            FOREIGN KEY (dish_id) REFERENCES dishes(id)
+        );
+        """
 
         execute(createRestaurantsTable)
         execute(createDishesTable)
+        execute(createOrdersTable)
+        execute(createOrderItemsTable)
     }
 
     // MARK: - Execute Query
@@ -257,5 +283,150 @@ final class DatabaseManager {
         fetchDishes().filter {
             $0.restaurantId == restaurant.id
         }
+    }
+    
+    // MARK: - Insert Order
+
+    func insertOrder(_ order: Order) {
+
+        let query = """
+        INSERT OR REPLACE INTO orders
+        (id, delivery_address, comment, payment_method, total_price, status, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?);
+        """
+
+        var statement: OpaquePointer?
+
+        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+
+            sqlite3_bind_text(statement, 1, order.id.uuidString, -1, transient)
+            sqlite3_bind_text(statement, 2, order.deliveryAddress, -1, transient)
+            sqlite3_bind_text(statement, 3, order.comment, -1, transient)
+            sqlite3_bind_text(statement, 4, order.paymentMethod.rawValue, -1, transient)
+            sqlite3_bind_double(statement, 5, order.totalPrice)
+            sqlite3_bind_text(statement, 6, order.status, -1, transient)
+            sqlite3_bind_double(statement, 7, order.createdAt.timeIntervalSince1970)
+
+            sqlite3_step(statement)
+        }
+
+        sqlite3_finalize(statement)
+
+        order.items.forEach {
+            insertOrderItem($0, orderId: order.id.uuidString)
+        }
+    }
+
+    // MARK: - Insert Order Item
+
+    private func insertOrderItem(_ item: CartItem, orderId: String) {
+
+        let query = """
+        INSERT OR REPLACE INTO order_items
+        (id, order_id, dish_id, quantity, total_price)
+        VALUES (?, ?, ?, ?, ?);
+        """
+
+        var statement: OpaquePointer?
+
+        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+
+            sqlite3_bind_text(statement, 1, item.id.uuidString, -1, transient)
+            sqlite3_bind_text(statement, 2, orderId, -1, transient)
+            sqlite3_bind_text(statement, 3, item.dish.id, -1, transient)
+            sqlite3_bind_int(statement, 4, Int32(item.quantity))
+            sqlite3_bind_double(statement, 5, item.totalPrice)
+
+            sqlite3_step(statement)
+        }
+
+        sqlite3_finalize(statement)
+    }
+
+    // MARK: - Fetch Orders
+
+    func fetchOrders() -> [Order] {
+
+        let query = """
+        SELECT id, delivery_address, comment, payment_method, total_price, status, created_at
+        FROM orders
+        ORDER BY created_at DESC;
+        """
+
+        var orders: [Order] = []
+        var statement: OpaquePointer?
+
+        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+
+            while sqlite3_step(statement) == SQLITE_ROW {
+
+                let orderId = String(cString: sqlite3_column_text(statement, 0))
+                let deliveryAddress = String(cString: sqlite3_column_text(statement, 1))
+                let comment = String(cString: sqlite3_column_text(statement, 2))
+                let paymentMethodRaw = String(cString: sqlite3_column_text(statement, 3))
+                let totalPrice = sqlite3_column_double(statement, 4)
+                let status = String(cString: sqlite3_column_text(statement, 5))
+                let createdAt = Date(
+                    timeIntervalSince1970: sqlite3_column_double(statement, 6)
+                )
+
+                let paymentMethod = PaymentMethod(rawValue: paymentMethodRaw) ?? .cash
+                let items = fetchOrderItems(orderId: orderId)
+
+                let order = Order(
+                    items: items,
+                    deliveryAddress: deliveryAddress,
+                    comment: comment,
+                    paymentMethod: paymentMethod,
+                    totalPrice: totalPrice,
+                    status: status,
+                    createdAt: createdAt
+                )
+
+                orders.append(order)
+            }
+        }
+
+        sqlite3_finalize(statement)
+        return orders
+    }
+
+    // MARK: - Fetch Order Items
+
+    private func fetchOrderItems(orderId: String) -> [CartItem] {
+
+        let query = """
+        SELECT dish_id, quantity
+        FROM order_items
+        WHERE order_id = ?;
+        """
+
+        var items: [CartItem] = []
+        var statement: OpaquePointer?
+
+        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+
+            sqlite3_bind_text(statement, 1, orderId, -1, transient)
+
+            while sqlite3_step(statement) == SQLITE_ROW {
+
+                let dishId = String(cString: sqlite3_column_text(statement, 0))
+                let quantity = Int(sqlite3_column_int(statement, 1))
+
+                if let dish = fetchDishes().first(where: { $0.id == dishId }) {
+
+                    let item = CartItem(
+                        dish: dish,
+                        quantity: quantity,
+                        selectedToppings: []
+                    )
+
+                    items.append(item)
+                }
+            }
+        }
+
+        sqlite3_finalize(statement)
+        return items
     }
 }

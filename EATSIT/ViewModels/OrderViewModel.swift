@@ -14,10 +14,20 @@ final class OrderViewModel: ObservableObject {
 
     @Published var orders: [Order] = []
 
+    // MARK: - Initialization
+
+    init() {
+        loadOrders()
+    }
+
     // MARK: - Methods
 
-    func addOrder(_ order: Order) {
+    func loadOrders() {
+        orders = DatabaseManager.shared.fetchOrders()
+    }
 
-        orders.insert(order, at: 0)
+    func addOrder(_ order: Order) {
+        DatabaseManager.shared.insertOrder(order)
+        loadOrders()
     }
 }
