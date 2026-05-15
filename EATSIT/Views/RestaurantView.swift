@@ -113,14 +113,20 @@ struct RestaurantView: View {
             .padding(.horizontal, 20)
         }
     }
-
+    
+    // MARK: - Dishes View
+    private var restaurantDishes: [Dish] {
+        MockData.dishes.filter {
+            $0.restaurantName == restaurant.name
+        }
+    }
     // MARK: - Dishes View
 
     private var dishesView: some View {
 
         VStack(spacing: 16) {
 
-            ForEach(MockData.dishes) { dish in
+            ForEach(restaurantDishes) { dish in
 
                 NavigationLink {
 

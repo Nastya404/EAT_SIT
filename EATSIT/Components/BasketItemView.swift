@@ -13,69 +13,172 @@ struct BasketItemView: View {
 
     let item: CartItem
 
+    @EnvironmentObject private var cartViewModel: CartViewModel
+
+    private var toppingsText: String {
+        item.selectedToppings.map { $0.name }.joined(separator: ", ")
+    }
+
     // MARK: - Body
 
     var body: some View {
 
-        HStack(spacing: 14) {
+        VStack(spacing: 18) {
 
-            dishImageView
-            dishInfoView
+            topInfoView
+
+            Divider()
+
+            bottomControlsView
+        }
+        .padding(18)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 26))
+        .shadow(color: .black.opacity(0.04), radius: 10, x: 0, y: 5)
+    }
+
+    // MARK: - Top Info View
+
+    private var topInfoView: some View {
+
+        HStack(alignment: .top, spacing: 14) {
+
+            ZStack(alignment: .bottomTrailing) {
+
+                Image(item.dish.imageName)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 92, height: 92)
+                    .clipShape(RoundedRectangle(cornerRadius: 18))
+
+                Text("\(item.quantity)")
+                    .font(.caption)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.white)
+                    .frame(width: 26, height: 26)
+                    .background(Color.orange)
+                    .clipShape(Circle())
+                    .offset(x: 8, y: 8)
+            }
+
+            VStack(alignment: .leading, spacing: 8) {
+
+                Text(item.dish.name)
+                    .font(.headline)
+                    .lineLimit(2)
+
+                if !item.selectedToppings.isEmpty {
+                    Text(toppingsText)
+                        .font(.subheadline)
+                        .foregroundStyle(.gray)
+                        .lineLimit(1)
+
+                    Text("+ toppings")
+                        .font(.caption)
+                        .fontWeight(.bold)
+                        .foregroundStyle(.orange)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(Color.orange.opacity(0.1))
+                        .clipShape(Capsule())
+                }
+            }
 
             Spacer()
 
-            priceView
-        }
-        .padding(14)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 24))
-    }
+            VStack(alignment: .trailing, spacing: 8) {
 
-    // MARK: - Dish Image View
+                Text(String(format: "$%.2f", item.totalPrice))
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.orange)
 
-    private var dishImageView: some View {
-
-        Image(item.dish.imageName)
-            .resizable()
-            .scaledToFill()
-            .frame(width: 76, height: 76)
-            .clipShape(RoundedRectangle(cornerRadius: 18))
-    }
-
-    // MARK: - Dish Info View
-
-    private var dishInfoView: some View {
-
-        VStack(alignment: .leading, spacing: 6) {
-
-            Text(item.dish.name)
-                .font(.headline)
-
-            Text("Quantity: \(item.quantity)")
-                .font(.subheadline)
-                .foregroundStyle(.gray)
-
-            if !item.selectedToppings.isEmpty {
-
-                Text(
-                    item.selectedToppings
-                        .map { $0.name }
-                        .joined(separator: ", ")
-                )
-                .font(.caption)
-                .foregroundStyle(.gray)
-                .lineLimit(2)
+                Text(String(format: "$%.2f", item.dish.price))
+                    .font(.caption)
+                    .strikethrough()
+                    .foregroundStyle(.gray.opacity(0.7))
             }
         }
     }
 
-    // MARK: - Price View
+    // MARK: - Bottom Controls View
 
-    private var priceView: some View {
+    private var bottomControlsView: some View {
 
-        Text("$\(item.totalPrice, specifier: "%.2f")")
-            .font(.headline)
-            .fontWeight(.bold)
-            .foregroundStyle(.orange)
+        HStack {
+
+            Text("Quantity")
+                .foregroundStyle(.gray)
+
+            Spacer()
+
+            quantityControl
+
+            Button {
+
+                cartViewModel.removeItem(item)
+
+            } label: {
+
+                Image(systemName: "trash")
+                    .font(.headline)
+                    .foregroundStyle(.red)
+                    .frame(width: 40, height: 40)
+            }
+        }
     }
+
+    // MARK: - Quantity Control
+
+    private var quantityControl: some View {
+
+        HStack(spacing: 0) {
+
+            Button {
+                cartViewModel.decreaseQuantity(for: item)
+            } label: {
+                Text("−")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.orange)
+                    .frame(width: 44, height: 40)
+            }
+
+            Text("\(item.quantity)")
+                .font(.title3)
+                .fontWeight(.bold)
+                .frame(width: 46, height: 40)
+
+            Button {
+                cartViewModel.increaseQuantity(for: item)
+            } label: {
+                Text("+")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.white)
+                    .frame(width: 44, height: 40)
+                    .background(Color.orange)
+            }
+        }
+        .background(Color.orange.opacity(0.08))
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay {
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(Color.orange.opacity(0.25))
+        }
+    }
+}
+
+// MARK: - Preview
+
+#Preview {
+
+    BasketItemView(
+        item: CartItem(
+            dish: MockData.dishes[0],
+            quantity: 1,
+            selectedToppings: MockData.customizations
+        )
+    )
+    .environmentObject(CartViewModel())
 }

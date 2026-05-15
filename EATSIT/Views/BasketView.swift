@@ -12,43 +12,94 @@ struct BasketView: View {
     // MARK: - Properties
 
     @EnvironmentObject private var cartViewModel: CartViewModel
+    @Environment(\.dismiss) private var dismiss
 
     // MARK: - Body
 
     var body: some View {
 
-        ScrollView {
+        ZStack(alignment: .bottom) {
 
-            VStack(alignment: .leading, spacing: 24) {
+            ScrollView {
 
-                titleView
+                VStack(alignment: .leading, spacing: 26) {
 
-                if cartViewModel.items.isEmpty {
-                    emptyBasketView
-                } else {
-                    basketItemsView
-                    orderSummaryView
-                    checkoutButton
+                    headerView
+
+                    if cartViewModel.items.isEmpty {
+                        emptyBasketView
+                    } else {
+                        orderSectionView
+                        orderSummaryView
+                        deliveryInfoView
+                    }
                 }
+                .padding(20)
+                .padding(.bottom, 110)
             }
-            .padding(20)
+            .background(Color(.systemGray6))
+
+            if !cartViewModel.items.isEmpty {
+                checkoutButton
+            }
         }
-        .background(Color(.systemGray6))
-        .navigationTitle("My Basket")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
     }
 
-    // MARK: - Title View
+    // MARK: - Header View
 
-    private var titleView: some View {
+    private var headerView: some View {
 
-        Text("\(cartViewModel.items.count) item")
-            .font(.headline)
-            .foregroundStyle(.white)
-            .padding(.horizontal, 18)
-            .padding(.vertical, 10)
-            .background(Color.orange)
-            .clipShape(Capsule())
+        HStack {
+
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.left")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.primary)
+                    .frame(width: 52, height: 52)
+                    .background(Color.white)
+                    .clipShape(Circle())
+            }
+
+            Spacer()
+
+            Text("My Basket")
+                .font(.title2)
+                .fontWeight(.bold)
+
+            Spacer()
+
+            Text("\(cartViewModel.items.count) item")
+                .font(.headline)
+                .foregroundStyle(.white)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(Color.orange)
+                .clipShape(RoundedRectangle(cornerRadius: 14))
+        }
+    }
+
+    // MARK: - Order Section View
+
+    private var orderSectionView: some View {
+
+        VStack(alignment: .leading, spacing: 18) {
+
+            Text("YOUR ORDER")
+                .font(.headline)
+                .foregroundStyle(.gray)
+
+            VStack(spacing: 16) {
+
+                ForEach(cartViewModel.items) { item in
+
+                    BasketItemView(item: item)
+                }
+            }
+        }
     }
 
     // MARK: - Empty Basket View
@@ -63,82 +114,136 @@ struct BasketView: View {
             .padding(.top, 80)
     }
 
-    // MARK: - Basket Items View
-
-    private var basketItemsView: some View {
-
-        VStack(spacing: 16) {
-
-            ForEach(cartViewModel.items) { item in
-
-                BasketItemView(item: item)
-            }
-        }
-    }
-
     // MARK: - Order Summary View
 
     private var orderSummaryView: some View {
 
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 18) {
 
-            Text("Order Summary")
-                .font(.title2)
-                .fontWeight(.bold)
+            Text("ORDER SUMMARY")
+                .font(.headline)
+                .foregroundStyle(.gray)
 
-            HStack {
-                Text("Items Total")
-                Spacer()
-                Text("$\(cartViewModel.totalPrice, specifier: "%.2f")")
+            VStack(spacing: 18) {
+
+                summaryRow(
+                    icon: "list.clipboard",
+                    title: "Items Total",
+                    value: String(format: "$%.2f", cartViewModel.totalPrice)
+                )
+
+                Divider()
+
+                HStack {
+
+                    Label("Delivery Fee", systemImage: "scooter")
+                        .foregroundStyle(.gray)
+
+                    Spacer()
+
+                    Text("$2.99")
+                        .strikethrough()
+                        .foregroundStyle(.gray.opacity(0.6))
+
+                    Text("Free")
+                        .fontWeight(.bold)
+                        .foregroundStyle(.green)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(Color.green.opacity(0.12))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+
+                Divider()
+
+                summaryRow(
+                    icon: "banknote",
+                    title: "Total to Pay",
+                    value: String(format: "$%.2f", cartViewModel.totalPrice),
+                    isTotal: true
+                )
             }
-
-            HStack {
-                Text("Delivery Fee")
-                Spacer()
-                Text("FREE")
-                    .foregroundStyle(.green)
-                    .fontWeight(.bold)
-            }
-
-            Divider()
-
-            HStack {
-                Text("Total to Pay")
-                    .font(.title3)
-                    .fontWeight(.bold)
-
-                Spacer()
-
-                Text("$\(cartViewModel.totalPrice, specifier: "%.2f")")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.orange)
-            }
+            .padding(20)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 26))
         }
-        .padding(20)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 28))
     }
-}
 
-// MARK: - Checkout Button
+    // MARK: - Delivery Info View
 
-private var checkoutButton: some View {
+    private var deliveryInfoView: some View {
 
-    NavigationLink {
+        HStack(spacing: 12) {
 
-        CheckoutView()
+            Image(systemName: "truck.box")
+                .foregroundStyle(.orange)
 
-    } label: {
+            Text("Free delivery on your first order! Estimated 15–20 min.")
+                .font(.headline)
+                .foregroundStyle(.orange)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.orange.opacity(0.08))
+        .overlay {
+            RoundedRectangle(cornerRadius: 18)
+                .stroke(Color.orange.opacity(0.25))
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 18))
+    }
 
-        Text("Go to Checkout")
+    // MARK: - Checkout Button
+
+    private var checkoutButton: some View {
+
+        NavigationLink {
+
+            CheckoutView()
+
+        } label: {
+
+            HStack {
+
+                Image(systemName: "lock.fill")
+
+                Text(String(format: "Checkout — $%.2f", cartViewModel.totalPrice))
+
+                Image(systemName: "chevron.right")
+            }
             .font(.title3)
             .fontWeight(.bold)
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
             .padding()
             .background(Color.orange)
-            .clipShape(RoundedRectangle(cornerRadius: 22))
+            .clipShape(RoundedRectangle(cornerRadius: 24))
+            .padding(20)
+            .background(Color.white)
+        }
+    }
+
+    // MARK: - Helper Views
+
+    private func summaryRow(
+        icon: String,
+        title: String,
+        value: String,
+        isTotal: Bool = false
+    ) -> some View {
+
+        HStack {
+
+            Label(title, systemImage: icon)
+                .font(isTotal ? .title3 : .body)
+                .fontWeight(isTotal ? .bold : .regular)
+
+            Spacer()
+
+            Text(value)
+                .font(isTotal ? .title2 : .body)
+                .fontWeight(.bold)
+                .foregroundStyle(isTotal ? .orange : .primary)
+        }
     }
 }
 

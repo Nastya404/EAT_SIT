@@ -78,7 +78,17 @@ struct MockData {
             description: "Classic pepperoni pizza with mozzarella cheese",
             price: 12.99,
             imageName: "pizza",
-            category: "Pizza"
+            category: "Pizza",
+            restaurantName: "Pizza Palace"
+        ),
+
+        Dish(
+            name: "Margherita Pizza",
+            description: "San Marzano tomatoes and mozzarella",
+            price: 14.00,
+            imageName: "pizza",
+            category: "Pizza",
+            restaurantName: "Pizza Palace"
         ),
 
         Dish(
@@ -86,7 +96,17 @@ struct MockData {
             description: "Crab meat, avocado and cucumber",
             price: 9.99,
             imageName: "sushi",
-            category: "Sushi"
+            category: "Sushi",
+            restaurantName: "Sakura Sushi Bar"
+        ),
+
+        Dish(
+            name: "Salmon Nigiri",
+            description: "Fresh salmon with sushi rice",
+            price: 11.50,
+            imageName: "sushi",
+            category: "Sushi",
+            restaurantName: "Sakura Sushi Bar"
         ),
 
         Dish(
@@ -94,7 +114,17 @@ struct MockData {
             description: "Beef burger with cheddar cheese",
             price: 10.49,
             imageName: "burger",
-            category: "Burger"
+            category: "Burger",
+            restaurantName: "Burger House"
+        ),
+
+        Dish(
+            name: "Smoky Wagyu Burger",
+            description: "Juicy beef patty, smoked cheddar and brioche bun",
+            price: 12.00,
+            imageName: "burger",
+            category: "Burger",
+            restaurantName: "Burger House"
         ),
 
         Dish(
@@ -102,10 +132,37 @@ struct MockData {
             description: "Fresh salad with parmesan and chicken",
             price: 8.99,
             imageName: "salad",
-            category: "Healthy"
+            category: "Healthy",
+            restaurantName: "The Green Bowl"
+        ),
+
+        Dish(
+            name: "Green Bowl",
+            description: "Vegetables, grains and light dressing",
+            price: 9.50,
+            imageName: "salad",
+            category: "Healthy",
+            restaurantName: "The Green Bowl"
+        ),
+
+        Dish(
+            name: "Pasta Carbonara",
+            description: "Pasta with parmesan and creamy sauce",
+            price: 13.50,
+            imageName: "pasta",
+            category: "Pasta",
+            restaurantName: "Pasta Roma"
+        ),
+
+        Dish(
+            name: "Lemon Tart",
+            description: "French pastry with lemon cream",
+            price: 7.50,
+            imageName: "dessert",
+            category: "Dessert",
+            restaurantName: "Dessert Cloud"
         )
     ]
-    
     // MARK: - Dish Customizations Mock Data
 
     static let customizations: [DishCustomization] = [

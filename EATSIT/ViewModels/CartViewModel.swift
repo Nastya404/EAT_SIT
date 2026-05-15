@@ -43,4 +43,25 @@ final class CartViewModel: ObservableObject {
 
         items.removeAll()
     }
+    
+    func increaseQuantity(for item: CartItem) {
+        guard let index = items.firstIndex(where: { $0.id == item.id }) else { return }
+
+        items[index] = CartItem(
+            dish: item.dish,
+            quantity: item.quantity + 1,
+            selectedToppings: item.selectedToppings
+        )
+    }
+
+    func decreaseQuantity(for item: CartItem) {
+        guard item.quantity > 1 else { return }
+        guard let index = items.firstIndex(where: { $0.id == item.id }) else { return }
+
+        items[index] = CartItem(
+            dish: item.dish,
+            quantity: item.quantity - 1,
+            selectedToppings: item.selectedToppings
+        )
+    }
 }

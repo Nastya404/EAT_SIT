@@ -18,4 +18,5 @@ struct Dish: Identifiable {
     let price: Double
     let imageName: String
     let category: String
+    let restaurantName: String
 }
