@@ -67,4 +67,42 @@ struct MockData {
             isPopular: true
         )
     ]
+    
+    
+    // MARK: - Dishes Mock Data
+
+    static let dishes: [Dish] = [
+
+        Dish(
+            name: "Pepperoni Pizza",
+            description: "Classic pepperoni pizza with mozzarella cheese",
+            price: 12.99,
+            imageName: "pizza",
+            category: "Pizza"
+        ),
+
+        Dish(
+            name: "California Roll",
+            description: "Crab meat, avocado and cucumber",
+            price: 9.99,
+            imageName: "sushi",
+            category: "Sushi"
+        ),
+
+        Dish(
+            name: "Cheese Burger",
+            description: "Beef burger with cheddar cheese",
+            price: 10.49,
+            imageName: "burger",
+            category: "Burger"
+        ),
+
+        Dish(
+            name: "Caesar Salad",
+            description: "Fresh salad with parmesan and chicken",
+            price: 8.99,
+            imageName: "salad",
+            category: "Healthy"
+        )
+    ]
 }

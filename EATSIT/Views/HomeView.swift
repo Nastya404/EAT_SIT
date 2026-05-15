@@ -162,9 +162,19 @@ struct HomeView: View {
 
                 ForEach(MockData.restaurants) { restaurant in
 
-                    RestaurantCardView(
-                        restaurant: restaurant
-                    )
+                    NavigationLink {
+
+                        RestaurantView(
+                            restaurant: restaurant
+                        )
+
+                    } label: {
+
+                        RestaurantCardView(
+                            restaurant: restaurant
+                        )
+                    }
+                    .buttonStyle(.plain)
                 }
             }
         }
