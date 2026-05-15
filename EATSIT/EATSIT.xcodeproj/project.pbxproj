@@ -30,6 +30,8 @@
 		81B0F9A72FB75B140019ADDE /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9A62FB75B120019ADDE /* Order.swift */; };
 		81B0F9A92FB75B2D0019ADDE /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9A82FB75B2B0019ADDE /* OrderViewModel.swift */; };
 		81B0F9AB2FB75C330019ADDE /* OrderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9AA2FB75C300019ADDE /* OrderCardView.swift */; };
+		81B0F9AD2FB75F240019ADDE /* ProfileOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9AC2FB75F220019ADDE /* ProfileOption.swift */; };
+		81B0F9AF2FB75FBA0019ADDE /* ProfileOptionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9AE2FB75FB60019ADDE /* ProfileOptionRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,8 @@
 		81B0F9A62FB75B120019ADDE /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		81B0F9A82FB75B2B0019ADDE /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 		81B0F9AA2FB75C300019ADDE /* OrderCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCardView.swift; sourceTree = "<group>"; };
+		81B0F9AC2FB75F220019ADDE /* ProfileOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOption.swift; sourceTree = "<group>"; };
+		81B0F9AE2FB75FB60019ADDE /* ProfileOptionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOptionRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -183,6 +187,7 @@
 		81B0F95F2FB740970019ADDE /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				81B0F9AE2FB75FB60019ADDE /* ProfileOptionRowView.swift */,
 				81B0F9AA2FB75C300019ADDE /* OrderCardView.swift */,
 				81B0F99C2FB757090019ADDE /* BasketItemView.swift */,
 				81B0F9782FB74D3E0019ADDE /* DishRowView.swift */,
@@ -210,6 +215,7 @@
 		81B0F9622FB740F40019ADDE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				81B0F9AC2FB75F220019ADDE /* ProfileOption.swift */,
 				81B0F9A62FB75B120019ADDE /* Order.swift */,
 				81B0F99E2FB758A60019ADDE /* PaymentMethod.swift */,
 				81B0F9962FB754210019ADDE /* CartItem.swift */,
@@ -365,12 +371,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81B0F9AD2FB75F240019ADDE /* ProfileOption.swift in Sources */,
 				81B0F96B2FB743210019ADDE /* OrdersView.swift in Sources */,
 				81B0F9A92FB75B2D0019ADDE /* OrderViewModel.swift in Sources */,
 				81B0F9752FB74CCC0019ADDE /* Dish.swift in Sources */,
 				81B0F9A52FB759030019ADDE /* CheckoutView.swift in Sources */,
 				81B0F9772FB74CFF0019ADDE /* RestaurantView.swift in Sources */,
 				81B0F9372FB73F260019ADDE /* ContentView.swift in Sources */,
+				81B0F9AF2FB75FBA0019ADDE /* ProfileOptionRowView.swift in Sources */,
 				81B0F9AB2FB75C330019ADDE /* OrderCardView.swift in Sources */,
 				81B0F99B2FB756B70019ADDE /* BasketView.swift in Sources */,
 				81B0F9A72FB75B140019ADDE /* Order.swift in Sources */,
