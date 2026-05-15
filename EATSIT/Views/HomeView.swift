@@ -66,9 +66,26 @@ struct HomeView: View {
 
                 Spacer()
 
-                Image(systemName: "person.circle.fill")
-                    .font(.system(size: 44))
-                    .foregroundStyle(.orange)
+                HStack(spacing: 12) {
+
+                    NavigationLink {
+
+                        RestaurantMapView()
+
+                    } label: {
+
+                        Image(systemName: "map.fill")
+                            .font(.title3)
+                            .foregroundStyle(.white)
+                            .frame(width: 44, height: 44)
+                            .background(Color.orange)
+                            .clipShape(Circle())
+                    }
+
+                    Image(systemName: "person.circle.fill")
+                        .font(.system(size: 44))
+                        .foregroundStyle(.orange)
+                }
             }
 
             Text("home.question")
