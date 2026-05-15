@@ -28,6 +28,7 @@ struct BasketView: View {
                 } else {
                     basketItemsView
                     orderSummaryView
+                    checkoutButton
                 }
             }
             .padding(20)
@@ -117,6 +118,27 @@ struct BasketView: View {
         .padding(20)
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 28))
+    }
+}
+
+// MARK: - Checkout Button
+
+private var checkoutButton: some View {
+
+    NavigationLink {
+
+        CheckoutView()
+
+    } label: {
+
+        Text("Go to Checkout")
+            .font(.title3)
+            .fontWeight(.bold)
+            .foregroundStyle(.white)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.orange)
+            .clipShape(RoundedRectangle(cornerRadius: 22))
     }
 }
 
