@@ -40,3 +40,20 @@
 "orders.pastOrders" = "POPRZEDNIE ZAMÓWIENIA";
 "orders.emptyTitle" = "Brak zamówień";
 "orders.emptySubtitle" = "Tutaj pojawią się zakończone zamówienia.";
+
+"basket.title" = "Mój koszyk";
+"basket.item" = "produkt";
+"basket.items" = "produktów";
+
+"basket.yourOrder" = "TWOJE ZAMÓWIENIE";
+"basket.empty" = "Koszyk jest pusty";
+
+"basket.summary" = "PODSUMOWANIE";
+"basket.itemsTotal" = "Koszt dań";
+"basket.deliveryFee" = "Koszt dostawy";
+"basket.totalToPay" = "Łącznie do zapłaty";
+
+"basket.freeDelivery" = "Darmowa";
+"basket.deliveryInfo" = "Darmowa dostawa przy pierwszym zamówieniu! Szacowany czas 15–20 min.";
+
+"basket.checkout" = "Przejdź do płatności";

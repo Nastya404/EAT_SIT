@@ -40,3 +40,20 @@
 "orders.pastOrders" = "PAST ORDERS";
 "orders.emptyTitle" = "No orders yet";
 "orders.emptySubtitle" = "Your completed orders will appear here.";
+
+"basket.title" = "My Basket";
+"basket.item" = "item";
+"basket.items" = "items";
+
+"basket.yourOrder" = "YOUR ORDER";
+"basket.empty" = "Your basket is empty";
+
+"basket.summary" = "ORDER SUMMARY";
+"basket.itemsTotal" = "Items Total";
+"basket.deliveryFee" = "Delivery Fee";
+"basket.totalToPay" = "Total to Pay";
+
+"basket.freeDelivery" = "Free";
+"basket.deliveryInfo" = "Free delivery on your first order! Estimated 15–20 min.";
+
+"basket.checkout" = "Checkout";

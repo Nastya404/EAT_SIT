@@ -66,13 +66,18 @@ struct BasketView: View {
 
             Spacer()
 
-            Text("My Basket")
+            Text("basket.title")
                 .font(.title2)
                 .fontWeight(.bold)
 
             Spacer()
 
-            Text("\(cartViewModel.items.count) item")
+            Text(
+                "\(cartViewModel.items.count) " +
+                String(localized: cartViewModel.items.count == 1
+                       ? "basket.item"
+                       : "basket.items")
+            )
                 .font(.headline)
                 .foregroundStyle(.white)
                 .padding(.horizontal, 16)
@@ -88,7 +93,7 @@ struct BasketView: View {
 
         VStack(alignment: .leading, spacing: 18) {
 
-            Text("YOUR ORDER")
+            Text("basket.yourOrder")
                 .font(.headline)
                 .foregroundStyle(.gray)
 
@@ -106,7 +111,7 @@ struct BasketView: View {
 
     private var emptyBasketView: some View {
 
-        Text("Your basket is empty")
+        Text("basket.empty")
             .font(.title2)
             .fontWeight(.bold)
             .foregroundStyle(.gray)
@@ -120,7 +125,7 @@ struct BasketView: View {
 
         VStack(alignment: .leading, spacing: 18) {
 
-            Text("ORDER SUMMARY")
+            Text("basket.summary")
                 .font(.headline)
                 .foregroundStyle(.gray)
 
@@ -128,7 +133,7 @@ struct BasketView: View {
 
                 summaryRow(
                     icon: "list.clipboard",
-                    title: "Items Total",
+                    title: String(localized: "basket.itemsTotal"),
                     value: String(format: "$%.2f", cartViewModel.totalPrice)
                 )
 
@@ -136,7 +141,7 @@ struct BasketView: View {
 
                 HStack {
 
-                    Label("Delivery Fee", systemImage: "scooter")
+                    Label("basket.deliveryFee", systemImage: "scooter")
                         .foregroundStyle(.gray)
 
                     Spacer()
@@ -145,7 +150,7 @@ struct BasketView: View {
                         .strikethrough()
                         .foregroundStyle(.gray.opacity(0.6))
 
-                    Text("Free")
+                    Text("basket.freeDelivery")
                         .fontWeight(.bold)
                         .foregroundStyle(.green)
                         .padding(.horizontal, 10)
@@ -158,7 +163,7 @@ struct BasketView: View {
 
                 summaryRow(
                     icon: "banknote",
-                    title: "Total to Pay",
+                    title: String(localized: "basket.totalToPay"),
                     value: String(format: "$%.2f", cartViewModel.totalPrice),
                     isTotal: true
                 )
@@ -178,7 +183,7 @@ struct BasketView: View {
             Image(systemName: "truck.box")
                 .foregroundStyle(.orange)
 
-            Text("Free delivery on your first order! Estimated 15–20 min.")
+            Text("basket.deliveryInfo")
                 .font(.headline)
                 .foregroundStyle(.orange)
         }
@@ -206,7 +211,10 @@ struct BasketView: View {
 
                 Image(systemName: "lock.fill")
 
-                Text(String(format: "Checkout — $%.2f", cartViewModel.totalPrice))
+                Text(
+                    String(localized: "basket.checkout") +
+                    String(format: " — $%.2f", cartViewModel.totalPrice)
+                )
 
                 Image(systemName: "chevron.right")
             }

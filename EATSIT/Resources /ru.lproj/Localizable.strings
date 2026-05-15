@@ -40,3 +40,20 @@
 "orders.pastOrders" = "ПРОШЛЫЕ ЗАКАЗЫ";
 "orders.emptyTitle" = "Заказов пока нет";
 "orders.emptySubtitle" = "Здесь появятся ваши завершённые заказы.";
+
+"basket.title" = "Моя корзина";
+"basket.item" = "товар";
+"basket.items" = "товаров";
+
+"basket.yourOrder" = "ВАШ ЗАКАЗ";
+"basket.empty" = "Корзина пуста";
+
+"basket.summary" = "СВОДКА ЗАКАЗА";
+"basket.itemsTotal" = "Стоимость блюд";
+"basket.deliveryFee" = "Стоимость доставки";
+"basket.totalToPay" = "Итого к оплате";
+
+"basket.freeDelivery" = "Бесплатно";
+"basket.deliveryInfo" = "Бесплатная доставка на первый заказ! Примерное время 15–20 мин.";
+
+"basket.checkout" = "Оформить";
