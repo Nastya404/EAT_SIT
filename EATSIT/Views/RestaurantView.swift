@@ -11,6 +11,8 @@ struct RestaurantView: View {
 
     // MARK: - Properties
 
+    @StateObject private var viewModel: RestaurantViewModel
+    
     let restaurant: Restaurant
 
     private let categories = [
@@ -19,6 +21,13 @@ struct RestaurantView: View {
         "Burger",
         "Healthy"
     ]
+    
+    init(restaurant: Restaurant) {
+        self.restaurant = restaurant
+        _viewModel = StateObject(
+            wrappedValue: RestaurantViewModel(restaurant: restaurant)
+        )
+    }
 
     // MARK: - Body
 
@@ -114,19 +123,14 @@ struct RestaurantView: View {
         }
     }
     
-    // MARK: - Dishes View
-    private var restaurantDishes: [Dish] {
-        MockData.dishes.filter {
-            $0.restaurantName == restaurant.name
-        }
-    }
+    
     // MARK: - Dishes View
 
     private var dishesView: some View {
 
         VStack(spacing: 16) {
 
-            ForEach(restaurantDishes) { dish in
+            ForEach(viewModel.dishes) { dish in
 
                 NavigationLink {
 

@@ -14,57 +14,81 @@ struct MockData {
     static let restaurants: [Restaurant] = [
 
         Restaurant(
+            id: "restaurant_pizza_palace",
             name: "Pizza Palace",
             imageName: "pizza",
             rating: 4.8,
             deliveryTime: "20-30 min",
             deliveryPrice: "Free Delivery",
-            isPopular: false
+            isPopular: false,
+            category: "Pizza",
+            latitude: 52.2297,
+            longitude: 21.0122
         ),
 
         Restaurant(
+            id: "restaurant_sakura_sushi",
             name: "Sakura Sushi Bar",
             imageName: "sushi",
             rating: 4.9,
             deliveryTime: "25-35 min",
             deliveryPrice: "$1.99 Delivery",
-            isPopular: false
+            isPopular: false,
+            category: "Sushi",
+            latitude: 52.2319,
+            longitude: 21.0067
         ),
 
         Restaurant(
+            id: "restaurant_burger_house",
             name: "Burger House",
             imageName: "burger",
             rating: 4.7,
             deliveryTime: "15-25 min",
             deliveryPrice: "Free Delivery",
-            isPopular: true
+            isPopular: true,
+            category: "Burger",
+            latitude: 52.2356,
+            longitude: 21.0104
         ),
 
         Restaurant(
+            id: "restaurant_green_bowl",
             name: "The Green Bowl",
             imageName: "salad",
             rating: 4.6,
             deliveryTime: "20-30 min",
             deliveryPrice: "$0.99 Delivery",
-            isPopular: false
+            isPopular: false,
+            category: "Healthy",
+            latitude: 52.2241,
+            longitude: 21.0175
         ),
 
         Restaurant(
+            id: "restaurant_pasta_roma",
             name: "Pasta Roma",
             imageName: "pasta",
             rating: 4.5,
             deliveryTime: "30-40 min",
             deliveryPrice: "Free Delivery",
-            isPopular: false
+            isPopular: false,
+            category: "Pasta",
+            latitude: 52.2372,
+            longitude: 21.0211
         ),
 
         Restaurant(
+            id: "restaurant_dessert_cloud",
             name: "Dessert Cloud",
             imageName: "dessert",
             rating: 4.9,
             deliveryTime: "20-25 min",
             deliveryPrice: "$1.49 Delivery",
-            isPopular: true
+            isPopular: true,
+            category: "Dessert",
+            latitude: 52.2208,
+            longitude: 21.0043
         )
     ]
     
@@ -74,6 +98,8 @@ struct MockData {
     static let dishes: [Dish] = [
 
         Dish(
+            id: "dish_pepperoni_pizza",
+            restaurantId: "restaurant_pizza_palace",
             name: "Pepperoni Pizza",
             description: "Classic pepperoni pizza with mozzarella cheese",
             price: 12.99,
@@ -83,6 +109,8 @@ struct MockData {
         ),
 
         Dish(
+            id: "dish_margherita_pizza",
+            restaurantId: "restaurant_pizza_palace",
             name: "Margherita Pizza",
             description: "San Marzano tomatoes and mozzarella",
             price: 14.00,
@@ -92,6 +120,8 @@ struct MockData {
         ),
 
         Dish(
+            id: "dish_california_roll",
+            restaurantId: "restaurant_sakura_sushi",
             name: "California Roll",
             description: "Crab meat, avocado and cucumber",
             price: 9.99,
@@ -101,6 +131,8 @@ struct MockData {
         ),
 
         Dish(
+            id: "dish_salmon_nigiri",
+            restaurantId: "restaurant_sakura_sushi",
             name: "Salmon Nigiri",
             description: "Fresh salmon with sushi rice",
             price: 11.50,
@@ -110,6 +142,8 @@ struct MockData {
         ),
 
         Dish(
+            id: "dish_cheese_burger",
+            restaurantId: "restaurant_burger_house",
             name: "Cheese Burger",
             description: "Beef burger with cheddar cheese",
             price: 10.49,
@@ -119,6 +153,8 @@ struct MockData {
         ),
 
         Dish(
+            id: "dish_smoky_wagyu_burger",
+            restaurantId: "restaurant_burger_house",
             name: "Smoky Wagyu Burger",
             description: "Juicy beef patty, smoked cheddar and brioche bun",
             price: 12.00,
@@ -128,6 +164,8 @@ struct MockData {
         ),
 
         Dish(
+            id: "dish_caesar_salad",
+            restaurantId: "restaurant_green_bowl",
             name: "Caesar Salad",
             description: "Fresh salad with parmesan and chicken",
             price: 8.99,
@@ -137,6 +175,8 @@ struct MockData {
         ),
 
         Dish(
+            id: "dish_green_bowl",
+            restaurantId: "restaurant_green_bowl",
             name: "Green Bowl",
             description: "Vegetables, grains and light dressing",
             price: 9.50,
@@ -146,6 +186,8 @@ struct MockData {
         ),
 
         Dish(
+            id: "dish_pasta_carbonara",
+            restaurantId: "restaurant_pasta_roma",
             name: "Pasta Carbonara",
             description: "Pasta with parmesan and creamy sauce",
             price: 13.50,
@@ -155,6 +197,8 @@ struct MockData {
         ),
 
         Dish(
+            id: "dish_lemon_tart",
+            restaurantId: "restaurant_dessert_cloud",
             name: "Lemon Tart",
             description: "French pastry with lemon cream",
             price: 7.50,

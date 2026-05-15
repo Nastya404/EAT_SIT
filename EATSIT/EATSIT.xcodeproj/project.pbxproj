@@ -11,6 +11,9 @@
 		817F53652FB78C1B00D75CA7 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53642FB78BEE00D75CA7 /* LocalizationManager.swift */; };
 		817F53672FB78C2E00D75CA7 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53662FB78C2D00D75CA7 /* LanguageView.swift */; };
 		817F536A2FB78D3900D75CA7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 817F53682FB78D3900D75CA7 /* Localizable.strings */; };
+		817F53822FB799DD00D75CA7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53812FB799DA00D75CA7 /* HomeViewModel.swift */; };
+		817F53842FB79BE300D75CA7 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53832FB79BD500D75CA7 /* DatabaseManager.swift */; };
+		817F53862FB79C3100D75CA7 /* RestaurantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53852FB79C2F00D75CA7 /* RestaurantViewModel.swift */; };
 		81B0F9372FB73F260019ADDE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9362FB73F260019ADDE /* ContentView.swift */; };
 		81B0F9392FB73F270019ADDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81B0F9382FB73F270019ADDE /* Assets.xcassets */; };
 		81B0F9642FB742B00019ADDE /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9632FB742AD0019ADDE /* MainTabView.swift */; };
@@ -62,6 +65,10 @@
 		817F53692FB78D3900D75CA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		817F536B2FB78D5E00D75CA7 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		817F536C2FB78D6A00D75CA7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		817F537E2FB7981500D75CA7 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		817F53812FB799DA00D75CA7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		817F53832FB79BD500D75CA7 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		817F53852FB79C2F00D75CA7 /* RestaurantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewModel.swift; sourceTree = "<group>"; };
 		81B0F9312FB73F260019ADDE /* EATSIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EATSIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B0F9362FB73F260019ADDE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		81B0F9382FB73F270019ADDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -135,6 +142,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		817F537D2FB7981500D75CA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				817F537E2FB7981500D75CA7 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		81B0F9282FB73F260019ADDE = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +163,7 @@
 				81B0F9332FB73F260019ADDE /* EATSIT */,
 				81B0F9412FB73F270019ADDE /* EATSITTests */,
 				81B0F94B2FB73F270019ADDE /* EATSITUITests */,
+				817F537D2FB7981500D75CA7 /* Frameworks */,
 				81B0F9322FB73F260019ADDE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -182,6 +198,8 @@
 		81B0F95D2FB7407E0019ADDE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				817F53852FB79C2F00D75CA7 /* RestaurantViewModel.swift */,
+				817F53812FB799DA00D75CA7 /* HomeViewModel.swift */,
 				81B0F9A82FB75B2B0019ADDE /* OrderViewModel.swift */,
 				81B0F9982FB754480019ADDE /* CartViewModel.swift */,
 			);
@@ -191,6 +209,7 @@
 		81B0F95E2FB7408D0019ADDE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				817F53832FB79BD500D75CA7 /* DatabaseManager.swift */,
 				817F53642FB78BEE00D75CA7 /* LocalizationManager.swift */,
 			);
 			path = Services;
@@ -390,6 +409,7 @@
 			files = (
 				81B0F9AD2FB75F240019ADDE /* ProfileOption.swift in Sources */,
 				81B0F96B2FB743210019ADDE /* OrdersView.swift in Sources */,
+				817F53842FB79BE300D75CA7 /* DatabaseManager.swift in Sources */,
 				81B0F9A92FB75B2D0019ADDE /* OrderViewModel.swift in Sources */,
 				81B0F9752FB74CCC0019ADDE /* Dish.swift in Sources */,
 				81B0F9A52FB759030019ADDE /* CheckoutView.swift in Sources */,
@@ -403,6 +423,7 @@
 				817F53672FB78C2E00D75CA7 /* LanguageView.swift in Sources */,
 				81B0F9992FB7548B0019ADDE /* CartViewModel.swift in Sources */,
 				81B0F9732FB7459E0019ADDE /* RestaurantCardView.swift in Sources */,
+				817F53822FB799DD00D75CA7 /* HomeViewModel.swift in Sources */,
 				81B0F97B2FB74E850019ADDE /* DishCustomization.swift in Sources */,
 				81B0F9692FB743050019ADDE /* HomeView.swift in Sources */,
 				81B0F9722FB745930019ADDE /* Restaurant.swift in Sources */,
@@ -415,6 +436,7 @@
 				81B0F9972FB754240019ADDE /* CartItem.swift in Sources */,
 				81B0F99F2FB758AB0019ADDE /* PaymentMethod.swift in Sources */,
 				81B0F97D2FB74EF50019ADDE /* DishDetailsView.swift in Sources */,
+				817F53862FB79C3100D75CA7 /* RestaurantViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

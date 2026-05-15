@@ -11,8 +11,9 @@ struct Dish: Identifiable {
 
     // MARK: - Properties
 
-    let id = UUID()
+    let id: String
 
+    let restaurantId: String
     let name: String
     let description: String
     let price: Double

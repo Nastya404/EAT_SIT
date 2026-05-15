@@ -11,7 +11,7 @@ struct Restaurant: Identifiable {
 
     // MARK: - Properties
 
-    let id = UUID()
+    let id: String
 
     let name: String
     let imageName: String
@@ -19,4 +19,7 @@ struct Restaurant: Identifiable {
     let deliveryTime: String
     let deliveryPrice: String
     let isPopular: Bool
+    let category: String
+    let latitude: Double
+    let longitude: Double
 }

@@ -10,6 +10,8 @@ import SwiftUI
 struct HomeView: View {
 
     // MARK: - Properties
+    
+    @StateObject private var viewModel = HomeViewModel()
 
     private let categories = [
         "home.category.pizza",
@@ -159,7 +161,7 @@ struct HomeView: View {
                 spacing: 22
             ) {
 
-                ForEach(MockData.restaurants) { restaurant in
+                ForEach(viewModel.restaurants) { restaurant in
 
                     NavigationLink {
 
