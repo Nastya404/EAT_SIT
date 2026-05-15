@@ -122,8 +122,16 @@ struct RestaurantView: View {
 
             ForEach(MockData.dishes) { dish in
 
-                DishRowView(dish: dish)
-                    .padding(.horizontal, 20)
+                NavigationLink {
+
+                    DishDetailsView(dish: dish)
+
+                } label: {
+
+                    DishRowView(dish: dish)
+                        .padding(.horizontal, 20)
+                }
+                .buttonStyle(.plain)
             }
         }
     }

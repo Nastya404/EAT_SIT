@@ -105,4 +105,24 @@ struct MockData {
             category: "Healthy"
         )
     ]
+    
+    // MARK: - Dish Customizations Mock Data
+
+    static let customizations: [DishCustomization] = [
+
+        DishCustomization(
+            name: "Extra Cheese",
+            price: 1.00
+        ),
+
+        DishCustomization(
+            name: "Jalapeños",
+            price: 0.50
+        ),
+
+        DishCustomization(
+            name: "Bacon",
+            price: 2.00
+        )
+    ]
 }
