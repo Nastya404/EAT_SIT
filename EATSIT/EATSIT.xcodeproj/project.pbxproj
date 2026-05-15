@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		81B0F9372FB73F260019ADDE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9362FB73F260019ADDE /* ContentView.swift */; };
+		81B0F9392FB73F270019ADDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81B0F9382FB73F270019ADDE /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		81B0F93F2FB73F270019ADDE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -25,6 +30,8 @@
 
 /* Begin PBXFileReference section */
 		81B0F9312FB73F260019ADDE /* EATSIT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EATSIT.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		81B0F9362FB73F260019ADDE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		81B0F9382FB73F270019ADDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81B0F93E2FB73F270019ADDE /* EATSITTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EATSITTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B0F9482FB73F270019ADDE /* EATSITUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EATSITUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -75,6 +82,13 @@
 		81B0F9282FB73F260019ADDE = {
 			isa = PBXGroup;
 			children = (
+				81B0F9622FB740F40019ADDE /* Models */,
+				81B0F9612FB740B30019ADDE /* Helpers */,
+				81B0F9602FB740A90019ADDE /* Resources  */,
+				81B0F95F2FB740970019ADDE /* Components */,
+				81B0F95E2FB7408D0019ADDE /* Services */,
+				81B0F95D2FB7407E0019ADDE /* ViewModels */,
+				81B0F95C2FB7406F0019ADDE /* Views */,
 				81B0F9332FB73F260019ADDE /* EATSIT */,
 				81B0F9412FB73F270019ADDE /* EATSITTests */,
 				81B0F94B2FB73F270019ADDE /* EATSITUITests */,
@@ -90,6 +104,57 @@
 				81B0F9482FB73F270019ADDE /* EATSITUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		81B0F95C2FB7406F0019ADDE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				81B0F9362FB73F260019ADDE /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		81B0F95D2FB7407E0019ADDE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		81B0F95E2FB7408D0019ADDE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		81B0F95F2FB740970019ADDE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		81B0F9602FB740A90019ADDE /* Resources  */ = {
+			isa = PBXGroup;
+			children = (
+				81B0F9382FB73F270019ADDE /* Assets.xcassets */,
+			);
+			path = "Resources ";
+			sourceTree = "<group>";
+		};
+		81B0F9612FB740B30019ADDE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		81B0F9622FB740F40019ADDE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81B0F9392FB73F270019ADDE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81B0F9372FB73F260019ADDE /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
