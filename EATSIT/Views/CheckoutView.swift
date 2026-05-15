@@ -13,6 +13,7 @@ struct CheckoutView: View {
     // MARK: - Properties
 
     @EnvironmentObject private var cartViewModel: CartViewModel
+    @EnvironmentObject private var orderViewModel: OrderViewModel
 
     @State private var deliveryAddress = ""
     @State private var orderComment = ""
@@ -198,10 +199,20 @@ struct CheckoutView: View {
 
         Button {
 
+            let order = Order(
+                items: cartViewModel.items,
+                deliveryAddress: deliveryAddress,
+                comment: orderComment,
+                paymentMethod: selectedPaymentMethod,
+                totalPrice: cartViewModel.totalPrice,
+                status: "Waiting for restaurant confirmation",
+                createdAt: Date()
+            )
+
+            orderViewModel.addOrder(order)
             showSuccessAlert = true
 
         } label: {
-
             Text("Place Order")
                 .font(.title3)
                 .fontWeight(.bold)

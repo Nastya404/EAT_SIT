@@ -13,6 +13,7 @@ struct EATSITApp: App {
     // MARK: - Properties
 
     @StateObject private var cartViewModel = CartViewModel()
+    @StateObject private var orderViewModel = OrderViewModel()
 
     // MARK: - Body
 
@@ -22,6 +23,7 @@ struct EATSITApp: App {
 
             ContentView()
                 .environmentObject(cartViewModel)
+                .environmentObject(orderViewModel)
         }
     }
 }

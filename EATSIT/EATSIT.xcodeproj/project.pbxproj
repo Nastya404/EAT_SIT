@@ -27,6 +27,9 @@
 		81B0F99D2FB7570C0019ADDE /* BasketItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F99C2FB757090019ADDE /* BasketItemView.swift */; };
 		81B0F99F2FB758AB0019ADDE /* PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F99E2FB758A60019ADDE /* PaymentMethod.swift */; };
 		81B0F9A52FB759030019ADDE /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9A42FB759020019ADDE /* CheckoutView.swift */; };
+		81B0F9A72FB75B140019ADDE /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9A62FB75B120019ADDE /* Order.swift */; };
+		81B0F9A92FB75B2D0019ADDE /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9A82FB75B2B0019ADDE /* OrderViewModel.swift */; };
+		81B0F9AB2FB75C330019ADDE /* OrderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B0F9AA2FB75C300019ADDE /* OrderCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,9 @@
 		81B0F99C2FB757090019ADDE /* BasketItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketItemView.swift; sourceTree = "<group>"; };
 		81B0F99E2FB758A60019ADDE /* PaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethod.swift; sourceTree = "<group>"; };
 		81B0F9A42FB759020019ADDE /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
+		81B0F9A62FB75B120019ADDE /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		81B0F9A82FB75B2B0019ADDE /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
+		81B0F9AA2FB75C300019ADDE /* OrderCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -150,8 +156,8 @@
 				81B0F97C2FB74EF20019ADDE /* DishDetailsView.swift */,
 				81B0F9762FB74CFC0019ADDE /* RestaurantView.swift */,
 				81B0F96C2FB743340019ADDE /* ProfileView.swift */,
-				81B0F96A2FB7431D0019ADDE /* OrdersView.swift */,
 				81B0F9682FB742FC0019ADDE /* HomeView.swift */,
+				81B0F96A2FB7431D0019ADDE /* OrdersView.swift */,
 				81B0F9632FB742AD0019ADDE /* MainTabView.swift */,
 				81B0F9362FB73F260019ADDE /* ContentView.swift */,
 			);
@@ -161,6 +167,7 @@
 		81B0F95D2FB7407E0019ADDE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				81B0F9A82FB75B2B0019ADDE /* OrderViewModel.swift */,
 				81B0F9982FB754480019ADDE /* CartViewModel.swift */,
 			);
 			path = ViewModels;
@@ -176,6 +183,7 @@
 		81B0F95F2FB740970019ADDE /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				81B0F9AA2FB75C300019ADDE /* OrderCardView.swift */,
 				81B0F99C2FB757090019ADDE /* BasketItemView.swift */,
 				81B0F9782FB74D3E0019ADDE /* DishRowView.swift */,
 				81B0F9702FB744C00019ADDE /* RestaurantCardView.swift */,
@@ -202,6 +210,7 @@
 		81B0F9622FB740F40019ADDE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				81B0F9A62FB75B120019ADDE /* Order.swift */,
 				81B0F99E2FB758A60019ADDE /* PaymentMethod.swift */,
 				81B0F9962FB754210019ADDE /* CartItem.swift */,
 				81B0F97A2FB74E820019ADDE /* DishCustomization.swift */,
@@ -357,11 +366,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				81B0F96B2FB743210019ADDE /* OrdersView.swift in Sources */,
+				81B0F9A92FB75B2D0019ADDE /* OrderViewModel.swift in Sources */,
 				81B0F9752FB74CCC0019ADDE /* Dish.swift in Sources */,
 				81B0F9A52FB759030019ADDE /* CheckoutView.swift in Sources */,
 				81B0F9772FB74CFF0019ADDE /* RestaurantView.swift in Sources */,
 				81B0F9372FB73F260019ADDE /* ContentView.swift in Sources */,
+				81B0F9AB2FB75C330019ADDE /* OrderCardView.swift in Sources */,
 				81B0F99B2FB756B70019ADDE /* BasketView.swift in Sources */,
+				81B0F9A72FB75B140019ADDE /* Order.swift in Sources */,
 				81B0F9992FB7548B0019ADDE /* CartViewModel.swift in Sources */,
 				81B0F9732FB7459E0019ADDE /* RestaurantCardView.swift in Sources */,
 				81B0F97B2FB74E850019ADDE /* DishCustomization.swift in Sources */,
