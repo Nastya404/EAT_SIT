@@ -57,3 +57,40 @@
 "basket.deliveryInfo" = "Бесплатная доставка на первый заказ! Примерное время 15–20 мин.";
 
 "basket.checkout" = "Оформить";
+
+"checkout.title" = "Оформление";
+"checkout.secure" = "Безопасно";
+"checkout.orderSummary" = "Состав заказа";
+"checkout.addMoreItems" = "Добавить ещё";
+
+"checkout.deliveryAddress" = "Адрес доставки";
+"checkout.savedAddresses" = "Сохранено: %d";
+"checkout.address.home" = "Дом";
+"checkout.address.office" = "Офис";
+"checkout.address.homeValue" = "42 Riverside Drive, кв. 3B";
+"checkout.address.officeValue" = "10 Business Center, этаж 5";
+"checkout.address.default" = "ПО УМОЛЧАНИЮ";
+"checkout.addNewAddress" = "Добавить новый адрес";
+
+"checkout.instructions" = "Комментарий к доставке";
+"checkout.instructionsPlaceholder" = "Например: оставить у двери, позвонить по прибытии, код домофона #1234...";
+
+"checkout.paymentMethod" = "Способ оплаты";
+"checkout.cardTitle" = "•••• •••• •••• 1234";
+"checkout.cardSubtitle" = "Действует до 09/28";
+"checkout.cashTitle" = "Оплата наличными";
+"checkout.cashSubtitle" = "Оплата при получении заказа";
+"checkout.eripTitle" = "Оплата через ЕРИП";
+"checkout.eripSubtitle" = "Оплата через систему ЕРИП";
+
+"checkout.totalBreakdown" = "Итоговая сумма";
+"checkout.items" = "Блюда";
+"checkout.deliveryFee" = "Стоимость доставки";
+"checkout.free" = "Бесплатно";
+"checkout.serviceFee" = "Сервисный сбор";
+"checkout.totalToPay" = "Итого к оплате";
+
+"checkout.deliveryEstimate" = "Примерно 15–20 мин\nдоставка";
+"checkout.placeOrder" = "Оформить заказ";
+"checkout.success" = "Заказ успешно оформлен!";
+"checkout.ok" = "OK";

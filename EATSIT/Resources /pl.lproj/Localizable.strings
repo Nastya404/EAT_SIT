@@ -57,3 +57,40 @@
 "basket.deliveryInfo" = "Darmowa dostawa przy pierwszym zamówieniu! Szacowany czas 15–20 min.";
 
 "basket.checkout" = "Przejdź do płatności";
+
+"checkout.title" = "Zamówienie";
+"checkout.secure" = "Bezpieczne";
+"checkout.orderSummary" = "Podsumowanie zamówienia";
+"checkout.addMoreItems" = "Dodaj więcej";
+
+"checkout.deliveryAddress" = "Adres dostawy";
+"checkout.savedAddresses" = "%d zapisane";
+"checkout.address.home" = "Dom";
+"checkout.address.office" = "Biuro";
+"checkout.address.homeValue" = "42 Riverside Drive, lok. 3B";
+"checkout.address.officeValue" = "10 Business Center, piętro 5";
+"checkout.address.default" = "DOMYŚLNY";
+"checkout.addNewAddress" = "Dodaj nowy adres";
+
+"checkout.instructions" = "Instrukcje dostawy";
+"checkout.instructionsPlaceholder" = "np. zostawić pod drzwiami, zadzwonić po przyjeździe, kod #1234...";
+
+"checkout.paymentMethod" = "Metoda płatności";
+"checkout.cardTitle" = "•••• •••• •••• 1234";
+"checkout.cardSubtitle" = "Ważna do 09/28";
+"checkout.cashTitle" = "Gotówka przy odbiorze";
+"checkout.cashSubtitle" = "Zapłać po dostarczeniu zamówienia";
+"checkout.eripTitle" = "Płatność ERIP";
+"checkout.eripSubtitle" = "Zapłać przez system ERIP";
+
+"checkout.totalBreakdown" = "Podsumowanie kosztów";
+"checkout.items" = "Dania";
+"checkout.deliveryFee" = "Koszt dostawy";
+"checkout.free" = "Darmowa";
+"checkout.serviceFee" = "Opłata serwisowa";
+"checkout.totalToPay" = "Łącznie do zapłaty";
+
+"checkout.deliveryEstimate" = "Szac. 15–20 min\ndostawa";
+"checkout.placeOrder" = "Złóż zamówienie";
+"checkout.success" = "Zamówienie zostało złożone!";
+"checkout.ok" = "OK";

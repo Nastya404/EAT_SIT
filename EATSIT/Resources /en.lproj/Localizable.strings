@@ -57,3 +57,40 @@
 "basket.deliveryInfo" = "Free delivery on your first order! Estimated 15–20 min.";
 
 "basket.checkout" = "Checkout";
+
+"checkout.title" = "Checkout";
+"checkout.secure" = "Secure";
+"checkout.orderSummary" = "Order Summary";
+"checkout.addMoreItems" = "Add more items";
+
+"checkout.deliveryAddress" = "Delivery Address";
+"checkout.savedAddresses" = "%d saved";
+"checkout.address.home" = "Home";
+"checkout.address.office" = "Office";
+"checkout.address.homeValue" = "42 Riverside Drive, Apt 3B";
+"checkout.address.officeValue" = "10 Business Center, Floor 5";
+"checkout.address.default" = "DEFAULT";
+"checkout.addNewAddress" = "Add New Address";
+
+"checkout.instructions" = "Delivery Instructions";
+"checkout.instructionsPlaceholder" = "e.g. Leave at the door, call on arrival, gate code #1234...";
+
+"checkout.paymentMethod" = "Payment Method";
+"checkout.cardTitle" = "•••• •••• •••• 1234";
+"checkout.cardSubtitle" = "Expires 09/28";
+"checkout.cashTitle" = "Cash on Delivery";
+"checkout.cashSubtitle" = "Pay when your order arrives";
+"checkout.eripTitle" = "ERIP Payment";
+"checkout.eripSubtitle" = "Pay via ERIP system";
+
+"checkout.totalBreakdown" = "Total Breakdown";
+"checkout.items" = "Items";
+"checkout.deliveryFee" = "Delivery Fee";
+"checkout.free" = "Free";
+"checkout.serviceFee" = "Service Fee";
+"checkout.totalToPay" = "Total to Pay";
+
+"checkout.deliveryEstimate" = "Est. 15–20 min\ndelivery";
+"checkout.placeOrder" = "Place Order";
+"checkout.success" = "Order successfully placed!";
+"checkout.ok" = "OK";

@@ -16,7 +16,7 @@ struct CheckoutView: View {
 
     @Environment(\.dismiss) private var dismiss
 
-    @State private var selectedAddress = "Home"
+    @State private var selectedAddress = "home"
     @State private var orderComment = ""
     @State private var selectedPaymentMethod: PaymentMethod = .onlineCard
     @State private var showSuccessAlert = false
@@ -24,9 +24,9 @@ struct CheckoutView: View {
     private let serviceFee = 0.50
 
     private var currentDeliveryAddress: String {
-        selectedAddress == "Home"
-            ? "42 Riverside Drive, Apt 3B"
-            : "10 Business Center, Floor 5"
+        selectedAddress == "home"
+            ? String(localized: "checkout.address.homeValue")
+            : String(localized: "checkout.address.officeValue")
     }
 
     private var totalPrice: Double {
@@ -63,8 +63,8 @@ struct CheckoutView: View {
             bottomOrderBar
         }
         .navigationBarBackButtonHidden(true)
-        .alert("Order successfully placed!", isPresented: $showSuccessAlert) {
-            Button("OK") {
+        .alert("checkout.success", isPresented: $showSuccessAlert) {
+            Button("checkout.ok") {
                 cartViewModel.clearCart()
             }
         }
@@ -90,7 +90,7 @@ struct CheckoutView: View {
 
             Spacer()
 
-            Text("Checkout")
+            Text("checkout.title")
                 .font(.title)
                 .fontWeight(.bold)
 
@@ -98,7 +98,7 @@ struct CheckoutView: View {
 
             HStack(spacing: 6) {
                 Image(systemName: "checkmark.shield")
-                Text("Secure")
+                Text("checkout.secure")
             }
             .font(.subheadline)
             .fontWeight(.semibold)
@@ -113,7 +113,7 @@ struct CheckoutView: View {
 
         VStack(alignment: .leading, spacing: 18) {
 
-            sectionTitle(icon: "list.clipboard", title: "Order Summary")
+            sectionTitle(icon: "list.clipboard", titleKey: "checkout.orderSummary")
 
             ForEach(cartViewModel.items) { item in
 
@@ -153,7 +153,7 @@ struct CheckoutView: View {
 
                 Spacer()
 
-                Label("Add more items", systemImage: "plus.circle")
+                Label("checkout.addMoreItems", systemImage: "plus.circle")
                     .font(.headline)
                     .foregroundStyle(.orange)
             }
@@ -171,11 +171,11 @@ struct CheckoutView: View {
 
             HStack {
 
-                sectionTitle(icon: "mappin", title: "Delivery Address")
+                sectionTitle(icon: "mappin", titleKey: "checkout.deliveryAddress")
 
                 Spacer()
 
-                Text("2 saved")
+                Text(String(format: String(localized: "checkout.savedAddresses"), 2))
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundStyle(.orange)
@@ -186,15 +186,17 @@ struct CheckoutView: View {
             }
 
             addressCard(
-                title: "Home",
-                subtitle: "42 Riverside Drive, Apt 3B",
+                id: "home",
+                titleKey: "checkout.address.home",
+                subtitleKey: "checkout.address.homeValue",
                 icon: "house",
                 isDefault: true
             )
 
             addressCard(
-                title: "Office",
-                subtitle: "10 Business Center, Floor 5",
+                id: "office",
+                titleKey: "checkout.address.office",
+                subtitleKey: "checkout.address.officeValue",
                 icon: "building.2",
                 isDefault: false
             )
@@ -210,7 +212,7 @@ struct CheckoutView: View {
                             .stroke(Color.orange, style: StrokeStyle(lineWidth: 2, dash: [5]))
                     }
 
-                Text("Add New Address")
+                Text("checkout.addNewAddress")
                     .font(.headline)
                     .foregroundStyle(.orange)
             }
@@ -223,17 +225,18 @@ struct CheckoutView: View {
     // MARK: - Address Card
 
     private func addressCard(
-        title: String,
-        subtitle: String,
+        id: String,
+        titleKey: String,
+        subtitleKey: String,
         icon: String,
         isDefault: Bool
     ) -> some View {
 
-        let isSelected = selectedAddress == title
+        let isSelected = selectedAddress == id
 
         return Button {
 
-            selectedAddress = title
+            selectedAddress = id
 
         } label: {
 
@@ -250,12 +253,12 @@ struct CheckoutView: View {
                         Image(systemName: icon)
                             .foregroundStyle(isSelected ? .orange : .gray)
 
-                        Text(title)
+                        Text(LocalizedStringKey(titleKey))
                             .font(.headline)
                             .foregroundStyle(isSelected ? Color.primary : Color.gray)
 
                         if isDefault {
-                            Text("DEFAULT")
+                            Text("checkout.address.default")
                                 .font(.caption)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.white)
@@ -266,7 +269,7 @@ struct CheckoutView: View {
                         }
                     }
 
-                    Text(subtitle)
+                    Text(LocalizedStringKey(subtitleKey))
                         .foregroundStyle(.gray)
                 }
 
@@ -294,7 +297,7 @@ struct CheckoutView: View {
 
         VStack(alignment: .leading, spacing: 16) {
 
-            sectionTitle(icon: "doc.text", title: "Delivery Instructions")
+            sectionTitle(icon: "doc.text", titleKey: "checkout.instructions")
 
             ZStack(alignment: .topLeading) {
 
@@ -314,7 +317,7 @@ struct CheckoutView: View {
                     }
 
                 if orderComment.isEmpty {
-                    Text("e.g. Leave at the door, call on arrival, gate code #1234...")
+                    Text("checkout.instructionsPlaceholder")
                         .foregroundStyle(.gray.opacity(0.6))
                         .padding(.horizontal, 18)
                         .padding(.vertical, 20)
@@ -349,29 +352,29 @@ struct CheckoutView: View {
 
         VStack(alignment: .leading, spacing: 14) {
 
-            sectionTitle(icon: "creditcard", title: "Payment Method")
+            sectionTitle(icon: "creditcard", titleKey: "checkout.paymentMethod")
 
             paymentCard(
                 method: .onlineCard,
                 iconText: "VISA",
-                title: "•••• •••• •••• 1234",
-                subtitle: "Expires 09/28",
+                titleKey: "checkout.cardTitle",
+                subtitleKey: "checkout.cardSubtitle",
                 trailingText: nil
             )
 
             paymentCard(
                 method: .cash,
                 iconText: "💵",
-                title: "Cash on Delivery",
-                subtitle: "Pay when your order arrives",
+                titleKey: "checkout.cashTitle",
+                subtitleKey: "checkout.cashSubtitle",
                 trailingText: nil
             )
 
             paymentCard(
                 method: .erip,
                 iconText: "ERIP",
-                title: "ERIP Payment",
-                subtitle: "Pay via ERIP system",
+                titleKey: "checkout.eripTitle",
+                subtitleKey: "checkout.eripSubtitle",
                 trailingText: "BY"
             )
         }
@@ -385,8 +388,8 @@ struct CheckoutView: View {
     private func paymentCard(
         method: PaymentMethod,
         iconText: String,
-        title: String,
-        subtitle: String,
+        titleKey: String,
+        subtitleKey: String,
         trailingText: String?
     ) -> some View {
 
@@ -421,11 +424,11 @@ struct CheckoutView: View {
 
                 VStack(alignment: .leading, spacing: 4) {
 
-                    Text(title)
+                    Text(LocalizedStringKey(titleKey))
                         .font(.headline)
                         .foregroundStyle(.primary)
 
-                    Text(subtitle)
+                    Text(LocalizedStringKey(subtitleKey))
                         .font(.subheadline)
                         .foregroundStyle(.gray)
                 }
@@ -460,10 +463,10 @@ struct CheckoutView: View {
 
         VStack(alignment: .leading, spacing: 18) {
 
-            sectionTitle(icon: "list.bullet.rectangle", title: "Total Breakdown")
+            sectionTitle(icon: "list.bullet.rectangle", titleKey: "checkout.totalBreakdown")
 
             priceRow(
-                title: "Items (\(cartViewModel.items.count))",
+                titleKey: "checkout.items",
                 value: String(format: "$%.2f", cartViewModel.totalPrice)
             )
 
@@ -471,7 +474,7 @@ struct CheckoutView: View {
 
             HStack {
 
-                Text("Delivery Fee")
+                Text("checkout.deliveryFee")
                     .foregroundStyle(.gray)
 
                 Spacer()
@@ -480,7 +483,7 @@ struct CheckoutView: View {
                     .strikethrough()
                     .foregroundStyle(.gray.opacity(0.6))
 
-                Text("Free")
+                Text("checkout.free")
                     .fontWeight(.bold)
                     .foregroundStyle(.green)
                     .padding(.horizontal, 10)
@@ -492,7 +495,7 @@ struct CheckoutView: View {
             Divider()
 
             priceRow(
-                title: "Service Fee",
+                titleKey: "checkout.serviceFee",
                 value: String(format: "$%.2f", serviceFee)
             )
 
@@ -500,7 +503,7 @@ struct CheckoutView: View {
 
             HStack {
 
-                Text("Total to Pay")
+                Text("checkout.totalToPay")
                     .font(.title2)
                     .fontWeight(.bold)
 
@@ -525,7 +528,7 @@ struct CheckoutView: View {
 
             HStack {
 
-                Label("Est. 15–20 min\ndelivery", systemImage: "truck.box")
+                Label("checkout.deliveryEstimate", systemImage: "truck.box")
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundStyle(.green)
@@ -547,7 +550,10 @@ struct CheckoutView: View {
                 HStack(spacing: 12) {
 
                     Image(systemName: "checkmark.circle")
-                    Text(String(format: "Place Order — $%.2f", totalPrice))
+                    Text(
+                        String(localized: "checkout.placeOrder") +
+                        String(format: " — $%.2f", totalPrice)
+                    )
                 }
                 .font(.title3)
                 .fontWeight(.bold)
@@ -566,24 +572,24 @@ struct CheckoutView: View {
 
     // MARK: - Helper Views
 
-    private func sectionTitle(icon: String, title: String) -> some View {
+    private func sectionTitle(icon: String, titleKey: String) -> some View {
 
         HStack(spacing: 12) {
 
             Image(systemName: icon)
                 .foregroundStyle(.orange)
 
-            Text(title)
+            Text(LocalizedStringKey(titleKey))
                 .font(.title2)
                 .fontWeight(.bold)
         }
     }
 
-    private func priceRow(title: String, value: String) -> some View {
+    private func priceRow(titleKey: String, value: String) -> some View {
 
         HStack {
 
-            Text(title)
+            Text(LocalizedStringKey(titleKey))
                 .foregroundStyle(.gray)
 
             Spacer()
