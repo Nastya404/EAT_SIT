@@ -94,3 +94,7 @@
 "checkout.placeOrder" = "Place Order";
 "checkout.success" = "Order successfully placed!";
 "checkout.ok" = "OK";
+
+"order.delivered" = "Delivered";
+"order.itemsCount" = "%d item(s)";
+"order.restaurantFallback" = "Restaurant";

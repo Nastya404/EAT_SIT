@@ -94,3 +94,7 @@
 "checkout.placeOrder" = "Оформить заказ";
 "checkout.success" = "Заказ успешно оформлен!";
 "checkout.ok" = "OK";
+
+"order.delivered" = "Доставлен";
+"order.itemsCount" = "%d товар(ов)";
+"order.restaurantFallback" = "Ресторан";

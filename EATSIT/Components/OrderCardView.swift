@@ -70,7 +70,7 @@ struct OrderCardView: View {
 
         VStack(alignment: .leading, spacing: 6) {
 
-            Text(firstItem?.dish.category ?? "Restaurant")
+            Text(firstItem?.dish.category ?? String(localized: "order.restaurantFallback"))
                 .font(.headline)
 
             Text(order.createdAt, style: .date)
@@ -91,7 +91,12 @@ struct OrderCardView: View {
                 .font(.title3)
                 .fontWeight(.bold)
 
-            Text("\(order.items.count) item(s)")
+            Text(
+                String(
+                    format: String(localized: "order.itemsCount"),
+                    order.items.count
+                )
+            )
                 .font(.caption)
                 .foregroundStyle(.gray)
         }
@@ -106,7 +111,7 @@ struct OrderCardView: View {
             Image(systemName: "checkmark.circle.fill")
                 .font(.caption)
 
-            Text("Delivered")
+            Text("order.delivered")
                 .font(.caption)
                 .fontWeight(.semibold)
         }
