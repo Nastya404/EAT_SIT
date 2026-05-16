@@ -26,7 +26,7 @@
 "home.deliveringTo" = "DOSTAWA DO";
 "home.address" = "Dom";
 "home.question" = "Na co masz dziś ochotę? 🍔";
-"home.search" = "Szukaj restauracji lub dań";
+"home.search" = "Szukaj restauracji";
 "home.category.pizza" = "🍕 Pizza";
 "home.category.sushi" = "🍣 Sushi";
 "home.category.burgers" = "🍔 Burgery";

@@ -13,6 +13,7 @@ struct HomeView: View {
     
     @StateObject private var viewModel = HomeViewModel()
     @State private var selectedCategory = "all"
+    @State private var searchText = ""
 
     private let categories = [
         ("all", "home.category.all"),
@@ -26,14 +27,22 @@ struct HomeView: View {
     
     private var filteredRestaurants: [Restaurant] {
 
-        if selectedCategory == "all" {
-            return viewModel.restaurants
+        let categoryFilteredRestaurants = selectedCategory == "all"
+            ? viewModel.restaurants
+            : viewModel.restaurants.filter {
+                $0.category == selectedCategory
+            }
+
+        if searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return categoryFilteredRestaurants
         }
 
-        return viewModel.restaurants.filter {
-            $0.category == selectedCategory
+        return categoryFilteredRestaurants.filter {
+            $0.name.localizedCaseInsensitiveContains(searchText)
+                || $0.category.localizedCaseInsensitiveContains(searchText)
         }
     }
+    
     // MARK: - Body
 
     var body: some View {
@@ -88,7 +97,7 @@ struct HomeView: View {
 
                     } label: {
 
-                        Image(systemName: "map.fill")
+                        Image(systemName: "globe.europe.africa.fill")
                             .font(.title3)
                             .foregroundStyle(.white)
                             .frame(width: 44, height: 44)
@@ -118,16 +127,33 @@ struct HomeView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.gray)
 
-            Text("home.search")
-                .foregroundStyle(.gray.opacity(0.7))
+            TextField("home.search", text: $searchText)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
 
-            Spacer()
+            if !searchText.isEmpty {
 
-            Image(systemName: "slider.horizontal.3")
-                .foregroundStyle(.white)
-                .padding(10)
-                .background(Color.orange)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
+                Button {
+                    searchText = ""
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(.gray)
+                }
+            }
+
+            Button {
+
+                selectedCategory = "all"
+                searchText = ""
+
+            } label: {
+
+                Image(systemName: "slider.horizontal.3")
+                    .foregroundStyle(.white)
+                    .padding(10)
+                    .background(Color.orange)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
         }
         .padding()
         .background(Color.white)
@@ -192,29 +218,40 @@ struct HomeView: View {
                     .foregroundStyle(.orange)
             }
 
-            LazyVGrid(
-                columns: [
-                    GridItem(.flexible(), spacing: 18),
-                    GridItem(.flexible(), spacing: 18)
-                ],
-                spacing: 22
-            ) {
+            if filteredRestaurants.isEmpty {
 
-                ForEach(filteredRestaurants) { restaurant in
-                    
-                    NavigationLink {
+                Text("home.noRestaurantsFound")
+                    .font(.headline)
+                    .foregroundStyle(.gray)
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 40)
 
-                        RestaurantView(
-                            restaurant: restaurant
-                        )
+            } else {
 
-                    } label: {
+                LazyVGrid(
+                    columns: [
+                        GridItem(.flexible(), spacing: 18),
+                        GridItem(.flexible(), spacing: 18)
+                    ],
+                    spacing: 22
+                ) {
 
-                        RestaurantCardView(
-                            restaurant: restaurant
-                        )
+                    ForEach(filteredRestaurants) { restaurant in
+                        
+                        NavigationLink {
+
+                            RestaurantView(
+                                restaurant: restaurant
+                            )
+
+                        } label: {
+
+                            RestaurantCardView(
+                                restaurant: restaurant
+                            )
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
                 }
             }
         }
