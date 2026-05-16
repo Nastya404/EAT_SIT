@@ -4,12 +4,6 @@
 //
 //  Created by Shamruk_Polina on 15.05.2026.
 //
-//
-//  CartViewModel.swift
-//  EATSIT
-//
-//  Created by Shamruk_Polina on 15.05.2026.
-//
 
 import SwiftUI
 import Combine
