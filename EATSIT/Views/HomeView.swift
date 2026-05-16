@@ -12,16 +12,28 @@ struct HomeView: View {
     // MARK: - Properties
     
     @StateObject private var viewModel = HomeViewModel()
+    @State private var selectedCategory = "all"
 
     private let categories = [
-        "home.category.all",
-        "home.category.desserts",
-        "home.category.shawarma",
-        "home.category.pizza",
-        "home.category.sushi",
-        "home.category.fastFood",
-        "home.category.asian"
+        ("all", "home.category.all"),
+        ("desserts", "home.category.desserts"),
+        ("shawarma", "home.category.shawarma"),
+        ("pizza", "home.category.pizza"),
+        ("sushi", "home.category.sushi"),
+        ("fast_food", "home.category.fastFood"),
+        ("asian", "home.category.asian")
     ]
+    
+    private var filteredRestaurants: [Restaurant] {
+
+        if selectedCategory == "all" {
+            return viewModel.restaurants
+        }
+
+        return viewModel.restaurants.filter {
+            $0.category == selectedCategory
+        }
+    }
     // MARK: - Body
 
     var body: some View {
@@ -130,24 +142,32 @@ struct HomeView: View {
 
             HStack(spacing: 14) {
 
-                ForEach(categories, id: \.self) { category in
+                ForEach(categories, id: \.0) { category in
 
-                    Text(LocalizedStringKey(category))
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
-                        .background(
-                            category == "home.category.pizza"
-                            ? Color.orange
-                            : Color.white
-                        )
-                        .foregroundStyle(
-                            category == "home.category.pizza"
-                            ? .white
-                            : .gray
-                        )
-                        .clipShape(RoundedRectangle(cornerRadius: 18))
+                    Button {
+
+                        selectedCategory = category.0
+
+                    } label: {
+
+                        Text(LocalizedStringKey(category.1))
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
+                            .background(
+                                selectedCategory == category.0
+                                ? Color.orange
+                                : Color.white
+                            )
+                            .foregroundStyle(
+                                selectedCategory == category.0
+                                ? .white
+                                : .gray
+                            )
+                            .clipShape(RoundedRectangle(cornerRadius: 18))
+                    }
+                    .buttonStyle(.plain)
                 }
             }
         }
@@ -180,8 +200,8 @@ struct HomeView: View {
                 spacing: 22
             ) {
 
-                ForEach(viewModel.restaurants) { restaurant in
-
+                ForEach(filteredRestaurants) { restaurant in
+                    
                     NavigationLink {
 
                         RestaurantView(

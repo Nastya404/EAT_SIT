@@ -70,7 +70,7 @@ struct OrderCardView: View {
 
         VStack(alignment: .leading, spacing: 6) {
 
-            Text(firstItem?.dish.category ?? String(localized: "order.restaurantFallback"))
+            Text(firstItem?.dish.restaurantName ?? String(localized: "order.restaurantFallback"))
                 .font(.headline)
 
             Text(order.createdAt, style: .date)
