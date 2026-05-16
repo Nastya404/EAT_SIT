@@ -15,6 +15,28 @@ struct RestaurantMapView: View {
     @StateObject private var viewModel = HomeViewModel()
     @StateObject private var locationManager = LocationManager()
     @State private var nearestRestaurant: Restaurant?
+    @State private var selectedCategory = "all"
+
+    private let categories = [
+        ("all", "home.category.all"),
+        ("desserts", "home.category.desserts"),
+        ("shawarma", "home.category.shawarma"),
+        ("pizza", "home.category.pizza"),
+        ("sushi", "home.category.sushi"),
+        ("fast_food", "home.category.fastFood"),
+        ("asian", "home.category.asian")
+    ]
+
+    private var filteredRestaurants: [Restaurant] {
+
+        if selectedCategory == "all" {
+            return viewModel.restaurants
+        }
+
+        return viewModel.restaurants.filter {
+            $0.category == selectedCategory
+        }
+    }
 
     @State private var cameraPosition: MapCameraPosition = .region(
         MKCoordinateRegion(
@@ -37,7 +59,7 @@ struct RestaurantMapView: View {
 
             Map(position: $cameraPosition) {
 
-                ForEach(viewModel.restaurants) { restaurant in
+                ForEach(filteredRestaurants) { restaurant in
 
                     Annotation(
                         restaurant.name,
@@ -77,10 +99,58 @@ struct RestaurantMapView: View {
                 }
             }
 
-            bottomPanel
+            VStack(spacing: 0) {
+
+                categoryFilterView
+                bottomPanel
+            }
         }
         .navigationTitle("Map")
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    // MARK: - Category Filter View
+
+    private var categoryFilterView: some View {
+
+        ScrollView(.horizontal, showsIndicators: false) {
+
+            HStack(spacing: 10) {
+
+                ForEach(categories, id: \.0) { category in
+
+                    Button {
+
+                        selectedCategory = category.0
+                        nearestRestaurant = nil
+                        moveToNearestRestaurantInSelectedCategory()
+
+                    } label: {
+
+                        Text(LocalizedStringKey(category.1))
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 10)
+                            .background(
+                                selectedCategory == category.0
+                                    ? Color.orange
+                                    : Color.white
+                            )
+                            .foregroundStyle(
+                                selectedCategory == category.0
+                                    ? .white
+                                    : .gray
+                            )
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 12)
+        }
+        .background(.ultraThinMaterial)
     }
 
     // MARK: - Bottom Panel
@@ -129,7 +199,7 @@ struct RestaurantMapView: View {
             return
         }
 
-        nearestRestaurant = viewModel.restaurants.min { first, second in
+        nearestRestaurant = filteredRestaurants.min { first, second in
 
             let firstLocation = CLLocation(
                 latitude: first.latitude,
@@ -160,6 +230,26 @@ struct RestaurantMapView: View {
                 )
             )
         }
+    }
+    
+    private func moveToNearestRestaurantInSelectedCategory() {
+
+        guard let restaurant = filteredRestaurants.first else {
+            return
+        }
+
+        cameraPosition = .region(
+            MKCoordinateRegion(
+                center: CLLocationCoordinate2D(
+                    latitude: restaurant.latitude,
+                    longitude: restaurant.longitude
+                ),
+                span: MKCoordinateSpan(
+                    latitudeDelta: 0.03,
+                    longitudeDelta: 0.03
+                )
+            )
+        )
     }
 }
 
