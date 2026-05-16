@@ -106,3 +106,13 @@
 "home.category.sushi" = "🍣 Sushi";
 "home.category.fastFood" = "🍔 Fast Food";
 "home.category.asian" = "🥢 Asian";
+
+
+"checkout.address.custom" = "Custom";
+"checkout.addressEditor.title" = "Delivery Address";
+"checkout.addressEditor.description" = "Enter or edit your delivery address.";
+"checkout.addressEditor.placeholder" = "Address";
+"checkout.cancel" = "Cancel";
+"checkout.save" = "Save";
+
+"checkout.deleteAddress" = "Delete Address";

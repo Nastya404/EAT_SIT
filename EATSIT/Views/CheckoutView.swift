@@ -17,16 +17,35 @@ struct CheckoutView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var selectedAddress = "home"
+    @State private var homeAddress = String(localized: "checkout.address.homeValue")
+    @State private var officeAddress = String(localized: "checkout.address.officeValue")
+    @State private var customAddress = ""
+    @State private var editingAddressId = ""
+    @State private var editingAddressText = ""
+    @State private var showAddressEditor = false
+    
+
     @State private var orderComment = ""
     @State private var selectedPaymentMethod: PaymentMethod = .onlineCard
     @State private var showSuccessAlert = false
 
     private let serviceFee = 0.50
 
+    private var savedAddressCount: Int {
+        customAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? 2 : 3
+    }
+
     private var currentDeliveryAddress: String {
-        selectedAddress == "home"
-            ? String(localized: "checkout.address.homeValue")
-            : String(localized: "checkout.address.officeValue")
+        switch selectedAddress {
+        case "home":
+            return homeAddress
+        case "office":
+            return officeAddress
+        case "custom":
+            return customAddress
+        default:
+            return homeAddress
+        }
     }
 
     private var totalPrice: Double {
@@ -67,6 +86,9 @@ struct CheckoutView: View {
             Button("checkout.ok") {
                 cartViewModel.clearCart()
             }
+        }
+        .sheet(isPresented: $showAddressEditor) {
+            addressEditorView
         }
     }
 
@@ -175,7 +197,7 @@ struct CheckoutView: View {
 
                 Spacer()
 
-                Text(String(format: String(localized: "checkout.savedAddresses"), 2))
+                Text(String(format: String(localized: "checkout.savedAddresses"), savedAddressCount))
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundStyle(.orange)
@@ -188,7 +210,7 @@ struct CheckoutView: View {
             addressCard(
                 id: "home",
                 titleKey: "checkout.address.home",
-                subtitleKey: "checkout.address.homeValue",
+                subtitle: homeAddress,
                 icon: "house",
                 isDefault: true
             )
@@ -196,26 +218,44 @@ struct CheckoutView: View {
             addressCard(
                 id: "office",
                 titleKey: "checkout.address.office",
-                subtitleKey: "checkout.address.officeValue",
+                subtitle: officeAddress,
                 icon: "building.2",
                 isDefault: false
             )
 
-            HStack(spacing: 10) {
-
-                Image(systemName: "plus")
-                    .font(.headline)
-                    .foregroundStyle(.orange)
-                    .frame(width: 34, height: 34)
-                    .overlay {
-                        Circle()
-                            .stroke(Color.orange, style: StrokeStyle(lineWidth: 2, dash: [5]))
-                    }
-
-                Text("checkout.addNewAddress")
-                    .font(.headline)
-                    .foregroundStyle(.orange)
+            if !customAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                addressCard(
+                    id: "custom",
+                    titleKey: "checkout.address.custom",
+                    subtitle: customAddress,
+                    icon: "mappin.and.ellipse",
+                    isDefault: false
+                )
             }
+
+            Button {
+
+                startEditingAddress(id: "custom")
+
+            } label: {
+
+                HStack(spacing: 10) {
+
+                    Image(systemName: "plus")
+                        .font(.headline)
+                        .foregroundStyle(.orange)
+                        .frame(width: 34, height: 34)
+                        .overlay {
+                            Circle()
+                                .stroke(Color.orange, style: StrokeStyle(lineWidth: 2, dash: [5]))
+                        }
+
+                    Text("checkout.addNewAddress")
+                        .font(.headline)
+                        .foregroundStyle(.orange)
+                }
+            }
+            .buttonStyle(.plain)
         }
         .padding(20)
         .background(Color.white)
@@ -227,7 +267,7 @@ struct CheckoutView: View {
     private func addressCard(
         id: String,
         titleKey: String,
-        subtitleKey: String,
+        subtitle: String,
         icon: String,
         isDefault: Bool
     ) -> some View {
@@ -269,15 +309,21 @@ struct CheckoutView: View {
                         }
                     }
 
-                    Text(LocalizedStringKey(subtitleKey))
+                    Text(subtitle)
                         .foregroundStyle(.gray)
                 }
 
                 Spacer()
 
-                if isSelected {
+                Button {
+
+                    startEditingAddress(id: id)
+
+                } label: {
+
                     Image(systemName: "pencil")
                         .foregroundStyle(.orange)
+                        .frame(width: 44, height: 44)
                 }
             }
             .padding()
@@ -289,6 +335,57 @@ struct CheckoutView: View {
             .clipShape(RoundedRectangle(cornerRadius: 18))
         }
         .buttonStyle(.plain)
+    }
+
+    // MARK: - Address Editor View
+
+    private var addressEditorView: some View {
+
+        NavigationStack {
+
+            VStack(alignment: .leading, spacing: 20) {
+
+                Text("checkout.addressEditor.description")
+                    .font(.subheadline)
+                    .foregroundStyle(.gray)
+
+                TextField("checkout.addressEditor.placeholder", text: $editingAddressText)
+                    .textFieldStyle(.roundedBorder)
+                
+                if editingAddressId == "custom",
+                   !customAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+
+                    Button(role: .destructive) {
+                        deleteCustomAddress()
+                    } label: {
+                        Label("checkout.deleteAddress", systemImage: "trash")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                    }
+                    .buttonStyle(.bordered)
+                }
+
+                Spacer()
+            }
+            .padding(20)
+            .navigationTitle("checkout.addressEditor.title")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("checkout.cancel") {
+                        showAddressEditor = false
+                    }
+                }
+
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("checkout.save") {
+                        saveEditedAddress()
+                    }
+                    .disabled(editingAddressText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                }
+            }
+        }
     }
 
     // MARK: - Delivery Instructions View
@@ -601,6 +698,39 @@ struct CheckoutView: View {
 
     // MARK: - Methods
 
+    private func startEditingAddress(id: String) {
+
+        editingAddressId = id
+
+        switch id {
+        case "home":
+            editingAddressText = homeAddress
+        case "office":
+            editingAddressText = officeAddress
+        default:
+            editingAddressText = customAddress
+        }
+
+        showAddressEditor = true
+    }
+
+    private func saveEditedAddress() {
+
+        let trimmedAddress = editingAddressText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        switch editingAddressId {
+        case "home":
+            homeAddress = trimmedAddress
+        case "office":
+            officeAddress = trimmedAddress
+        default:
+            customAddress = trimmedAddress
+            selectedAddress = "custom"
+        }
+
+        showAddressEditor = false
+    }
+
     private func createOrder() {
 
         let order = Order(
@@ -616,7 +746,20 @@ struct CheckoutView: View {
         orderViewModel.addOrder(order)
         showSuccessAlert = true
     }
+    
+    private func deleteCustomAddress() {
+
+        customAddress = ""
+
+        if selectedAddress == "custom" {
+            selectedAddress = "home"
+        }
+
+        showAddressEditor = false
+    }
 }
+
+
 
 // MARK: - Preview
 

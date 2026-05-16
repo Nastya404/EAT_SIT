@@ -106,3 +106,12 @@
 "home.category.sushi" = "🍣 Суши";
 "home.category.fastFood" = "🍔 Фаст-фуд";
 "home.category.asian" = "🥢 Азиатская кухня";
+
+"checkout.address.custom" = "Новый адрес";
+"checkout.addressEditor.title" = "Адрес доставки";
+"checkout.addressEditor.description" = "Введите или измените адрес доставки.";
+"checkout.addressEditor.placeholder" = "Адрес";
+"checkout.cancel" = "Отмена";
+"checkout.save" = "Сохранить";
+
+"checkout.deleteAddress" = "Удалить адрес";
