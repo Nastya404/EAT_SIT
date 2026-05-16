@@ -134,3 +134,24 @@
 "profile.help.faq" = "Najczęstsze pytania";
 "profile.help.support" = "Kontakt z pomocą";
 "profile.help.terms" = "Warunki korzystania";
+
+"auth.login.title" = "Witamy ponownie";
+"auth.login.subtitle" = "Zaloguj się, aby dalej zamawiać ulubione jedzenie.";
+"auth.login.button" = "Zaloguj się";
+"auth.login.noAccount" = "Nie masz konta?";
+"auth.login.signUp" = "Zarejestruj się";
+
+"auth.register.title" = "Utwórz konto";
+"auth.register.subtitle" = "Dołącz do EAT&SIT i zamawiaj jedzenie szybciej.";
+"auth.register.button" = "Utwórz konto";
+"auth.register.hasAccount" = "Masz już konto?";
+"auth.register.signIn" = "Zaloguj się";
+
+"auth.name" = "Imię";
+"auth.email" = "E-mail";
+"auth.phone" = "Telefon";
+"auth.password" = "Hasło";
+
+"auth.error.emptyFields" = "Wypełnij wszystkie pola.";
+"auth.error.noUser" = "Nie znaleziono użytkownika. Utwórz konto.";
+"auth.error.invalidCredentials" = "Nieprawidłowy e-mail lub hasło.";

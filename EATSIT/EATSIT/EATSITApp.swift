@@ -15,6 +15,7 @@ struct EATSITApp: App {
     @StateObject private var cartViewModel = CartViewModel()
     @StateObject private var orderViewModel = OrderViewModel()
     @StateObject private var localizationManager = LocalizationManager()
+    @StateObject private var authViewModel = AuthViewModel()
 
     // MARK: - Body
 
@@ -22,11 +23,19 @@ struct EATSITApp: App {
 
         WindowGroup {
 
-            ContentView()
-                .environmentObject(cartViewModel)
-                .environmentObject(orderViewModel)
-                .environmentObject(localizationManager)
-                .environment(\.locale, Locale(identifier: localizationManager.selectedLanguage.rawValue))
+            Group {
+
+                if authViewModel.isLoggedIn {
+                    ContentView()
+                } else {
+                    LoginView()
+                }
+            }
+            .environmentObject(cartViewModel)
+            .environmentObject(orderViewModel)
+            .environmentObject(localizationManager)
+            .environmentObject(authViewModel)
+            .environment(\.locale, Locale(identifier: localizationManager.selectedLanguage.rawValue))
         }
     }
 }

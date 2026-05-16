@@ -134,3 +134,24 @@
 "profile.help.faq" = "Частые вопросы";
 "profile.help.support" = "Связаться с поддержкой";
 "profile.help.terms" = "Условия использования";
+
+"auth.login.title" = "С возвращением";
+"auth.login.subtitle" = "Войдите, чтобы продолжить заказывать любимую еду.";
+"auth.login.button" = "Войти";
+"auth.login.noAccount" = "Нет аккаунта?";
+"auth.login.signUp" = "Зарегистрироваться";
+
+"auth.register.title" = "Создать аккаунт";
+"auth.register.subtitle" = "Присоединяйтесь к EAT&SIT и заказывайте еду быстрее.";
+"auth.register.button" = "Создать аккаунт";
+"auth.register.hasAccount" = "Уже есть аккаунт?";
+"auth.register.signIn" = "Войти";
+
+"auth.name" = "Имя";
+"auth.email" = "Электронная почта";
+"auth.phone" = "Телефон";
+"auth.password" = "Пароль";
+
+"auth.error.emptyFields" = "Заполните все поля.";
+"auth.error.noUser" = "Пользователь не найден. Создайте аккаунт.";
+"auth.error.invalidCredentials" = "Неверная почта или пароль.";

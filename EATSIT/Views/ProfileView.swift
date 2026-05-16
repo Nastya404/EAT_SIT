@@ -11,7 +11,20 @@ struct ProfileView: View {
 
     // MARK: - Properties
 
+    @EnvironmentObject private var authViewModel: AuthViewModel
     @State private var showLogoutAlert = false
+
+    private var userName: String {
+        authViewModel.currentUser?.name ?? "User"
+    }
+
+    private var userEmail: String {
+        authViewModel.currentUser?.email ?? "user@email.com"
+    }
+
+    private var userPhone: String {
+        authViewModel.currentUser?.phone ?? "-"
+    }
 
     // MARK: - Body
 
@@ -34,7 +47,9 @@ struct ProfileView: View {
             .navigationBarTitleDisplayMode(.inline)
             .alert("profile.logoutTitle", isPresented: $showLogoutAlert) {
                 Button("profile.cancel", role: .cancel) { }
-                Button("profile.logout", role: .destructive) { }
+                Button("profile.logout", role: .destructive) {
+                    authViewModel.logout()
+                }
             } message: {
                 Text("profile.logoutMessage")
             }
@@ -55,7 +70,11 @@ struct ProfileView: View {
 
             NavigationLink {
 
-                ProfileDetailsView()
+                ProfileDetailsView(
+                    userName: userName,
+                    userEmail: userEmail,
+                    userPhone: userPhone
+                )
 
             } label: {
 
@@ -80,16 +99,16 @@ struct ProfileView: View {
                 .font(.system(size: 96))
                 .foregroundStyle(.orange)
 
-            Text("Alex Johnson")
+            Text(userName)
                 .font(.title)
                 .fontWeight(.bold)
 
             VStack(spacing: 4) {
 
-                Text("alex.johnson@email.com")
+                Text(userEmail)
                     .foregroundStyle(.orange)
 
-                Text("+1 (555) 012-3456")
+                Text(userPhone)
             }
             .font(.subheadline)
             .foregroundStyle(.gray)
@@ -250,6 +269,12 @@ struct ProfileView: View {
 
 private struct ProfileDetailsView: View {
 
+    // MARK: - Properties
+
+    let userName: String
+    let userEmail: String
+    let userPhone: String
+
     // MARK: - Body
 
     var body: some View {
@@ -258,9 +283,9 @@ private struct ProfileDetailsView: View {
 
             Section("profile.personalInfo") {
 
-                profileRow(titleKey: "profile.name", value: "Alex Johnson")
-                profileRow(titleKey: "profile.email", value: "alex.johnson@email.com")
-                profileRow(titleKey: "profile.phone", value: "+1 (555) 012-3456")
+                profileRow(titleKey: "profile.name", value: userName)
+                profileRow(titleKey: "profile.email", value: userEmail)
+                profileRow(titleKey: "profile.phone", value: userPhone)
             }
 
             Section("profile.account") {
@@ -356,4 +381,5 @@ private struct NotificationsSettingsView: View {
 #Preview {
 
     ProfileView()
+        .environmentObject(AuthViewModel())
 }

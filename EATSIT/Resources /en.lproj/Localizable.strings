@@ -135,3 +135,24 @@
 "profile.help.faq" = "FAQ";
 "profile.help.support" = "Contact support";
 "profile.help.terms" = "Terms and conditions";
+
+"auth.login.title" = "Welcome Back";
+"auth.login.subtitle" = "Sign in to continue ordering your favorite meals.";
+"auth.login.button" = "Sign In";
+"auth.login.noAccount" = "Don't have an account?";
+"auth.login.signUp" = "Sign Up";
+
+"auth.register.title" = "Create Account";
+"auth.register.subtitle" = "Join EAT&SIT and start ordering food faster.";
+"auth.register.button" = "Create Account";
+"auth.register.hasAccount" = "Already have an account?";
+"auth.register.signIn" = "Sign In";
+
+"auth.name" = "Name";
+"auth.email" = "Email";
+"auth.phone" = "Phone";
+"auth.password" = "Password";
+
+"auth.error.emptyFields" = "Please fill in all fields.";
+"auth.error.noUser" = "No registered user found. Please create an account.";
+"auth.error.invalidCredentials" = "Invalid email or password.";
