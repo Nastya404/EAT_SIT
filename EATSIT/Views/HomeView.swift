@@ -14,6 +14,8 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     @State private var selectedCategory = "all"
     @State private var searchText = ""
+    @State private var selectedDeliveryAddress = "home.address"
+    @State private var showAddressPicker = false
 
     private let categories = [
         ("all", "home.category.all"),
@@ -62,6 +64,35 @@ struct HomeView: View {
                 .padding(.top, 12)
             }
             .background(Color(.systemGray6))
+            .sheet(isPresented: $showAddressPicker) {
+
+                VStack(spacing: 24) {
+
+                    Text("home.selectAddress")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .padding(.top)
+
+                    addressButton(
+                        titleKey: "home.address",
+                        value: "home.address"
+                    )
+
+                    addressButton(
+                        titleKey: "checkout.address.office",
+                        value: "checkout.address.office"
+                    )
+
+                    addressButton(
+                        titleKey: "home.currentLocation",
+                        value: "home.currentLocation"
+                    )
+
+                    Spacer()
+                }
+                .padding()
+                .presentationDetents([.height(320)])
+            }
         }
     }
 
@@ -80,12 +111,24 @@ struct HomeView: View {
                 Image(systemName: "location.fill")
                     .foregroundStyle(.orange)
 
-                Text("home.address")
-                    .font(.title3)
-                    .fontWeight(.bold)
+                Button {
 
-                Image(systemName: "chevron.down")
-                    .foregroundStyle(.orange)
+                    showAddressPicker = true
+
+                } label: {
+
+                    HStack(spacing: 6) {
+
+                        Text(LocalizedStringKey(selectedDeliveryAddress))
+                            .font(.subheadline)
+                            .fontWeight(.bold)
+                            .lineLimit(1)
+
+                        Image(systemName: "chevron.down")
+                            .foregroundStyle(.orange)
+                    }
+                }
+                .buttonStyle(.plain)
 
                 Spacer()
 
@@ -254,6 +297,30 @@ struct HomeView: View {
                     }
                 }
             }
+        }
+    }
+
+    // MARK: - Address Button
+
+    private func addressButton(
+        titleKey: String,
+        value: String
+    ) -> some View {
+
+        Button {
+
+            selectedDeliveryAddress = value
+            showAddressPicker = false
+
+        } label: {
+
+            Text(LocalizedStringKey(titleKey))
+                .font(.headline)
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.orange)
+                .clipShape(RoundedRectangle(cornerRadius: 18))
         }
     }
 }

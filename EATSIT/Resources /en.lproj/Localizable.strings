@@ -156,3 +156,6 @@
 "auth.error.emptyFields" = "Please fill in all fields.";
 "auth.error.noUser" = "No registered user found. Please create an account.";
 "auth.error.invalidCredentials" = "Invalid email or password.";
+
+"home.selectAddress" = "Select delivery address";
+"home.currentLocation" = "Current location";

@@ -11,7 +11,10 @@ struct ProfileView: View {
 
     // MARK: - Properties
 
+    // MARK: - Properties
+
     @EnvironmentObject private var authViewModel: AuthViewModel
+    @EnvironmentObject private var orderViewModel: OrderViewModel
     @State private var showLogoutAlert = false
 
     private var userName: String {
@@ -26,6 +29,13 @@ struct ProfileView: View {
         authViewModel.currentUser?.phone ?? "-"
     }
 
+    private var ordersCount: String {
+        "\(orderViewModel.orders.count)"
+    }
+
+    private var pointsCount: String {
+        "\(orderViewModel.orders.count * 10)"
+    }
     // MARK: - Body
 
     var body: some View {
@@ -127,11 +137,9 @@ struct ProfileView: View {
 
         HStack {
 
-            statisticItem(titleKey: "profile.orders", value: "24")
+            statisticItem(titleKey: "profile.orders", value: ordersCount)
             Divider()
-            statisticItem(titleKey: "profile.reviews", value: "8")
-            Divider()
-            statisticItem(titleKey: "profile.points", value: "320")
+            statisticItem(titleKey: "profile.points", value: pointsCount)
         }
         .frame(height: 72)
         .padding()

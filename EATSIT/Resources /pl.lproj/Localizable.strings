@@ -155,3 +155,6 @@
 "auth.error.emptyFields" = "Wypełnij wszystkie pola.";
 "auth.error.noUser" = "Nie znaleziono użytkownika. Utwórz konto.";
 "auth.error.invalidCredentials" = "Nieprawidłowy e-mail lub hasło.";
+
+"home.selectAddress" = "Wybierz adres dostawy";
+"home.currentLocation" = "Bieżąca lokalizacja";

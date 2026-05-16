@@ -155,3 +155,6 @@
 "auth.error.emptyFields" = "Заполните все поля.";
 "auth.error.noUser" = "Пользователь не найден. Создайте аккаунт.";
 "auth.error.invalidCredentials" = "Неверная почта или пароль.";
+
+"home.selectAddress" = "Выберите адрес доставки";
+"home.currentLocation" = "Текущее местоположение";
