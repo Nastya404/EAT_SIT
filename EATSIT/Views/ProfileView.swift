@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ProfileView: View {
 
+    // MARK: - Properties
+
+    @State private var showLogoutAlert = false
+
     // MARK: - Body
 
     var body: some View {
@@ -28,6 +32,12 @@ struct ProfileView: View {
             }
             .background(Color(.systemGray6))
             .navigationBarTitleDisplayMode(.inline)
+            .alert("profile.logoutTitle", isPresented: $showLogoutAlert) {
+                Button("profile.cancel", role: .cancel) { }
+                Button("profile.logout", role: .destructive) { }
+            } message: {
+                Text("profile.logoutMessage")
+            }
         }
     }
 
@@ -43,11 +53,20 @@ struct ProfileView: View {
 
             Spacer()
 
-            Image(systemName: "ellipsis")
-                .font(.title3)
-                .padding(16)
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 18))
+            NavigationLink {
+
+                ProfileDetailsView()
+
+            } label: {
+
+                Image(systemName: "ellipsis")
+                    .font(.title3)
+                    .foregroundStyle(.primary)
+                    .padding(16)
+                    .background(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 18))
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -68,6 +87,8 @@ struct ProfileView: View {
             VStack(spacing: 4) {
 
                 Text("alex.johnson@email.com")
+                    .foregroundStyle(.orange)
+
                 Text("+1 (555) 012-3456")
             }
             .font(.subheadline)
@@ -107,22 +128,7 @@ struct ProfileView: View {
 
             ForEach(MockData.profileOptions) { option in
 
-                if option.titleKey == "profile.language" {
-
-                    NavigationLink {
-
-                        LanguageView()
-
-                    } label: {
-
-                        ProfileOptionRowView(option: option)
-                    }
-                    .buttonStyle(.plain)
-
-                } else {
-
-                    ProfileOptionRowView(option: option)
-                }
+                profileOptionLink(for: option)
 
                 if option.id != MockData.profileOptions.last?.id {
                     Divider()
@@ -140,6 +146,8 @@ struct ProfileView: View {
 
         Button {
 
+            showLogoutAlert = true
+
         } label: {
 
             HStack {
@@ -156,7 +164,7 @@ struct ProfileView: View {
         }
     }
 
-    // MARK: - Methods
+    // MARK: - Helper Views
 
     private func statisticItem(titleKey: String, value: String) -> some View {
 
@@ -172,8 +180,180 @@ struct ProfileView: View {
         }
         .frame(maxWidth: .infinity)
     }
+
+    private func profileOptionLink(for option: ProfileOption) -> some View {
+
+        NavigationLink {
+
+            destinationView(for: option)
+
+        } label: {
+
+            ProfileOptionRowView(option: option)
+        }
+        .buttonStyle(.plain)
+    }
+
+    @ViewBuilder
+    private func destinationView(for option: ProfileOption) -> some View {
+
+        switch option.titleKey {
+        case "profile.paymentMethods":
+            ProfileInfoView(
+                titleKey: "profile.paymentMethods",
+                iconName: "creditcard.fill",
+                rows: [
+                    "VISA •••• 1234",
+                    "Cash on Delivery",
+                    "ERIP Payment"
+                ]
+            )
+
+        case "profile.deliveryAddresses":
+            ProfileInfoView(
+                titleKey: "profile.deliveryAddresses",
+                iconName: "location.fill",
+                rows: [
+                    String(localized: "checkout.address.homeValue"),
+                    String(localized: "checkout.address.officeValue")
+                ]
+            )
+
+        case "profile.notifications":
+            NotificationsSettingsView()
+
+        case "profile.language":
+            LanguageView()
+
+        case "profile.help":
+            ProfileInfoView(
+                titleKey: "profile.help",
+                iconName: "questionmark.circle.fill",
+                rows: [
+                    String(localized: "profile.help.faq"),
+                    String(localized: "profile.help.support"),
+                    String(localized: "profile.help.terms")
+                ]
+            )
+
+        default:
+            ProfileInfoView(
+                titleKey: option.titleKey,
+                iconName: option.iconName,
+                rows: []
+            )
+        }
+    }
 }
 
+// MARK: - Profile Details View
+
+private struct ProfileDetailsView: View {
+
+    // MARK: - Body
+
+    var body: some View {
+
+        List {
+
+            Section("profile.personalInfo") {
+
+                profileRow(titleKey: "profile.name", value: "Alex Johnson")
+                profileRow(titleKey: "profile.email", value: "alex.johnson@email.com")
+                profileRow(titleKey: "profile.phone", value: "+1 (555) 012-3456")
+            }
+
+            Section("profile.account") {
+
+                profileRow(titleKey: "profile.status", value: "Active")
+                profileRow(titleKey: "profile.memberSince", value: "2026")
+            }
+        }
+        .navigationTitle("profile.details")
+    }
+
+    // MARK: - Helper Views
+
+    private func profileRow(titleKey: String, value: String) -> some View {
+
+        HStack {
+
+            Text(LocalizedStringKey(titleKey))
+
+            Spacer()
+
+            Text(value)
+                .foregroundStyle(.gray)
+        }
+    }
+}
+
+// MARK: - Profile Info View
+
+private struct ProfileInfoView: View {
+
+    // MARK: - Properties
+
+    let titleKey: String
+    let iconName: String
+    let rows: [String]
+
+    // MARK: - Body
+
+    var body: some View {
+
+        List {
+
+            if rows.isEmpty {
+
+                Text("profile.emptySection")
+                    .foregroundStyle(.gray)
+
+            } else {
+
+                ForEach(rows, id: \.self) { row in
+
+                    HStack(spacing: 12) {
+
+                        Image(systemName: iconName)
+                            .foregroundStyle(.orange)
+
+                        Text(row)
+                    }
+                }
+            }
+        }
+        .navigationTitle(LocalizedStringKey(titleKey))
+    }
+}
+
+// MARK: - Notifications Settings View
+
+private struct NotificationsSettingsView: View {
+
+    // MARK: - Properties
+
+    @State private var orderUpdatesEnabled = true
+    @State private var promotionsEnabled = false
+    @State private var deliveryStatusEnabled = true
+
+    // MARK: - Body
+
+    var body: some View {
+
+        List {
+
+            Toggle("profile.notifications.orderUpdates", isOn: $orderUpdatesEnabled)
+            Toggle("profile.notifications.promotions", isOn: $promotionsEnabled)
+            Toggle("profile.notifications.deliveryStatus", isOn: $deliveryStatusEnabled)
+        }
+        .navigationTitle("profile.notifications")
+    }
+}
+
+// MARK: - Preview
+
 #Preview {
+
     ProfileView()
 }

@@ -116,3 +116,22 @@
 "checkout.save" = "Save";
 
 "checkout.deleteAddress" = "Delete Address";
+
+"profile.logoutTitle" = "Log Out";
+"profile.logoutMessage" = "Are you sure you want to log out?";
+"profile.cancel" = "Cancel";
+"profile.details" = "Profile Details";
+"profile.personalInfo" = "Personal Information";
+"profile.name" = "Name";
+"profile.email" = "Email";
+"profile.phone" = "Phone";
+"profile.account" = "Account";
+"profile.status" = "Status";
+"profile.memberSince" = "Member Since";
+"profile.emptySection" = "No data yet";
+"profile.notifications.orderUpdates" = "Order updates";
+"profile.notifications.promotions" = "Promotions";
+"profile.notifications.deliveryStatus" = "Delivery status";
+"profile.help.faq" = "FAQ";
+"profile.help.support" = "Contact support";
+"profile.help.terms" = "Terms and conditions";

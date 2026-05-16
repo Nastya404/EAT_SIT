@@ -115,3 +115,22 @@
 "checkout.save" = "Zapisz";
 
 "checkout.deleteAddress" = "Usuń adres";
+
+"profile.logoutTitle" = "Wylogowanie";
+"profile.logoutMessage" = "Czy na pewno chcesz się wylogować?";
+"profile.cancel" = "Anuluj";
+"profile.details" = "Szczegóły profilu";
+"profile.personalInfo" = "Dane osobowe";
+"profile.name" = "Imię";
+"profile.email" = "E-mail";
+"profile.phone" = "Telefon";
+"profile.account" = "Konto";
+"profile.status" = "Status";
+"profile.memberSince" = "Użytkownik od";
+"profile.emptySection" = "Brak danych";
+"profile.notifications.orderUpdates" = "Aktualizacje zamówień";
+"profile.notifications.promotions" = "Promocje i rabaty";
+"profile.notifications.deliveryStatus" = "Status dostawy";
+"profile.help.faq" = "Najczęstsze pytania";
+"profile.help.support" = "Kontakt z pomocą";
+"profile.help.terms" = "Warunki korzystania";

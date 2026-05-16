@@ -115,3 +115,22 @@
 "checkout.save" = "Сохранить";
 
 "checkout.deleteAddress" = "Удалить адрес";
+
+"profile.logoutTitle" = "Выход";
+"profile.logoutMessage" = "Вы уверены, что хотите выйти?";
+"profile.cancel" = "Отмена";
+"profile.details" = "Детали профиля";
+"profile.personalInfo" = "Личная информация";
+"profile.name" = "Имя";
+"profile.email" = "Электронная почта";
+"profile.phone" = "Телефон";
+"profile.account" = "Аккаунт";
+"profile.status" = "Статус";
+"profile.memberSince" = "С нами с";
+"profile.emptySection" = "Пока нет данных";
+"profile.notifications.orderUpdates" = "Обновления заказа";
+"profile.notifications.promotions" = "Акции и скидки";
+"profile.notifications.deliveryStatus" = "Статус доставки";
+"profile.help.faq" = "Частые вопросы";
+"profile.help.support" = "Связаться с поддержкой";
+"profile.help.terms" = "Условия использования";
