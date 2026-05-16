@@ -98,3 +98,11 @@
 "order.delivered" = "Dostarczono";
 "order.itemsCount" = "%d produkt(ów)";
 "order.restaurantFallback" = "Restauracja";
+
+"home.category.all" = "🍽 Wszystko";
+"home.category.desserts" = "🍰 Desery";
+"home.category.shawarma" = "🌯 Shawarma";
+"home.category.pizza" = "🍕 Pizza";
+"home.category.sushi" = "🍣 Sushi";
+"home.category.fastFood" = "🍔 Fast food";
+"home.category.asian" = "🥢 Kuchnia azjatycka";

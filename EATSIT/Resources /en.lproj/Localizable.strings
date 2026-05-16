@@ -98,3 +98,11 @@
 "order.delivered" = "Delivered";
 "order.itemsCount" = "%d item(s)";
 "order.restaurantFallback" = "Restaurant";
+
+"home.category.all" = "🍽 All";
+"home.category.desserts" = "🍰 Desserts";
+"home.category.shawarma" = "🌯 Shawarma";
+"home.category.pizza" = "🍕 Pizza";
+"home.category.sushi" = "🍣 Sushi";
+"home.category.fastFood" = "🍔 Fast Food";
+"home.category.asian" = "🥢 Asian";

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		810B48C92FB8D9D0004ECF88 /* RestaurantLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810B48C82FB8D9CC004ECF88 /* RestaurantLocation.swift */; };
+		810B48CB2FB8E2D2004ECF88 /* eatsit.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 810B48CA2FB8E2D2004ECF88 /* eatsit.sqlite */; };
 		817F53632FB78BBE00D75CA7 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53622FB78BBB00D75CA7 /* AppLanguage.swift */; };
 		817F53652FB78C1B00D75CA7 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53642FB78BEE00D75CA7 /* LocalizationManager.swift */; };
 		817F53672FB78C2E00D75CA7 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53662FB78C2D00D75CA7 /* LanguageView.swift */; };
@@ -63,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		810B48C82FB8D9CC004ECF88 /* RestaurantLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantLocation.swift; sourceTree = "<group>"; };
+		810B48CA2FB8E2D2004ECF88 /* eatsit.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = eatsit.sqlite; sourceTree = "<group>"; };
 		817F53622FB78BBB00D75CA7 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		817F53642FB78BEE00D75CA7 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
 		817F53662FB78C2D00D75CA7 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 		81B0F9602FB740A90019ADDE /* Resources  */ = {
 			isa = PBXGroup;
 			children = (
+				810B48CA2FB8E2D2004ECF88 /* eatsit.sqlite */,
 				81B0F9382FB73F270019ADDE /* Assets.xcassets */,
 				817F53682FB78D3900D75CA7 /* Localizable.strings */,
 			);
@@ -392,6 +395,7 @@
 			files = (
 				81B0F9392FB73F270019ADDE /* Assets.xcassets in Resources */,
 				817F536A2FB78D3900D75CA7 /* Localizable.strings in Resources */,
+				810B48CB2FB8E2D2004ECF88 /* eatsit.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

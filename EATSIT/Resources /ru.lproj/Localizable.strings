@@ -98,3 +98,11 @@
 "order.delivered" = "Доставлен";
 "order.itemsCount" = "%d товар(ов)";
 "order.restaurantFallback" = "Ресторан";
+
+"home.category.all" = "🍽 Все";
+"home.category.desserts" = "🍰 Десерты";
+"home.category.shawarma" = "🌯 Шаурма";
+"home.category.pizza" = "🍕 Пицца";
+"home.category.sushi" = "🍣 Суши";
+"home.category.fastFood" = "🍔 Фаст-фуд";
+"home.category.asian" = "🥢 Азиатская кухня";

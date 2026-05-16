@@ -14,11 +14,13 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
 
     private let categories = [
+        "home.category.all",
+        "home.category.desserts",
+        "home.category.shawarma",
         "home.category.pizza",
         "home.category.sushi",
-        "home.category.burgers",
-        "home.category.healthy",
-        "home.category.desserts"
+        "home.category.fastFood",
+        "home.category.asian"
     ]
     // MARK: - Body
 

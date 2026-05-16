@@ -35,10 +35,11 @@ struct RestaurantCardView: View {
 
             Image(restaurant.imageName)
                 .resizable()
-                .scaledToFill()
-                .frame(height: 120)
+                .scaledToFit()
+                .frame(height: 110)
                 .frame(maxWidth: .infinity)
-                .clipped()
+                .background(Color.white)
+                .padding(12)
 
             if restaurant.isPopular {
 

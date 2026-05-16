@@ -14,13 +14,6 @@ struct RestaurantView: View {
     @StateObject private var viewModel: RestaurantViewModel
     
     let restaurant: Restaurant
-
-    private let categories = [
-        "Pizza",
-        "Sushi",
-        "Burger",
-        "Healthy"
-    ]
     
     init(restaurant: Restaurant) {
         self.restaurant = restaurant
@@ -39,7 +32,6 @@ struct RestaurantView: View {
 
                 restaurantImageView
                 restaurantInfoView
-                categoriesView
                 dishesView
             }
             .padding(.bottom, 120)
@@ -55,12 +47,18 @@ struct RestaurantView: View {
 
     private var restaurantImageView: some View {
 
-        Image(restaurant.imageName)
-            .resizable()
-            .scaledToFill()
-            .frame(height: 260)
-            .frame(maxWidth: .infinity)
-            .clipped()
+        ZStack {
+
+            Color.white
+
+            Image(restaurant.imageName)
+                .resizable()
+                .scaledToFit()
+                .padding(28)
+        }
+        .frame(height: 220)
+        .frame(maxWidth: .infinity)
+        .clipShape(RoundedRectangle(cornerRadius: 0))
     }
 
     // MARK: - Restaurant Info View
@@ -92,37 +90,7 @@ struct RestaurantView: View {
         .padding(.horizontal, 20)
     }
 
-    // MARK: - Categories View
 
-    private var categoriesView: some View {
-
-        ScrollView(.horizontal, showsIndicators: false) {
-
-            HStack(spacing: 12) {
-
-                ForEach(categories, id: \.self) { category in
-
-                    Text(category)
-                        .fontWeight(.semibold)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 10)
-                        .background(
-                            category == "Pizza"
-                            ? Color.orange
-                            : Color.white
-                        )
-                        .foregroundStyle(
-                            category == "Pizza"
-                            ? .white
-                            : .gray
-                        )
-                        .clipShape(Capsule())
-                }
-            }
-            .padding(.horizontal, 20)
-        }
-    }
-    
     
     // MARK: - Dishes View
 
