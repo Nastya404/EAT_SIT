@@ -24,11 +24,19 @@ jobs:
       - name: Show Xcode version
         run: xcodebuild -version
 
-      - name: List schemes
-        run: xcodebuild -list -project EATSIT.xcodeproj
+      # Этот шаг принудительно скачает и установит iOS Simulator для Xcode 16.4, если его нет в системе
+      - name: Download iOS Runtime
+        run: |
+          echo "Checking available iOS SDKs..."
+          xcrun xcodebuild -downloadPlatform iOS || true
+
+      - name: List schemes and devices
+        run: |
+          xcodebuild -list -project EATSIT.xcodeproj
+          xcrun simctl list devices available
 
       - name: Run Unit + UI Tests with Coverage
-        run: xcodebuild -project EATSIT.xcodeproj -scheme EATSIT -destination "id=dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder" -enableCodeCoverage YES clean test
+        run: xcodebuild -project EATSIT.xcodeproj -scheme EATSIT -destination "platform=iOS Simulator,name=iPhone 16" -enableCodeCoverage YES clean test
 
       - name: Create coverage folder
         run: mkdir -p coverage
