@@ -177,7 +177,7 @@
 "restaurant.open" = "Открыть";
 
 "restaurant.deliveryPrice" = "Доставка 2.99 BYN";
-"restaurant.deliveryPrice" = "Доставка 2.99 BYN";
+"restaurant.deliveryTime" = "20-35 мин";
 
 "basket.itemsCount" = "%d товаров";
 "basket.toppings" = "+ добавки";
