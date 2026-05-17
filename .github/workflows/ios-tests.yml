@@ -25,17 +25,10 @@ jobs:
         run: xcodebuild -version
 
       - name: List schemes
-        run: |
-          xcodebuild -list -project EATSIT.xcodeproj
+        run: xcodebuild -list -project EATSIT.xcodeproj
 
       - name: Run Unit + UI Tests with Coverage
-        run: |
-          xcodebuild \
-            -project EATSIT.xcodeproj \
-            -scheme EATSIT \
-            -destination 'platform=iOS Simulator' \            
-            -enableCodeCoverage YES \
-            clean test
+        run: xcodebuild -project EATSIT.xcodeproj -scheme EATSIT -destination "platform=iOS Simulator" -enableCodeCoverage YES clean test
 
       - name: Create coverage folder
         run: mkdir -p coverage
@@ -43,12 +36,9 @@ jobs:
       - name: Export coverage report
         run: |
           RESULT_BUNDLE=$(find ~/Library/Developer/Xcode/DerivedData -name "*.xcresult" | head -1)
-
           echo "Using result bundle:"
           echo $RESULT_BUNDLE
-
-          xcrun xccov view --report "$RESULT_BUNDLE" \
-            > coverage/coverage-report.txt
+          xcrun xccov view --report "$RESULT_BUNDLE" > coverage/coverage-report.txt
 
       - name: Show coverage report
         run: cat coverage/coverage-report.txt
@@ -57,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: coverage/
+          path: EATSIT/coverage/
 
       - name: Upload xcresult bundle
         uses: actions/upload-artifact@v4
