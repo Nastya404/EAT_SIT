@@ -12,6 +12,7 @@ struct RestaurantView: View {
     // MARK: - Properties
 
     @StateObject private var viewModel: RestaurantViewModel
+    @EnvironmentObject private var localizationManager: LocalizationManager
     
     let restaurant: Restaurant
     
@@ -40,6 +41,9 @@ struct RestaurantView: View {
         .navigationBarTitleDisplayMode(.inline)
         .safeAreaInset(edge: .bottom) {
             basketButton
+        }
+        .onChange(of: localizationManager.selectedLanguage) {
+            viewModel.loadDishes()
         }
     }
 

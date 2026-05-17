@@ -12,6 +12,7 @@ struct HomeView: View {
     // MARK: - Properties
     
     @StateObject private var viewModel = HomeViewModel()
+    @EnvironmentObject private var localizationManager: LocalizationManager
     @State private var selectedCategory = "all"
     @State private var searchText = ""
     @State private var selectedDeliveryAddress = "home.address"
@@ -92,6 +93,9 @@ struct HomeView: View {
                 }
                 .padding()
                 .presentationDetents([.height(320)])
+            }
+            .onChange(of: localizationManager.selectedLanguage) {
+                viewModel.loadRestaurants()
             }
         }
     }
