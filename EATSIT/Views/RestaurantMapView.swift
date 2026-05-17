@@ -105,7 +105,7 @@ struct RestaurantMapView: View {
                 bottomPanel
             }
         }
-        .navigationTitle("Map")
+        .navigationTitle("map.title")
         .navigationBarTitleDisplayMode(.inline)
     }
 
@@ -161,9 +161,13 @@ struct RestaurantMapView: View {
 
             if let nearestRestaurant {
 
-                Text("Nearest restaurant: \(nearestRestaurant.name)")
-                    .font(.headline)
-                    .foregroundStyle(.green)
+                HStack(spacing: 4) {
+
+                    Text("map.nearestRestaurant")
+                    Text(nearestRestaurant.name)
+                }
+                .font(.headline)
+                .foregroundStyle(.green)
             }
 
             Button {
@@ -175,7 +179,7 @@ struct RestaurantMapView: View {
                 HStack {
 
                     Image(systemName: "location.fill")
-                    Text("Find nearest restaurant")
+                    Text("map.findNearestRestaurant")
                 }
                 .font(.headline)
                 .foregroundStyle(.white)
@@ -231,7 +235,7 @@ struct RestaurantMapView: View {
             )
         }
     }
-    
+
     private func moveToNearestRestaurantInSelectedCategory() {
 
         guard let restaurant = filteredRestaurants.first else {

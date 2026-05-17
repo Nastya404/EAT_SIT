@@ -187,3 +187,7 @@
 "profile.payment.erip" = "Płatność ERIP";
 "profile.status.active" = "Aktywny";
 "profile.memberSince.value" = "2026";
+
+"map.title" = "Mapa";
+"map.nearestRestaurant" = "Najbliższa restauracja:";
+"map.findNearestRestaurant" = "Znajdź najbliższą restaurację";

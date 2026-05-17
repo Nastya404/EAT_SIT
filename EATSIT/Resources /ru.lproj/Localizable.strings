@@ -187,3 +187,7 @@
 "profile.payment.erip" = "Оплата через ЕРИП";
 "profile.status.active" = "Активен";
 "profile.memberSince.value" = "2026";
+
+"map.title" = "Карта";
+"map.nearestRestaurant" = "Ближайший ресторан:";
+"map.findNearestRestaurant" = "Найти ближайший ресторан";
