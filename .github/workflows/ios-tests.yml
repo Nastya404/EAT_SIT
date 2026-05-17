@@ -1,0 +1,63 @@
+name: iOS Tests and Coverage
+
+on:
+  push:
+    branches:
+      - "**"
+
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  test:
+    runs-on: macos-latest
+
+    defaults:
+      run:
+        working-directory: ./EATSIT
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Переключаемся на стабильный релиз Xcode 16.0, где симуляторы уже вшиты в систему
+      - name: Select stable Xcode 16
+        run: sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: List schemes and devices
+        run: |
+          xcodebuild -list -project EATSIT.xcodeproj
+          xcrun simctl list devices available
+
+      # Запускаем тесты на гарантированно существующем iPhone 16
+      - name: Run Unit + UI Tests with Coverage
+        run: xcodebuild -project EATSIT.xcodeproj -scheme EATSIT -destination "platform=iOS Simulator,name=iPhone 17,OS=26.0" -enableCodeCoverage YES clean test
+        
+      - name: Create coverage folder
+        run: mkdir -p coverage
+
+      - name: Export coverage report
+        run: |
+          RESULT_BUNDLE=$(find ~/Library/Developer/Xcode/DerivedData -name "*.xcresult" | head -1)
+          echo "Using result bundle:"
+          echo $RESULT_BUNDLE
+          xcrun xccov view --report "$RESULT_BUNDLE" > coverage/coverage-report.txt
+
+      - name: Show coverage report
+        run: cat coverage/coverage-report.txt
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: EATSIT/coverage/
+
+      - name: Upload xcresult bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcresult
+          path: ~/Library/Developer/Xcode/DerivedData
