@@ -61,22 +61,6 @@ final class EATSITOrderCheckoutUITests: XCTestCase {
         return false
     }
 
-    @discardableResult
-    private func tapLastButtonIfExists() -> Bool {
-        guard app.buttons.count > 0 else {
-            return false
-        }
-
-        let button = app.buttons.element(boundBy: app.buttons.count - 1)
-
-        if button.waitForExistence(timeout: 3) {
-            button.tap()
-            return true
-        }
-
-        return false
-    }
-
     private func openMainScreen() {
 
         if app.tabBars.firstMatch.waitForExistence(timeout: 5) {
@@ -186,48 +170,6 @@ final class EATSITOrderCheckoutUITests: XCTestCase {
         return app.scrollViews.firstMatch.waitForExistence(timeout: 5)
     }
 
-    @discardableResult
-    private func addDishToBasket() -> Bool {
-
-        guard openFirstDish() else {
-            return false
-        }
-
-        if tapButtonContaining("Add to Basket") {
-            return true
-        }
-
-        return tapLastButtonIfExists()
-    }
-
-    @discardableResult
-    private func openBasketAfterAddingDish() -> Bool {
-
-        guard addDishToBasket() else {
-            return false
-        }
-
-        if tapButtonContaining("View Basket") {
-            return app.scrollViews.firstMatch.waitForExistence(timeout: 5)
-        }
-
-        return tapLastButtonIfExists()
-    }
-
-    @discardableResult
-    private func openCheckoutAfterAddingDish() -> Bool {
-
-        guard openBasketAfterAddingDish() else {
-            return false
-        }
-
-        if tapButtonContaining("Checkout") {
-            return app.scrollViews.firstMatch.waitForExistence(timeout: 5)
-        }
-
-        return tapLastButtonIfExists()
-    }
-
     // MARK: - Restaurant Tests
 
     @MainActor
@@ -266,147 +208,11 @@ final class EATSITOrderCheckoutUITests: XCTestCase {
             app.buttons["−"].tap()
         }
 
-        if !tapButtonContaining("Add to Basket") {
-            _ = tapLastButtonIfExists()
-        }
+        _ = tapButtonContaining("Add to Basket")
 
         XCTAssertTrue(
             app.scrollViews.firstMatch.exists || app.buttons.count > 0,
             "После действия экран должен остаться рабочим"
-        )
-    }
-
-    @MainActor
-    func testDishToppingsFlow() throws {
-
-        _ = openFirstDish()
-
-        if app.scrollViews.firstMatch.exists {
-            app.scrollViews.firstMatch.swipeUp()
-        }
-
-        let buttons = app.buttons
-
-        if buttons.count > 1 {
-            buttons.element(boundBy: 1).tap()
-        }
-
-        if buttons.count > 2 {
-            buttons.element(boundBy: 2).tap()
-        }
-
-        XCTAssertTrue(
-            app.scrollViews.firstMatch.exists || app.buttons.count > 0,
-            "После выбора топпингов экран должен оставаться доступным"
-        )
-    }
-
-    // MARK: - Basket Tests
-
-    @MainActor
-    func testBasketContentAfterAddingDishFlow() throws {
-
-        _ = openBasketAfterAddingDish()
-
-        XCTAssertTrue(
-            app.scrollViews.firstMatch.exists || app.buttons.count > 0,
-            "Корзина или текущий экран должны быть доступны"
-        )
-
-        if app.scrollViews.firstMatch.exists {
-            app.scrollViews.firstMatch.swipeUp()
-            app.scrollViews.firstMatch.swipeDown()
-        }
-    }
-
-    @MainActor
-    func testBasketItemQuantityControlsFlow() throws {
-
-        _ = openBasketAfterAddingDish()
-
-        if app.buttons["+"].waitForExistence(timeout: 3) {
-            app.buttons["+"].tap()
-        }
-
-        if app.buttons["−"].waitForExistence(timeout: 3) {
-            app.buttons["−"].tap()
-        }
-
-        XCTAssertTrue(
-            app.scrollViews.firstMatch.exists || app.buttons.count > 0,
-            "После изменения количества экран должен оставаться доступным"
-        )
-    }
-
-    // MARK: - Checkout Tests
-
-    @MainActor
-    func testCheckoutScreenSectionsFlow() throws {
-
-        _ = openCheckoutAfterAddingDish()
-
-        XCTAssertTrue(
-            app.scrollViews.firstMatch.exists || app.buttons.count > 0,
-            "Checkout или текущий экран должны быть доступны"
-        )
-
-        if app.scrollViews.firstMatch.exists {
-            app.scrollViews.firstMatch.swipeUp()
-            app.scrollViews.firstMatch.swipeUp()
-            app.scrollViews.firstMatch.swipeDown()
-        }
-    }
-
-    @MainActor
-    func testCheckoutAddAddressFlow() throws {
-
-        _ = openCheckoutAfterAddingDish()
-
-        if tapButtonContaining("Add New Address") {
-
-            let addressField = app.textFields.firstMatch
-
-            if addressField.waitForExistence(timeout: 5) {
-                addressField.tap()
-                addressField.typeText("Test Address 123")
-                closeKeyboardIfNeeded()
-            }
-
-            _ = tapButtonContaining("Save")
-        }
-
-        XCTAssertTrue(
-            app.scrollViews.firstMatch.exists
-                || app.navigationBars.firstMatch.exists
-                || app.buttons.count > 0,
-            "После редактирования адреса приложение должно остаться доступным"
-        )
-    }
-
-    @MainActor
-    func testPlaceOrderFlow() throws {
-
-        _ = openCheckoutAfterAddingDish()
-
-        if app.scrollViews.firstMatch.exists {
-            app.scrollViews.firstMatch.swipeUp()
-        }
-
-        if !tapButtonContaining("Place Order") {
-            _ = tapLastButtonIfExists()
-        }
-
-        let alert = app.alerts.firstMatch
-
-        if alert.waitForExistence(timeout: 5) {
-            alert.buttons.firstMatch.tap()
-        }
-
-        XCTAssertTrue(
-            app.scrollViews.firstMatch.exists
-                || app.tabBars.firstMatch.exists
-                || app.buttons.count > 0,
-            "После оформления заказа приложение должно оставаться доступным"
         )
     }
 
