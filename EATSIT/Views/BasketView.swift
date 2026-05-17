@@ -72,18 +72,16 @@ struct BasketView: View {
 
             Spacer()
 
-            Text(
-                String(
-                    format: String(localized: "basket.itemsCount"),
-                    cartViewModel.items.count
-                )
-            )
-                .font(.headline)
-                .foregroundStyle(.white)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 10)
-                .background(Color.orange)
-                .clipShape(RoundedRectangle(cornerRadius: 14))
+            HStack(spacing: 4) {
+                Text("\(cartViewModel.items.count)")
+                Text("basket.items")
+            }
+            .font(.headline)
+            .foregroundStyle(.white)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .background(Color.orange)
+            .clipShape(RoundedRectangle(cornerRadius: 14))
         }
     }
 
@@ -133,7 +131,7 @@ struct BasketView: View {
 
                 summaryRow(
                     icon: "list.clipboard",
-                    title: String(localized: "basket.itemsTotal"),
+                    titleKey: "basket.itemsTotal",
                     value: String(format: "$%.2f", cartViewModel.totalPrice)
                 )
 
@@ -141,8 +139,12 @@ struct BasketView: View {
 
                 HStack {
 
-                    Label("basket.deliveryFee", systemImage: "scooter")
-                        .foregroundStyle(.gray)
+                    Label {
+                        Text("basket.deliveryFee")
+                    } icon: {
+                        Image(systemName: "scooter")
+                    }
+                    .foregroundStyle(.gray)
 
                     Spacer()
 
@@ -163,7 +165,7 @@ struct BasketView: View {
 
                 summaryRow(
                     icon: "banknote",
-                    title: String(localized: "basket.totalToPay"),
+                    titleKey: "basket.totalToPay",
                     value: String(format: "$%.2f", cartViewModel.totalPrice),
                     isTotal: true
                 )
@@ -211,10 +213,9 @@ struct BasketView: View {
 
                 Image(systemName: "lock.fill")
 
-                Text(
-                    String(localized: "basket.checkout") +
-                    String(format: " — $%.2f", cartViewModel.totalPrice)
-                )
+                Text("basket.checkout")
+
+                Text(String(format: "— $%.2f", cartViewModel.totalPrice))
 
                 Image(systemName: "chevron.right")
             }
@@ -234,16 +235,20 @@ struct BasketView: View {
 
     private func summaryRow(
         icon: String,
-        title: String,
+        titleKey: LocalizedStringKey,
         value: String,
         isTotal: Bool = false
     ) -> some View {
 
         HStack {
 
-            Label(title, systemImage: icon)
-                .font(isTotal ? .title3 : .body)
-                .fontWeight(isTotal ? .bold : .regular)
+            Label {
+                Text(titleKey)
+            } icon: {
+                Image(systemName: icon)
+            }
+            .font(isTotal ? .title3 : .body)
+            .fontWeight(isTotal ? .bold : .regular)
 
             Spacer()
 
