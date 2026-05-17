@@ -67,7 +67,7 @@ struct RestaurantCardView: View {
 
             ratingView
 
-            Text(restaurant.deliveryPrice)
+            Text(LocalizedStringKey(restaurant.deliveryPrice))
                 .font(.caption)
                 .foregroundStyle(.orange)
                 .padding(.horizontal, 10)
@@ -94,14 +94,12 @@ struct RestaurantCardView: View {
 
             Text("•")
 
-            Text(restaurant.deliveryTime)
+            Text(LocalizedStringKey(restaurant.deliveryTime))
                 .foregroundStyle(.gray)
         }
         .font(.subheadline)
     }
 }
-
-// MARK: - Preview
 
 // MARK: - Preview
 
