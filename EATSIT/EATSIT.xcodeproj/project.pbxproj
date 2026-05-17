@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		810B48C92FB8D9D0004ECF88 /* RestaurantLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810B48C82FB8D9CC004ECF88 /* RestaurantLocation.swift */; };
-		810B48CB2FB8E2D2004ECF88 /* eatsit.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 810B48CA2FB8E2D2004ECF88 /* eatsit.sqlite */; };
 		810B48DD2FB91507004ECF88 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810B48DC2FB91504004ECF88 /* User.swift */; };
 		810B48DF2FB91527004ECF88 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810B48DE2FB91523004ECF88 /* AuthViewModel.swift */; };
 		810B48E12FB91552004ECF88 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810B48E02FB9154F004ECF88 /* LoginView.swift */; };
 		810B48E32FB9157E004ECF88 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810B48E22FB9157B004ECF88 /* RegisterView.swift */; };
+		81557CE02FB98EC9007AE491 /* eatsit3.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 81557CDF2FB98EC9007AE491 /* eatsit3.sqlite */; };
 		817F53632FB78BBE00D75CA7 /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53622FB78BBB00D75CA7 /* AppLanguage.swift */; };
 		817F53652FB78C1B00D75CA7 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53642FB78BEE00D75CA7 /* LocalizationManager.swift */; };
 		817F53672FB78C2E00D75CA7 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F53662FB78C2D00D75CA7 /* LanguageView.swift */; };
@@ -68,11 +68,11 @@
 
 /* Begin PBXFileReference section */
 		810B48C82FB8D9CC004ECF88 /* RestaurantLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantLocation.swift; sourceTree = "<group>"; };
-		810B48CA2FB8E2D2004ECF88 /* eatsit.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = eatsit.sqlite; sourceTree = "<group>"; };
 		810B48DC2FB91504004ECF88 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		810B48DE2FB91523004ECF88 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		810B48E02FB9154F004ECF88 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		810B48E22FB9157B004ECF88 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		81557CDF2FB98EC9007AE491 /* eatsit3.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = eatsit3.sqlite; sourceTree = "<group>"; };
 		817F53622FB78BBB00D75CA7 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		817F53642FB78BEE00D75CA7 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
 		817F53662FB78C2D00D75CA7 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
@@ -251,7 +251,7 @@
 		81B0F9602FB740A90019ADDE /* Resources  */ = {
 			isa = PBXGroup;
 			children = (
-				810B48CA2FB8E2D2004ECF88 /* eatsit.sqlite */,
+				81557CDF2FB98EC9007AE491 /* eatsit3.sqlite */,
 				81B0F9382FB73F270019ADDE /* Assets.xcassets */,
 				817F53682FB78D3900D75CA7 /* Localizable.strings */,
 			);
@@ -405,9 +405,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81557CE02FB98EC9007AE491 /* eatsit3.sqlite in Resources */,
 				81B0F9392FB73F270019ADDE /* Assets.xcassets in Resources */,
 				817F536A2FB78D3900D75CA7 /* Localizable.strings in Resources */,
-				810B48CB2FB8E2D2004ECF88 /* eatsit.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
