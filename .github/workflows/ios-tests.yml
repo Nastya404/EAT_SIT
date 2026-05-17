@@ -13,6 +13,10 @@ jobs:
   test:
     runs-on: macos-latest
 
+    defaults:
+      run:
+        working-directory: ./EATSIT
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
