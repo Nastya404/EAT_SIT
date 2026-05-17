@@ -11,6 +11,7 @@ on:
 jobs:
   test:
     runs-on: macos-15
+    timeout-minutes: 30
 
     defaults:
       run:
@@ -33,6 +34,7 @@ jobs:
             -scheme EATSIT \
             -destination "platform=iOS Simulator,name=iPhone SE (3rd generation)" \
             -enableCodeCoverage YES \
+            -parallel-testing-enabled NO \
             IPHONEOS_DEPLOYMENT_TARGET=17.0 \
             SDKROOT=iphonesimulator \
             clean test
