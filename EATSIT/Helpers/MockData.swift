@@ -9,7 +9,6 @@ struct MockData {
     // MARK: - Dish Customizations Mock Data
 
     static let customizations: [DishCustomization] = [
-
         DishCustomization(
             name: "Extra Cheese",
             price: 1.00

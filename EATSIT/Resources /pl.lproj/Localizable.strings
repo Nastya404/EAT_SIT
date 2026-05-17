@@ -158,3 +158,26 @@
 
 "home.selectAddress" = "Wybierz adres dostawy";
 "home.currentLocation" = "Bieżąca lokalizacja";
+
+"dish.addToBasket" = "Dodaj do koszyka";
+
+"dish.perItem" = "za sztukę";
+"dish.popular" = "Popularne";
+"dish.addToppings" = "Dodatki (+$)";
+"dish.quantity" = "Ilość";
+
+"basket.itemsTotal" = "Suma dań";
+"basket.totalToPay" = "Razem do zapłaty";
+"basket.checkout" = "Przejdź do kasy";
+"basket.quantity" = "Ilość";
+
+"checkout.placeOrder" = "Złóż zamówienie";
+
+"restaurant.viewBasket" = "Zobacz koszyk";
+"restaurant.open" = "Otwórz";
+
+"restaurant.deliveryPrice" = "Dostawa 2.99 BYN";
+"restaurant.deliveryTime" = "20-35 min";
+
+"basket.itemsCount" = "%d produktów";
+"basket.toppings" = "+ dodatki";

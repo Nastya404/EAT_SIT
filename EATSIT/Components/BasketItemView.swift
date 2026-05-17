@@ -73,7 +73,7 @@ struct BasketItemView: View {
                         .foregroundStyle(.gray)
                         .lineLimit(1)
 
-                    Text("+ toppings")
+                    Text("basket.toppings")
                         .font(.caption)
                         .fontWeight(.bold)
                         .foregroundStyle(.orange)
@@ -107,7 +107,7 @@ struct BasketItemView: View {
 
         HStack {
 
-            Text("Quantity")
+            Text(LocalizedStringKey("basket.quantity"))
                 .foregroundStyle(.gray)
 
             Spacer()

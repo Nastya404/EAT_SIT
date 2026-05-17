@@ -73,10 +73,10 @@ struct BasketView: View {
             Spacer()
 
             Text(
-                "\(cartViewModel.items.count) " +
-                String(localized: cartViewModel.items.count == 1
-                       ? "basket.item"
-                       : "basket.items")
+                String(
+                    format: String(localized: "basket.itemsCount"),
+                    cartViewModel.items.count
+                )
             )
                 .font(.headline)
                 .foregroundStyle(.white)

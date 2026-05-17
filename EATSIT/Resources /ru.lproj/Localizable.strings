@@ -158,3 +158,26 @@
 
 "home.selectAddress" = "Выберите адрес доставки";
 "home.currentLocation" = "Текущее местоположение";
+
+"dish.addToBasket" = "В корзину";
+
+"dish.perItem" = "за штуку";
+"dish.popular" = "Популярное";
+"dish.addToppings" = "Добавки (+$)";
+"dish.quantity" = "Количество";
+
+"basket.itemsTotal" = "Стоимость блюд";
+"basket.totalToPay" = "Итого к оплате";
+"basket.checkout" = "Оформить";
+"basket.quantity" = "Количество";
+
+"checkout.placeOrder" = "Оформить заказ";
+
+"restaurant.viewBasket" = "Посмотреть корзину";
+"restaurant.open" = "Открыть";
+
+"restaurant.deliveryPrice" = "Доставка 2.99 BYN";
+"restaurant.deliveryPrice" = "Доставка 2.99 BYN";
+
+"basket.itemsCount" = "%d товаров";
+"basket.toppings" = "+ добавки";

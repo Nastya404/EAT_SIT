@@ -93,7 +93,7 @@ struct DishDetailsView: View {
                         .fontWeight(.bold)
                         .foregroundStyle(.orange)
 
-                    Text("per item")
+                    Text(LocalizedStringKey("dish.perItem"))
                         .font(.subheadline)
                         .foregroundStyle(.gray)
                 }
@@ -105,7 +105,7 @@ struct DishDetailsView: View {
 
             HStack(spacing: 10) {
 
-                Label("Popular", systemImage: "flame.fill")
+                Label(LocalizedStringKey("dish.popular"), systemImage: "flame.fill")
                     .foregroundStyle(.orange)
                     .padding(8)
                     .background(Color.orange.opacity(0.12))
@@ -132,7 +132,7 @@ struct DishDetailsView: View {
 
         VStack(alignment: .leading, spacing: 18) {
 
-            Text("Add Toppings (+$)")
+            Text(LocalizedStringKey("dish.addToppings"))
                 .font(.title2)
                 .fontWeight(.bold)
 
@@ -140,7 +140,6 @@ struct DishDetailsView: View {
 
                 Button {
 
-                    
                     toggleCustomization(customization)
 
                 } label: {
@@ -183,7 +182,7 @@ struct DishDetailsView: View {
 
         VStack(alignment: .leading, spacing: 18) {
 
-            Text("Quantity")
+            Text(LocalizedStringKey("dish.quantity"))
                 .font(.title2)
                 .fontWeight(.bold)
 
@@ -239,7 +238,7 @@ struct DishDetailsView: View {
 
         } label: {
 
-            Text("Add to Basket — $\(totalPrice, specifier: "%.2f")")
+            Text("\(String(localized: "dish.addToBasket")) — $\(totalPrice, specifier: "%.2f")")
                 .font(.title3)
                 .fontWeight(.bold)
                 .foregroundStyle(.white)
@@ -259,7 +258,7 @@ struct DishDetailsView: View {
 
         customizations = DatabaseManager.shared.fetchCustomizations(for: dish)
     }
-    
+
     private func toggleCustomization(_ customization: DishCustomization) {
 
         if selectedCustomizations.contains(customization.id) {

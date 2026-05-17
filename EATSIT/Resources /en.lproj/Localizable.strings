@@ -159,3 +159,26 @@
 
 "home.selectAddress" = "Select delivery address";
 "home.currentLocation" = "Current location";
+
+"dish.addToBasket" = "Add to Basket";
+
+"dish.perItem" = "per item";
+"dish.popular" = "Popular";
+"dish.addToppings" = "Add Toppings (+$)";
+"dish.quantity" = "Quantity";
+
+"basket.itemsTotal" = "Items Total";
+"basket.totalToPay" = "Total to Pay";
+"basket.checkout" = "Checkout";
+"basket.quantity" = "Quantity";
+
+"checkout.placeOrder" = "Place Order";
+
+"restaurant.viewBasket" = "View Basket";
+"restaurant.open" = "Open";
+
+"restaurant.deliveryPrice" = "2.99 BYN Delivery";
+"restaurant.deliveryTime" = "20-35 min";
+
+"basket.itemsCount" = "%d items";
+"basket.toppings" = "+ toppings";

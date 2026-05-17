@@ -15,6 +15,10 @@ struct RestaurantView: View {
     @EnvironmentObject private var localizationManager: LocalizationManager
     
     let restaurant: Restaurant
+
+    private var localizedRestaurantName: String {
+        viewModel.dishes.first?.restaurantName ?? restaurant.name
+    }
     
     init(restaurant: Restaurant) {
         self.restaurant = restaurant
@@ -71,7 +75,7 @@ struct RestaurantView: View {
 
         VStack(alignment: .leading, spacing: 12) {
 
-            Text(restaurant.name)
+            Text(localizedRestaurantName)
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
@@ -83,11 +87,11 @@ struct RestaurantView: View {
                 Text(String(format: "%.1f", restaurant.rating))
                     .fontWeight(.semibold)
 
-                Text("• \(restaurant.deliveryTime)")
+                Text("• \(String(localized: "restaurant.deliveryTime"))")
                     .foregroundStyle(.gray)
             }
 
-            Text(restaurant.deliveryPrice)
+            Text("restaurant.deliveryPrice")
                 .foregroundStyle(.orange)
                 .fontWeight(.semibold)
         }
@@ -130,11 +134,11 @@ struct RestaurantView: View {
 
             HStack {
 
-                Text("View Basket")
+                Text("restaurant.viewBasket")
 
                 Spacer()
 
-                Text("Open")
+                Text("restaurant.open")
             }
             .fontWeight(.bold)
             .foregroundStyle(.white)
@@ -147,6 +151,7 @@ struct RestaurantView: View {
         }
     }
 }
+
 #Preview {
 
     NavigationStack {
