@@ -13,23 +13,27 @@ struct CheckoutView: View {
 
     @EnvironmentObject private var cartViewModel: CartViewModel
     @EnvironmentObject private var orderViewModel: OrderViewModel
+    @EnvironmentObject private var localizationManager: LocalizationManager
 
     @Environment(\.dismiss) private var dismiss
 
     @State private var selectedAddress = "home"
-    @State private var homeAddress = String(localized: "checkout.address.homeValue")
-    @State private var officeAddress = String(localized: "checkout.address.officeValue")
+    @State private var homeAddress = ""
+    @State private var officeAddress = ""
     @State private var customAddress = ""
     @State private var editingAddressId = ""
     @State private var editingAddressText = ""
     @State private var showAddressEditor = false
-    
 
     @State private var orderComment = ""
     @State private var selectedPaymentMethod: PaymentMethod = .onlineCard
     @State private var showSuccessAlert = false
 
     private let serviceFee = 0.50
+
+    private var selectedLocale: Locale {
+        Locale(identifier: localizationManager.selectedLanguage.rawValue)
+    }
 
     private var savedAddressCount: Int {
         customAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? 2 : 3
@@ -89,6 +93,12 @@ struct CheckoutView: View {
         }
         .sheet(isPresented: $showAddressEditor) {
             addressEditorView
+        }
+        .onAppear {
+            setDefaultAddressesIfNeeded()
+        }
+        .onChange(of: localizationManager.selectedLanguage) {
+            updateDefaultAddressesForSelectedLanguage()
         }
     }
 
@@ -197,7 +207,7 @@ struct CheckoutView: View {
 
                 Spacer()
 
-                Text(String(format: String(localized: "checkout.savedAddresses"), savedAddressCount))
+                Text(String(format: localized("checkout.savedAddresses"), savedAddressCount))
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundStyle(.orange)
@@ -351,7 +361,7 @@ struct CheckoutView: View {
 
                 TextField("checkout.addressEditor.placeholder", text: $editingAddressText)
                     .textFieldStyle(.roundedBorder)
-                
+
                 if editingAddressId == "custom",
                    !customAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
 
@@ -647,10 +657,10 @@ struct CheckoutView: View {
                 HStack(spacing: 12) {
 
                     Image(systemName: "checkmark.circle")
-                    Text(
-                        String(localized: "checkout.placeOrder") +
-                        String(format: " — $%.2f", totalPrice)
-                    )
+
+                    Text("checkout.placeOrder")
+
+                    Text(String(format: "— $%.2f", totalPrice))
                 }
                 .font(.title3)
                 .fontWeight(.bold)
@@ -696,7 +706,32 @@ struct CheckoutView: View {
         }
     }
 
+    private func localized(_ key: String) -> String {
+
+        String(
+            localized: String.LocalizationValue(key),
+            locale: selectedLocale
+        )
+    }
+
     // MARK: - Methods
+
+    private func setDefaultAddressesIfNeeded() {
+
+        if homeAddress.isEmpty {
+            homeAddress = localized("checkout.address.homeValue")
+        }
+
+        if officeAddress.isEmpty {
+            officeAddress = localized("checkout.address.officeValue")
+        }
+    }
+
+    private func updateDefaultAddressesForSelectedLanguage() {
+
+        homeAddress = localized("checkout.address.homeValue")
+        officeAddress = localized("checkout.address.officeValue")
+    }
 
     private func startEditingAddress(id: String) {
 
@@ -746,7 +781,7 @@ struct CheckoutView: View {
         orderViewModel.addOrder(order)
         showSuccessAlert = true
     }
-    
+
     private func deleteCustomAddress() {
 
         customAddress = ""
@@ -759,8 +794,6 @@ struct CheckoutView: View {
     }
 }
 
-
-
 // MARK: - Preview
 
 #Preview {
@@ -770,5 +803,6 @@ struct CheckoutView: View {
         CheckoutView()
             .environmentObject(CartViewModel())
             .environmentObject(OrderViewModel())
+            .environmentObject(LocalizationManager())
     }
 }
