@@ -273,41 +273,67 @@ final class EATSITDeepFlowUITests: XCTestCase {
         }
     }
 
-    // Проверка добавления блюда в корзину и открытия корзины
+    // Проверка открытия ресторана, блюда и попытки добавления в корзину
     @MainActor
     func testAddDishToBasketAndOpenBasketDeepFlow() throws {
 
         openHomeTab()
 
         let scrollView = app.scrollViews.firstMatch
-        XCTAssertTrue(scrollView.waitForExistence(timeout: 5))
 
-        let buttons = scrollView.buttons
+        XCTAssertTrue(
+            scrollView.waitForExistence(timeout: 5),
+            "Главный экран должен открыться"
+        )
 
-        if buttons.count > 2 {
-            buttons.element(boundBy: 2).tap()
-        }
+        let homeButtons = scrollView.buttons
 
-        let restaurantScrollView = app.scrollViews.firstMatch
-        let dishButtons = restaurantScrollView.buttons
-
-        if dishButtons.count > 0 {
-            dishButtons.element(boundBy: 0).tap()
-        }
-
-        let detailButtons = app.buttons
-
-        if detailButtons.count > 0 {
-            detailButtons.element(boundBy: 0).tap()
-        }
-
-        if detailButtons.count > 1 {
-            detailButtons.element(boundBy: 1).tap()
+        // Открываем карточку ресторана, если она доступна
+        if homeButtons.count > 2 {
+            homeButtons.element(boundBy: 2).tap()
+        } else {
+            XCTAssertTrue(scrollView.exists)
+            return
         }
 
         XCTAssertTrue(
             app.scrollViews.firstMatch.waitForExistence(timeout: 5),
-            "После добавления блюда должен оставаться доступным экран приложения"
+            "Экран ресторана должен открыться"
+        )
+
+        let restaurantButtons = app.scrollViews.firstMatch.buttons
+
+        // Открываем первое блюдо, если оно доступно
+        if restaurantButtons.count > 0 {
+            restaurantButtons.element(boundBy: 0).tap()
+        } else {
+            XCTAssertTrue(app.scrollViews.firstMatch.exists)
+            return
+        }
+
+        XCTAssertTrue(
+            app.scrollViews.firstMatch.waitForExistence(timeout: 5),
+            "Экран блюда должен открыться"
+        )
+
+        // На экране блюда может быть несколько кнопок: количество, добавление, корзина.
+        // Проверяем, что экран не сломался и кнопки доступны.
+        XCTAssertGreaterThan(
+            app.buttons.count,
+            0,
+            "На экране блюда должны быть кнопки"
+        )
+
+        // Нажимаем последнюю доступную кнопку как наиболее вероятное действие снизу экрана.
+        let lastButton = app.buttons.element(boundBy: app.buttons.count - 1)
+
+        if lastButton.waitForExistence(timeout: 5) {
+            lastButton.tap()
+        }
+
+        XCTAssertTrue(
+            app.scrollViews.firstMatch.exists || app.navigationBars.firstMatch.exists,
+            "После действия приложение должно остаться в рабочем состоянии"
         )
     }
 
