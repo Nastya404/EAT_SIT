@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EAT&SIT — Документация</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface2: #1c1c1c;
+      --border: #272727;
+      --accent: #f0c060;
+      --accent2: #d45a35;
+      --green: #4caf84;
+      --yellow: #e5a020;
+      --red: #d04040;
+      --text: #e8e2d8;
+      --muted: #666;
+      --sidebar-w: 268px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'IBM Plex Sans',sans-serif; background:var(--bg); color:var(--text); display:flex; min-height:100vh; }
+
+    .sidebar {
+      width:var(--sidebar-w); background:var(--surface);
+      border-right:1px solid var(--border);
+      position:fixed; top:0; left:0; bottom:0;
+      overflow-y:auto; display:flex; flex-direction:column;
+      z-index:100; transition:transform .3s;
+    }
+    .sidebar-brand { padding:1.75rem 1.5rem 1.25rem; border-bottom:1px solid var(--border); }
+    .brand-name { font-family:'Playfair Display',serif; font-size:1.75rem; font-weight:900; color:var(--accent); line-height:1; letter-spacing:.04em; }
+    .brand-name span { color:var(--accent2); }
+    .brand-sub { font-family:'IBM Plex Mono',monospace; font-size:.6rem; color:var(--muted); letter-spacing:.18em; text-transform:uppercase; margin-top:.4rem; }
+    .sidebar-nav { padding:.75rem 0; flex:1; }
+    .nav-section { font-family:'IBM Plex Mono',monospace; font-size:.58rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); padding:.9rem 1.5rem .3rem; }
+    .nav-link { display:flex; align-items:center; gap:.6rem; padding:.55rem 1.5rem; color:#999; text-decoration:none; font-size:.82rem; cursor:pointer; border-left:3px solid transparent; transition:all .15s; user-select:none; }
+    .nav-link:hover { color:var(--text); background:var(--surface2); border-left-color:var(--border); }
+    .nav-link.active { color:var(--accent); background:rgba(240,192,96,.06); border-left-color:var(--accent); font-weight:500; }
+    .nav-icon { font-size:1rem; flex-shrink:0; }
+    .sidebar-foot { padding:1rem 1.5rem; border-top:1px solid var(--border); font-family:'IBM Plex Mono',monospace; font-size:.62rem; color:var(--muted); }
+    .sidebar-foot a { color:var(--muted); text-decoration:none; }
+    .sidebar-foot a:hover { color:var(--accent); }
+
+    .main { margin-left:var(--sidebar-w); flex:1; }
+    .page { display:none; padding:3rem 3.5rem; max-width:960px; animation:fadeUp .3s ease both; }
+    .page.active { display:block; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+    .page-head { border-bottom:1px solid var(--border); padding-bottom:1.5rem; margin-bottom:2.5rem; }
+    .page-eyebrow { font-family:'IBM Plex Mono',monospace; font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--accent2); margin-bottom:.4rem; }
+    .page-title { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700; color:var(--text); line-height:1.15; }
+    .page-desc { font-size:.88rem; color:#888; line-height:1.75; margin-top:.75rem; max-width:640px; }
+
+    .hero-tag { font-family:'IBM Plex Mono',monospace; font-size:.65rem; letter-spacing:.25em; text-transform:uppercase; color:var(--accent2); margin-bottom:.75rem; }
+    .hero-title { font-family:'Playfair Display',serif; font-size:4.5rem; font-weight:900; line-height:.95; color:var(--text); }
+    .hero-title em { color:var(--accent); font-style:normal; }
+    .hero-subtitle { font-size:.95rem; color:#888; line-height:1.8; max-width:540px; margin:1.25rem 0 2.5rem; font-weight:300; }
+
+    .feature-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); margin-bottom:3rem; }
+    .feat { background:var(--surface); padding:1.4rem 1.5rem; transition:background .2s; }
+    .feat:hover { background:var(--surface2); }
+    .feat-ico { font-size:1.5rem; margin-bottom:.6rem; }
+    .feat-title { font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:.4rem; }
+    .feat-text { font-size:.82rem; color:#777; line-height:1.6; }
+
+    h2 { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--text); margin:2.5rem 0 1rem; padding-bottom:.5rem; border-bottom:1px solid var(--border); }
+    h3 { font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin:1.75rem 0 .65rem; }
+    p { font-size:.875rem; color:#999; line-height:1.8; margin-bottom:.85rem; }
+
+    .req-list { display:flex; flex-direction:column; gap:.4rem; margin-bottom:1.5rem; }
+    .req { display:flex; gap:.85rem; align-items:flex-start; background:var(--surface); border:1px solid var(--border); padding:.8rem 1rem; transition:border-color .15s; }
+    .req:hover { border-color:#383838; }
+    .req-id { font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--accent); background:rgba(240,192,96,.08); padding:.18rem .5rem; white-space:nowrap; flex-shrink:0; margin-top:.1rem; border:1px solid rgba(240,192,96,.18); }
+    .req-text { font-size:.855rem; color:#bbb; line-height:1.65; }
+
+    .scenario { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--accent2); margin-bottom:2rem; }
+    .sc-head { padding:1rem 1.25rem; border-bottom:1px solid var(--border); background:var(--surface2); }
+    .sc-id { font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--accent2); letter-spacing:.08em; }
+    .sc-title { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--text); margin-top:.2rem; }
+    .sc-body { padding:1.25rem; }
+    .sc-meta { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); margin-bottom:1.25rem; }
+    .meta-cell { background:var(--surface2); padding:.7rem 1rem; }
+    .meta-lbl { font-family:'IBM Plex Mono',monospace; font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:.3rem; }
+    .meta-val { font-size:.8rem; color:#ccc; line-height:1.5; }
+    .steps { counter-reset:s; list-style:none; padding:0; }
+    .steps li { counter-increment:s; display:flex; gap:.75rem; padding:.5rem 0; border-bottom:1px solid var(--border); font-size:.855rem; color:#bbb; line-height:1.6; }
+    .steps li::before { content:counter(s); font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--accent); background:rgba(240,192,96,.09); border:1px solid rgba(240,192,96,.2); min-width:1.5rem; height:1.5rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:.1rem; }
+    .alt-note { font-size:.78rem; color:#666; margin-top:.85rem; padding-top:.75rem; border-top:1px solid var(--border); }
+
+    .spec-badge { display:inline-flex; align-items:center; gap:.4rem; font-family:'IBM Plex Mono',monospace; font-size:.65rem; padding:.25rem .65rem; border:1px solid; margin-bottom:1.5rem; letter-spacing:.05em; }
+    .spec-badge.reliability { color:#60a8e0; border-color:rgba(96,168,224,.3); background:rgba(96,168,224,.06); }
+    .spec-badge.performance { color:#a080e0; border-color:rgba(160,128,224,.3); background:rgba(160,128,224,.06); }
+    .spec-badge.usability   { color:#60c8a0; border-color:rgba(96,200,160,.3); background:rgba(96,200,160,.06); }
+
+    .db-table { width:100%; border-collapse:collapse; margin-bottom:2rem; font-size:.855rem; }
+    .db-table th { background:var(--surface2); border:1px solid var(--border); padding:.7rem 1rem; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:500; }
+    .db-table td { border:1px solid var(--border); padding:.7rem 1rem; color:#bbb; vertical-align:top; line-height:1.5; }
+    .db-table td:first-child { font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--accent); white-space:nowrap; }
+    .db-table tr:hover td { background:var(--surface); }
+
+    .diagram-block { border:1px solid var(--border); background:var(--surface); margin-bottom:2rem; }
+    .diagram-label { font-family:'IBM Plex Mono',monospace; font-size:.62rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); padding:.6rem 1rem; border-bottom:1px solid var(--border); background:var(--surface2); }
+    .diagram-link { display:flex; align-items:center; gap:.75rem; padding:1rem 1.25rem; text-decoration:none; color:var(--accent); font-size:.875rem; transition:background .15s; }
+    .diagram-link:hover { background:var(--surface2); }
+    .diagram-link .ico { font-size:1.25rem; }
+
+    .class-table { width:100%; border-collapse:collapse; margin-bottom:1.5rem; font-size:.845rem; }
+    .class-table th { background:var(--surface2); border:1px solid var(--border); padding:.65rem 1rem; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:.63rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:500; }
+    .class-table td { border:1px solid var(--border); padding:.65rem 1rem; color:#bbb; line-height:1.5; vertical-align:top; }
+    .class-table td:first-child { font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:#ddd; white-space:nowrap; }
+    .class-table tr:hover td { background:var(--surface); }
+
+    .coverage-summary { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-bottom:2rem; }
+    .cov-card { background:var(--surface); padding:1.25rem 1.5rem; text-align:center; }
+    .cov-label { font-family:'IBM Plex Mono',monospace; font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:.5rem; }
+    .cov-pct { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; }
+    .cov-pct.high { color:var(--green); }
+    .cov-pct.medium { color:var(--yellow); }
+    .cov-pct.low { color:var(--red); }
+    .cov-sub { font-size:.75rem; color:var(--muted); margin-top:.3rem; }
+
+    .cov-table { width:100%; border-collapse:collapse; font-size:.845rem; margin-bottom:1.5rem; }
+    .cov-table th { background:var(--surface2); border:1px solid var(--border); padding:.65rem 1rem; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:.63rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:500; }
+    .cov-table td { border:1px solid var(--border); padding:.6rem 1rem; color:#bbb; vertical-align:middle; }
+    .cov-table td:first-child { font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:#888; }
+    .cov-table td:nth-child(2) { color:#ddd; }
+    .cov-table tr:hover td { background:var(--surface); }
+
+    .badge { display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:600; padding:.2rem .55rem; border-radius:2px; }
+    .badge.high   { background:rgba(76,175,132,.15); color:var(--green);  border:1px solid rgba(76,175,132,.3); }
+    .badge.medium { background:rgba(229,160,32,.13);  color:var(--yellow); border:1px solid rgba(229,160,32,.3); }
+    .badge.low    { background:rgba(208,64,64,.13);   color:var(--red);    border:1px solid rgba(208,64,64,.3); }
+
+    .bar-wrap { display:flex; align-items:center; gap:.6rem; }
+    .bar { height:6px; background:var(--border); flex:1; border-radius:3px; overflow:hidden; }
+    .bar-fill { height:100%; border-radius:3px; }
+    .bar-fill.high   { background:var(--green); }
+    .bar-fill.medium { background:var(--yellow); }
+    .bar-fill.low    { background:var(--red); }
+    .bar-pct { font-family:'IBM Plex Mono',monospace; font-size:.72rem; min-width:3.5rem; text-align:right; }
+    .bar-pct.high   { color:var(--green); }
+    .bar-pct.medium { color:var(--yellow); }
+    .bar-pct.low    { color:var(--red); }
+
+    .team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-top:1rem; }
+    .team-card { background:var(--surface); padding:1.4rem 1.25rem; }
+    .team-name { font-family:'Playfair Display',serif; font-size:.95rem; color:var(--accent); margin-bottom:.5rem; }
+    .team-role { font-size:.78rem; color:#777; line-height:1.6; }
+
+    .install-list { counter-reset:inst; list-style:none; padding:0; }
+    .install-list li { counter-increment:inst; display:flex; gap:1rem; padding:1rem 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+    .install-list li::before { content:"0" counter(inst); font-family:'IBM Plex Mono',monospace; font-size:.82rem; font-weight:600; color:var(--accent2); flex-shrink:0; margin-top:.1rem; }
+    .step-desc { font-size:.875rem; color:#aaa; margin-bottom:.45rem; }
+    code { font-family:'IBM Plex Mono',monospace; font-size:.78rem; background:var(--surface2); border:1px solid var(--border); padding:.45rem .9rem; display:block; color:#a8d8a0; margin-top:.4rem; }
+
+    .pres-btn { display:inline-flex; align-items:center; gap:.75rem; background:var(--surface); border:1px solid var(--border); padding:1rem 1.5rem; text-decoration:none; color:var(--text); font-size:.875rem; transition:all .2s; margin-top:.75rem; }
+    .pres-btn:hover { border-color:var(--accent); color:var(--accent); }
+
+    .menu-btn { display:none; position:fixed; top:.9rem; right:.9rem; z-index:200; background:var(--surface); border:1px solid var(--border); color:var(--text); padding:.45rem .7rem; font-size:1.1rem; cursor:pointer; }
+
+    @media (max-width:820px) {
+      .sidebar { transform:translateX(-100%); }
+      .sidebar.open { transform:translateX(0); }
+      .main { margin-left:0; }
+      .page { padding:2rem 1.25rem; }
+      .feature-grid,.team-grid,.sc-meta,.coverage-summary { grid-template-columns:1fr; }
+      .hero-title { font-size:3rem; }
+      .menu-btn { display:block; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-name">EAT<span>&amp;</span>SIT</div>
+    <div class="brand-sub">Wiki · ТПМП · 2026</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">Обзор</div>
+    <a class="nav-link active" onclick="go('home',this)"><span class="nav-icon">🏠</span>Главная</a>
+    <a class="nav-link" onclick="go('install',this)"><span class="nav-icon">⚙️</span>Установка</a>
+    <div class="nav-section">Проектирование</div>
+    <a class="nav-link" onclick="go('functional',this)"><span class="nav-icon">📋</span>Функциональные требования</a>
+    <a class="nav-link" onclick="go('spec',this)"><span class="nav-icon">📐</span>Доп. спецификация</a>
+    <div class="nav-section">Техническая часть</div>
+    <a class="nav-link" onclick="go('database',this)"><span class="nav-icon">🗄️</span>Схема базы данных</a>
+    <a class="nav-link" onclick="go('diagrams',this)"><span class="nav-icon">📊</span>Диаграммы и архитектура</a>
+    <a class="nav-link" onclick="go('coverage',this)"><span class="nav-icon">🧪</span>Покрытие тестами</a>
+    <div class="nav-section">Итоги</div>
+    <a class="nav-link" onclick="go('presentation',this)"><span class="nav-icon">🎤</span>Презентация</a>
+  </nav>
+  <div class="sidebar-foot">
+    <a href="https://github.com/Nastya404/tpmp-lab9" target="_blank">→ GitHub репозиторий</a>
+  </div>
+</aside>
+
+<main class="main">
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero-tag">ТПМП · Лабораторная работа 9</div>
+  <div class="hero-title">EAT<em>&amp;</em>SIT</div>
+  <p class="hero-subtitle">Мобильное приложение для заказа еды с доставкой от ресторанов и кафе города. Интерактивная карта, удобное меню, оформление заказа и онлайн-оплата — всё в едином интерфейсе на iOS.</p>
+  <div class="feature-grid">
+    <div class="feat"><div class="feat-ico">🗺️</div><div class="feat-title">Карта заведений</div><div class="feat-text">Рестораны и кафе на интерактивной карте. Координаты, радиус доставки, рейтинг.</div></div>
+    <div class="feat"><div class="feat-ico">🍽️</div><div class="feat-title">Меню с кастомизацией</div><div class="feat-text">Карточки блюд с фото, ценами и дополнительными ингредиентами.</div></div>
+    <div class="feat"><div class="feat-ico">🛒</div><div class="feat-title">Корзина и заказ</div><div class="feat-text">Адрес доставки, комментарий, способ оплаты — простое оформление.</div></div>
+    <div class="feat"><div class="feat-ico">💳</div><div class="feat-title">Оплата онлайн</div><div class="feat-text">Карта, наличные или ЕРИП — безопасная оплата прямо в приложении.</div></div>
+    <div class="feat"><div class="feat-ico">🌍</div><div class="feat-title">Мультиязычность</div><div class="feat-text">Интерфейс на русском, английском и польском языках.</div></div>
+    <div class="feat"><div class="feat-ico">📦</div><div class="feat-title">История заказов</div><div class="feat-text">Все оформленные заказы с деталями и статусами в одном месте.</div></div>
+  </div>
+  <h2>Команда проекта</h2>
+  <div class="team-grid">
+    <div class="team-card"><div class="team-name">Ярмолик Анастасия</div><div class="team-role">Техдокументация · Требования · User Stories · Use Cases · UML-диаграммы · Визуальный стиль</div></div>
+    <div class="team-card"><div class="team-name">Богуш Полина</div><div class="team-role">Макет и прототип · UX-проектирование · Функциональное тестирование · Баги</div></div>
+    <div class="team-card"><div class="team-name">Шамрук Полина</div><div class="team-role">Основная логика · Диаграмма классов · ER-диаграмма · Визуальный стиль</div></div>
+  </div>
+</div>
+
+<!-- INSTALL -->
+<div class="page" id="page-install">
+  <div class="page-head">
+    <div class="page-eyebrow">Начало работы</div>
+    <div class="page-title">Установка</div>
+    <div class="page-desc">Требуется Xcode и CocoaPods. Поддерживается iOS-симулятор и реальные устройства.</div>
+  </div>
+  <ol class="install-list">
+    <li><div><div class="step-desc">Склонировать репозиторий</div><code>git clone https://github.com/Nastya404/tpmp-lab9</code></div></li>
+    <li><div><div class="step-desc">Перейти в директорию проекта</div><code>cd tpmp-lab9</code></div></li>
+    <li><div><div class="step-desc">Установить зависимости через CocoaPods</div><code>pod install</code></div></li>
+    <li><div><div class="step-desc">Открыть проект в Xcode</div><code>open EatAndSit.xcworkspace</code></div></li>
+    <li><div><div class="step-desc">Выбрать симулятор или подключённое iOS-устройство и нажать <strong style="color:#ddd">Run (⌘R)</strong></div></div></li>
+  </ol>
+</div>
+
+<!-- FUNCTIONAL -->
+<div class="page" id="page-functional">
+  <div class="page-head">
+    <div class="page-eyebrow">Проектирование</div>
+    <div class="page-title">Функциональные требования</div>
+    <div class="page-desc">Описание возможностей приложения EAT&amp;SIT и сценарии взаимодействия пользователей с системой.</div>
+  </div>
+
+  <h2>Диаграмма вариантов использования (Use Case)</h2>
+  <p>Описывает взаимодействие единственного актера — <strong style="color:#ddd">Пользователя</strong> — с системой. Отражает полный набор функций через отношения <code style="display:inline;padding:.1rem .4rem;font-size:.78rem;border:1px solid var(--border);background:var(--surface2);">&lt;&lt;extend&gt;&gt;</code> и <code style="display:inline;padding:.1rem .4rem;font-size:.78rem;border:1px solid var(--border);background:var(--surface2);">&lt;&lt;include&gt;&gt;</code>.</p>
+  <div class="diagram-block">
+    <div class="diagram-label">Use Case Diagram</div>
+    <a class="diagram-link" href="https://github.com/user-attachments/assets/475a3453-ce9e-4b9a-b608-da2deeaa595d" target="_blank"><span class="ico">🖼️</span><span>Открыть диаграмму Use Case →</span></a>
+  </div>
+
+  <h2>Текстовые сценарии</h2>
+
+  <div class="scenario">
+    <div class="sc-head"><div class="sc-id">UC1 · Оформить заказ</div><div class="sc-title">Оформление заказа в корзине</div></div>
+    <div class="sc-body">
+      <div class="sc-meta">
+        <div class="meta-cell"><div class="meta-lbl">Актор</div><div class="meta-val">Зарегистрированный пользователь</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Предусловия</div><div class="meta-val">Авторизован. В корзине есть хотя бы одно блюдо из одного ресторана</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Постусловия</div><div class="meta-val">Заказ зафиксирован, информация добавлена в историю заказов</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Расширение (EXTEND)</div><div class="meta-val">Добавить комментарий к заказу (до 200 символов) — между шагами 2 и 9</div></div>
+      </div>
+      <h3>Основной поток</h3>
+      <ol class="steps">
+        <li>Пользователь в корзине нажимает «Оформить заказ»</li>
+        <li>Система отображает экран: список блюд, адрес доставки, комментарий, способ оплаты, итоговая стоимость</li>
+        <li>Система предлагает выбрать адрес — из сохранённых или форму ввода нового (улица, дом, квартира)</li>
+        <li>Пользователь выбирает адрес доставки</li>
+        <li>Система предлагает способ оплаты: сохранённая карта, наличные или ЕРИП</li>
+        <li>Пользователь выбирает способ оплаты</li>
+        <li>Система отображает итоговую стоимость: стоимость блюд + доставка = итого</li>
+        <li>Пользователь нажимает «Оформить заказ»</li>
+        <li>Система валидирует: адрес указан, способ оплаты выбран</li>
+        <li>Создаётся заказ со статусом «Ожидает подтверждения рестораном»</li>
+        <li>Корзина очищается, история заказов обновляется</li>
+        <li>Отображается уведомление «Заказ успешно оформлен»</li>
+      </ol>
+      <div class="alt-note">⚠️ Альтернативный поток: если не указан адрес или способ оплаты — система предлагает их заполнить.</div>
+    </div>
+  </div>
+
+  <div class="scenario">
+    <div class="sc-head"><div class="sc-id">UC2 · Добавить блюдо в корзину</div><div class="sc-title">Выбор блюда с кастомизацией</div></div>
+    <div class="sc-body">
+      <div class="sc-meta">
+        <div class="meta-cell"><div class="meta-lbl">Актор</div><div class="meta-val">Зарегистрированный пользователь</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Предусловия</div><div class="meta-val">Авторизован. Находится на экране меню ресторана</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Постусловия (успех)</div><div class="meta-val">Блюдо добавлено в корзину с ингредиентами и ценой</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Постусловия (провал)</div><div class="meta-val">Блюдо не добавлено, корзина без изменений</div></div>
+      </div>
+      <h3>Вариант A — с кастомизацией</h3>
+      <ol class="steps">
+        <li>Пользователь нажимает на блюдо в списке</li>
+        <li>Система показывает карточку: фото, название, описание, ингредиенты с ценами, кнопка «Добавить»</li>
+        <li>Пользователь нажимает «Добавить ингредиенты» и выбирает нужные галочками</li>
+        <li>Система обновляет итоговую цену блюда</li>
+        <li>Пользователь нажимает «Добавить в корзину»</li>
+        <li>Система добавляет блюдо с выбранными ингредиентами и ценой</li>
+        <li>Отображается уведомление (toast): «Добавлено в корзину»</li>
+      </ol>
+      <h3>Вариант B — без кастомизации</h3>
+      <p style="color:#888;font-size:.855rem;margin-bottom:0">Пользователь сразу нажимает «Добавить в корзину» без выбора дополнительных ингредиентов.</p>
+      <div class="alt-note">⚠️ Альтернативный поток: нажатие «Назад» до шага 5 — блюдо не добавляется, use case прерывается.</div>
+    </div>
+  </div>
+
+  <h2>Функциональные требования</h2>
+  <h3>Регистрация и авторизация</h3>
+  <div class="req-list">
+    <div class="req"><span class="req-id">FR-001</span><span class="req-text">Система должна предоставлять возможность регистрации нового пользователя через email и пароль.</span></div>
+    <div class="req"><span class="req-id">FR-002</span><span class="req-text">Система должна предоставлять возможность входа в систему по email и паролю.</span></div>
+  </div>
+  <h3>Просмотр ресторанов и меню</h3>
+  <div class="req-list">
+    <div class="req"><span class="req-id">FR-003</span><span class="req-text">Система должна отображать список доступных ресторанов на главном экране.</span></div>
+    <div class="req"><span class="req-id">FR-004</span><span class="req-text">Система должна предоставлять фильтрацию ресторанов по категории кухни (пицца, суши, бургеры и т.д.).</span></div>
+    <div class="req"><span class="req-id">FR-005</span><span class="req-text">Система должна отображать рейтинг ресторана (1–5 звёзд), время доставки и цену за доставку.</span></div>
+    <div class="req"><span class="req-id">FR-006</span><span class="req-text">Система должна отображать меню ресторана с фотографиями, названиями, описаниями и ценами блюд.</span></div>
+  </div>
+  <h3>Корзина и оформление заказа</h3>
+  <div class="req-list">
+    <div class="req"><span class="req-id">FR-007</span><span class="req-text">Система должна предоставлять возможность добавления блюд в корзину.</span></div>
+    <div class="req"><span class="req-id">FR-008</span><span class="req-text">Система должна позволять изменять количество порций блюда в корзине.</span></div>
+    <div class="req"><span class="req-id">FR-009</span><span class="req-text">Система должна позволять удалять блюда из корзины.</span></div>
+    <div class="req"><span class="req-id">FR-010</span><span class="req-text">Система должна отображать общую стоимость заказа.</span></div>
+    <div class="req"><span class="req-id">FR-011</span><span class="req-text">Система должна предоставлять возможность добавления комментария к заказу (до 200 символов).</span></div>
+    <div class="req"><span class="req-id">FR-012</span><span class="req-text">Система должна предоставлять выбор адреса доставки из сохранённых или ввод нового.</span></div>
+    <div class="req"><span class="req-id">FR-013</span><span class="req-text">Система должна предоставлять возможность выбора способа оплаты.</span></div>
+  </div>
+  <h3>История заказов</h3>
+  <div class="req-list">
+    <div class="req"><span class="req-id">FR-014</span><span class="req-text">Система должна сохранять историю всех заказов пользователя.</span></div>
+    <div class="req"><span class="req-id">FR-015</span><span class="req-text">Система должна предоставлять возможность просмотра деталей прошлого заказа.</span></div>
+  </div>
+</div>
+
+<!-- SPEC -->
+<div class="page" id="page-spec">
+  <div class="page-head">
+    <div class="page-eyebrow">Проектирование</div>
+    <div class="page-title">Дополнительная спецификация</div>
+    <div class="page-desc">Нефункциональные требования: надёжность, производительность и удобство использования.</div>
+  </div>
+  <h2>Надёжность (Reliability)</h2>
+  <div class="spec-badge reliability">🔒 Reliability</div>
+  <div class="req-list">
+    <div class="req"><span class="req-id">RR-001</span><span class="req-text">Система должна быть доступна 99.5% времени — не более 3.6 часов простоя в месяц.</span></div>
+    <div class="req"><span class="req-id">RR-002</span><span class="req-text">Система должна автоматически сохранять состояние корзины пользователя локально на устройстве.</span></div>
+    <div class="req"><span class="req-id">RR-003</span><span class="req-text">При потере интернет-соединения приложение должно уведомить пользователя и позволить работу в офлайн-режиме.</span></div>
+    <div class="req"><span class="req-id">RR-004</span><span class="req-text">При восстановлении соединения система должна автоматически синхронизировать данные с сервером.</span></div>
+  </div>
+  <h2>Производительность (Performance)</h2>
+  <div class="spec-badge performance">⚡ Performance</div>
+  <div class="req-list">
+    <div class="req"><span class="req-id">PR-001</span><span class="req-text">Время загрузки главного экрана не должно превышать 2 секунды при скорости интернета 3G и выше.</span></div>
+    <div class="req"><span class="req-id">PR-002</span><span class="req-text">Время отклика на действия пользователя не должно превышать 300 миллисекунд.</span></div>
+    <div class="req"><span class="req-id">PR-003</span><span class="req-text">Загрузка списка ресторанов (до 50 записей) не должна превышать 3 секунды.</span></div>
+    <div class="req"><span class="req-id">PR-004</span><span class="req-text">Загрузка меню ресторана (до 100 блюд) не должна превышать 3 секунды.</span></div>
+  </div>
+  <h2>Удобство использования (Usability)</h2>
+  <div class="spec-badge usability">♿ Usability</div>
+  <div class="req-list">
+    <div class="req"><span class="req-id">UR-001</span><span class="req-text">Интерфейс должен быть интуитивно понятным без предварительного обучения.</span></div>
+    <div class="req"><span class="req-id">UR-002</span><span class="req-text">Процесс оформления заказа (от выбора блюда до подтверждения) не должен занимать более 3 минут.</span></div>
+    <div class="req"><span class="req-id">UR-003</span><span class="req-text">Новый пользователь должен иметь возможность сделать первый заказ в течение 5 минут после установки.</span></div>
+    <div class="req"><span class="req-id">UR-004</span><span class="req-text">Все интерактивные элементы должны иметь минимальный размер 44×44 пикселя.</span></div>
+    <div class="req"><span class="req-id">UR-005</span><span class="req-text">Приложение должно поддерживать работу одной рукой — важные элементы в нижней части экрана.</span></div>
+    <div class="req"><span class="req-id">UR-006</span><span class="req-text">Все текстовые элементы должны иметь минимальный размер шрифта 14pt.</span></div>
+    <div class="req"><span class="req-id">UR-007</span><span class="req-text">Цветовая схема должна обеспечивать контраст не менее 4.5:1 (стандарт WCAG AA).</span></div>
+    <div class="req"><span class="req-id">UR-008</span><span class="req-text">Сообщения об ошибках должны быть понятными и содержать подсказку по исправлению.</span></div>
+  </div>
+</div>
+
+<!-- DATABASE -->
+<div class="page" id="page-database">
+  <div class="page-head">
+    <div class="page-eyebrow">Техническая реализация</div>
+    <div class="page-title">Схема базы данных</div>
+    <div class="page-desc">База данных реализована на СУБД SQLite. Схема учитывает ограничения целостности (PK, FK). Поддержка мультиязычности через таблицы переводов.</div>
+  </div>
+  <h2>ER-диаграмма</h2>
+  <div class="diagram-block">
+    <div class="diagram-label">Entity-Relationship Diagram · SQLite</div>
+    <a class="diagram-link" href="https://github.com/user-attachments/assets/b147c7ee-630b-4e69-b043-1e26178f4d4f" target="_blank"><span class="ico">🖼️</span><span>Открыть ER-диаграмму →</span></a>
+  </div>
+  <h2>Описание таблиц</h2>
+  <table class="db-table">
+    <thead><tr><th>Таблица</th><th>Описание</th></tr></thead>
+    <tbody>
+      <tr><td>restaurants</td><td>Список ресторанов и кафе: название, категория, изображение, рейтинг.</td></tr>
+      <tr><td>restaurant_locations</td><td>Географические координаты (широта, долгота) и адрес каждого ресторана для карты.</td></tr>
+      <tr><td>restaurant_translations</td><td>Переводы названий ресторанов на разные языки.</td></tr>
+      <tr><td>dishes</td><td>Каталог блюд: название, описание, цена, категория, изображение — привязаны к ресторану.</td></tr>
+      <tr><td>dish_translations</td><td>Переводы названий и описаний блюд на разные языки.</td></tr>
+      <tr><td>dish_customizations</td><td>Дополнительные ингредиенты и модификации блюд с доплатой за каждую опцию.</td></tr>
+      <tr><td>dish_customization_translations</td><td>Переводы названий кастомизаций блюд.</td></tr>
+      <tr><td>orders</td><td>Оформленные заказы: адрес доставки, способ оплаты, статус, комментарий, дата.</td></tr>
+      <tr><td>order_items</td><td>Позиции внутри заказа: блюдо, количество, итоговая стоимость позиции.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- DIAGRAMS -->
+<div class="page" id="page-diagrams">
+  <div class="page-head">
+    <div class="page-eyebrow">Техническая реализация</div>
+    <div class="page-title">Диаграммы и архитектура</div>
+    <div class="page-desc">Структура Swift-проекта EAT&amp;SIT. Архитектурный паттерн MVVM.</div>
+  </div>
+
+  <h2>1. Диаграмма классов</h2>
+  <div class="diagram-block">
+    <div class="diagram-label">Class Diagram · Swift · MVVM</div>
+    <a class="diagram-link" href="https://github.com/user-attachments/assets/bc631e7b-d16c-44c8-9b77-47c3ba771399" target="_blank"><span class="ico">🖼️</span><span>Открыть диаграмму классов →</span></a>
+  </div>
+  <h3>Domain Models</h3>
+  <table class="class-table">
+    <thead><tr><th>Класс</th><th>Описание</th></tr></thead>
+    <tbody>
+      <tr><td>User</td><td>Пользователь: имя, email, телефон, пароль. Управляется через AuthViewModel.</td></tr>
+      <tr><td>Restaurant</td><td>Ресторан: название, категория, адрес, координаты, рейтинг, статус, радиус доставки.</td></tr>
+      <tr><td>Dish</td><td>Позиция меню: название, описание, цена, категория, изображение, доступность.</td></tr>
+      <tr><td>DishCustomization</td><td>Дополнительная опция к блюду: название, тип, доплата.</td></tr>
+      <tr><td>CartItem</td><td>Позиция в корзине: блюдо, кастомизация, количество, цена. Пересчёт подытога.</td></tr>
+      <tr><td>Order</td><td>Заказ: адрес, способ оплаты, статус, комментарий, временны́е метки.</td></tr>
+      <tr><td>OrderItem</td><td>Позиция в заказе: блюдо, количество, итоговая цена.</td></tr>
+      <tr><td>PaymentMethod</td><td>Enum: ONLINE, ERIP, TERMINAL, CASH.</td></tr>
+    </tbody>
+  </table>
+  <h3>ViewModels</h3>
+  <table class="class-table">
+    <thead><tr><th>ViewModel</th><th>Описание</th></tr></thead>
+    <tbody>
+      <tr><td>AuthViewModel</td><td>Авторизация: login, register, logout. Работает с DatabaseManager и моделью User.</td></tr>
+      <tr><td>HomeViewModel</td><td>Загружает рестораны (loadRestaurants), фильтрация по категории (filterByCategory).</td></tr>
+      <tr><td>RestaurantViewModel</td><td>Загружает меню (loadMenu) и детали ресторана (loadDetails).</td></tr>
+      <tr><td>CartViewModel</td><td>Корзина: хранит CartItem, добавляет/удаляет, считает итог, создаёт Order.</td></tr>
+      <tr><td>OrderViewModel</td><td>Оформление (placeOrder), история (loadOrderHistory), отслеживание (trackOrder).</td></tr>
+    </tbody>
+  </table>
+
+  <h2>2. Диаграмма деятельности (UC2)</h2>
+  <p>Алгоритм «Добавление блюда в корзину». Две дорожки: Пользователь и Система.</p>
+  <div class="diagram-block">
+    <div class="diagram-label">Activity Diagram · UC2</div>
+    <a class="diagram-link" href="https://github.com/user-attachments/assets/2f8f322b-27f7-4f5e-9a92-11b4b17ee841" target="_blank"><span class="ico">🖼️</span><span>Открыть диаграмму деятельности →</span></a>
+  </div>
+
+  <h2>3. Диаграмма последовательности (UC2)</h2>
+  <p>Динамическое взаимодействие объектов при добавлении блюда в заказ.</p>
+  <div class="diagram-block">
+    <div class="diagram-label">Sequence Diagram · UC2</div>
+    <a class="diagram-link" href="https://github.com/user-attachments/assets/6e5d02f1-ac72-422a-b9de-c61279dff6dc" target="_blank"><span class="ico">🖼️</span><span>Открыть диаграмму последовательности →</span></a>
+  </div>
+
+  <h2>4. Диаграмма развертывания</h2>
+  <p>Приложение выполняется на iPhone под управлением iOS 26.4. Пакет EATSIT.app содержит четыре компонента.</p>
+  <div class="diagram-block">
+    <div class="diagram-label">Deployment Diagram · iOS 26.4 · iPhone</div>
+    <a class="diagram-link" href="https://github.com/user-attachments/assets/dceb915b-aff2-464e-aac8-1d63fd515b40" target="_blank"><span class="ico">🖼️</span><span>Открыть диаграмму развертывания →</span></a>
+  </div>
+  <table class="class-table">
+    <thead><tr><th>Компонент</th><th>Описание</th></tr></thead>
+    <tbody>
+      <tr><td>Localization Resources</td><td>Localizable.strings на трёх языках: английском, русском, польском.</td></tr>
+      <tr><td>Image Assets</td><td>Assets.xcassets: иконки, изображения блюд и ресторанов.</td></tr>
+      <tr><td>SwiftUI Interface</td><td>Слой UI на SwiftUI. Отображает экраны, передаёт действия во ViewModel.</td></tr>
+      <tr><td>MVVM ViewModels</td><td>Бизнес-логика. Связывает интерфейс с сервисами и моделями.</td></tr>
+      <tr><td>Services</td><td>DatabaseManager, LocationManager, LocalizationManager.</td></tr>
+      <tr><td>Models</td><td>User, Restaurant, Dish, Order и другие структуры данных.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- COVERAGE -->
+<div class="page" id="page-coverage">
+  <div class="page-head">
+    <div class="page-eyebrow">Тестирование</div>
+    <div class="page-title">Покрытие тестами</div>
+    <div class="page-desc">Отчёт сгенерирован автоматически через GitHub Actions. Включает Unit-тесты и UI-тесты для приложения EATSIT.</div>
+  </div>
+
+  <div class="coverage-summary">
+    <div class="cov-card">
+      <div class="cov-label">EATSIT.app</div>
+      <div class="cov-pct low">46.19%</div>
+      <div class="cov-sub">основное приложение</div>
+    </div>
+    <div class="cov-card">
+      <div class="cov-label">Unit Tests</div>
+      <div class="cov-pct high">95.83%</div>
+      <div class="cov-sub">EATSITTests.xctest</div>
+    </div>
+    <div class="cov-card">
+      <div class="cov-label">UI Tests</div>
+      <div class="cov-pct medium">73.74%</div>
+      <div class="cov-sub">EATSITUITests.xctest</div>
+    </div>
+  </div>
+
+  <h2>Файлы приложения</h2>
+  <table class="cov-table">
+    <thead><tr><th style="width:60px">Тип</th><th>Файл</th><th style="width:220px">Покрытие</th></tr></thead>
+    <tbody id="app-files"></tbody>
+  </table>
+
+  <h2>Unit-тесты</h2>
+  <table class="cov-table">
+    <thead><tr><th style="width:60px">Тип</th><th>Файл</th><th style="width:220px">Покрытие</th></tr></thead>
+    <tbody id="unit-files"></tbody>
+  </table>
+
+  <h2>UI-тесты</h2>
+  <table class="cov-table">
+    <thead><tr><th style="width:60px">Тип</th><th>Файл</th><th style="width:220px">Покрытие</th></tr></thead>
+    <tbody id="ui-files"></tbody>
+  </table>
+</div>
+
+<!-- PRESENTATION -->
+<div class="page" id="page-presentation">
+  <div class="page-head">
+    <div class="page-eyebrow">Итоги проекта</div>
+    <div class="page-title">Презентация</div>
+    <div class="page-desc">Итоговый отчёт о работе команды: распределение ролей, реализованный функционал и результаты проекта.</div>
+  </div>
+  <a class="pres-btn" href="https://canva.link/mcsnkotb5wf5t8p" target="_blank"><span>🎨</span><span>Открыть презентацию в Canva →</span></a>
+  <h2>Вклад участников</h2>
+  <div class="team-grid">
+    <div class="team-card"><div class="team-name">Ярмолик Анастасия</div><div class="team-role">Техдокументация · Требования · User Stories · Use Cases · UML-диаграммы · Визуальный стиль</div></div>
+    <div class="team-card"><div class="team-name">Богуш Полина</div><div class="team-role">Макет и прототип · UX-проектирование · Функциональное тестирование · Баги</div></div>
+    <div class="team-card"><div class="team-name">Шамрук Полина</div><div class="team-role">Основная логика · Диаграмма классов · ER-диаграмма · Визуальный стиль</div></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+function go(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+  const pg = document.getElementById('page-' + id);
+  if (pg) pg.classList.add('active');
+  if (el) el.classList.add('active');
+  if (window.innerWidth <= 820) document.getElementById('sidebar').classList.remove('open');
+}
+
+function cls(pct) {
+  if (pct >= 80) return 'high';
+  if (pct >= 50) return 'medium';
+  return 'low';
+}
+
+function renderTable(id, rows) {
+  const tbody = document.getElementById(id);
+  rows.sort((a, b) => b.pct - a.pct);
+  tbody.innerHTML = rows.map(r => {
+    const c = cls(r.pct);
+    return `<tr>
+      <td><span class="badge ${c}">File</span></td>
+      <td>${r.name}</td>
+      <td><div class="bar-wrap">
+        <div class="bar"><div class="bar-fill ${c}" style="width:${r.pct}%"></div></div>
+        <span class="bar-pct ${c}">${r.pct.toFixed(2)}%</span>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+renderTable('app-files', [
+  {name:'OrderCardView.swift',pct:99.34},{name:'LanguageView.swift',pct:96.12},
+  {name:'LocalizationManager.swift',pct:100},{name:'CartViewModel.swift',pct:100},
+  {name:'ContentView.swift',pct:100},{name:'PaymentMethod.swift',pct:100},
+  {name:'LoginView.swift',pct:94.47},{name:'EATSITApp.swift',pct:100},
+  {name:'HomeView.swift',pct:97.86},{name:'AuthViewModel.swift',pct:91.43},
+  {name:'RestaurantViewModel.swift',pct:100},{name:'LocationManager.swift',pct:51.85},
+  {name:'RegisterView.swift',pct:95.72},{name:'RestaurantCardView.swift',pct:100},
+  {name:'ProfileView.swift',pct:69.45},{name:'RestaurantView.swift',pct:2.37},
+  {name:'MainTabView.swift',pct:100},{name:'OrderViewModel.swift',pct:100},
+  {name:'CartItem.swift',pct:91.67},{name:'OrdersView.swift',pct:86.12},
+  {name:'ProfileOptionRowView.swift',pct:100},{name:'AppLanguage.swift',pct:100},
+  {name:'RestaurantMapView.swift',pct:80.09},{name:'DatabaseManager.swift',pct:83.55},
+  {name:'HomeViewModel.swift',pct:100},{name:'DishDetailsView.swift',pct:0},
+  {name:'DishCustomization.swift',pct:0},{name:'CheckoutView.swift',pct:0},
+  {name:'DishRowView.swift',pct:0},{name:'ProfileOption.swift',pct:0},
+  {name:'BasketItemView.swift',pct:0},{name:'Order.swift',pct:0},
+  {name:'BasketView.swift',pct:0}
+]);
+
+renderTable('unit-files', [
+  {name:'EATSITAdditionalTests.swift',pct:99.01},
+  {name:'EATSITTests.swift',pct:92.25}
+]);
+
+renderTable('ui-files', [
+  {name:'EATSITUITestsLaunchTests.swift',pct:100},
+  {name:'EATSITDeepFlowUITests.swift',pct:80.65},
+  {name:'EATSITUITests.swift',pct:65.61},
+  {name:'EATSITOrderCheckoutUITests.swift',pct:65.35}
+]);
+</script>
+</body>
+</html>
