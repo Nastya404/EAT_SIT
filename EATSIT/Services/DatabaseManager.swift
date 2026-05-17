@@ -17,6 +17,9 @@ final class DatabaseManager {
     private var database: OpaquePointer?
     private let databaseName = "eatsit.sqlite"
     private let transient = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
+    private var currentLanguageCode: String {
+        Locale.current.language.languageCode?.identifier ?? "ru"
+    }
 
     // MARK: - Initialization
 
@@ -83,7 +86,7 @@ final class DatabaseManager {
         let query = """
         SELECT
             r.id,
-            r.name,
+            COALESCE(rt.name, r.name),
             r.image_name,
             r.rating,
             r.is_popular,
@@ -91,6 +94,9 @@ final class DatabaseManager {
             l.latitude,
             l.longitude
         FROM restaurants r
+        LEFT JOIN restaurant_translations rt
+        ON r.id = rt.restaurant_id
+        AND rt.language_code = ?
         LEFT JOIN restaurant_locations l
         ON r.id = l.restaurant_id
         GROUP BY r.id;
@@ -100,6 +106,8 @@ final class DatabaseManager {
         var statement: OpaquePointer?
 
         if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+
+            sqlite3_bind_text(statement, 1, currentLanguageCode, -1, transient)
 
             while sqlite3_step(statement) == SQLITE_ROW {
 
@@ -125,7 +133,7 @@ final class DatabaseManager {
         sqlite3_finalize(statement)
         return restaurants
     }
-
+    
     // MARK: - Fetch Restaurant Locations
 
     func fetchLocations(for restaurant: Restaurant) -> [RestaurantLocation] {
@@ -171,21 +179,30 @@ final class DatabaseManager {
         SELECT
             d.id,
             d.restaurant_id,
-            d.name,
-            d.description,
+            COALESCE(dt.name, d.name),
+            COALESCE(dt.description, d.description),
             d.price,
             d.image_name,
             d.category,
-            r.name
+            COALESCE(rt.name, r.name)
         FROM dishes d
         INNER JOIN restaurants r
-        ON d.restaurant_id = r.id;
+        ON d.restaurant_id = r.id
+        LEFT JOIN dish_translations dt
+        ON d.id = dt.dish_id
+        AND dt.language_code = ?
+        LEFT JOIN restaurant_translations rt
+        ON r.id = rt.restaurant_id
+        AND rt.language_code = ?;
         """
 
         var dishes: [Dish] = []
         var statement: OpaquePointer?
 
         if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+
+            sqlite3_bind_text(statement, 1, currentLanguageCode, -1, transient)
+            sqlite3_bind_text(statement, 2, currentLanguageCode, -1, transient)
 
             while sqlite3_step(statement) == SQLITE_ROW {
 
@@ -224,9 +241,14 @@ final class DatabaseManager {
     func fetchCustomizations(for dish: Dish) -> [DishCustomization] {
 
         let query = """
-        SELECT name, price
-        FROM dish_customizations
-        WHERE dish_id = ?;
+        SELECT
+            COALESCE(dct.name, dc.name),
+            dc.price
+        FROM dish_customizations dc
+        LEFT JOIN dish_customization_translations dct
+        ON dc.id = dct.customization_id
+        AND dct.language_code = ?
+        WHERE dc.dish_id = ?;
         """
 
         var customizations: [DishCustomization] = []
@@ -234,7 +256,8 @@ final class DatabaseManager {
 
         if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
 
-            sqlite3_bind_text(statement, 1, dish.id, -1, transient)
+            sqlite3_bind_text(statement, 1, currentLanguageCode, -1, transient)
+            sqlite3_bind_text(statement, 2, dish.id, -1, transient)
 
             while sqlite3_step(statement) == SQLITE_ROW {
 
