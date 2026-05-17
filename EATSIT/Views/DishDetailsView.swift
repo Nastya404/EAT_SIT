@@ -56,7 +56,7 @@ struct DishDetailsView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            customizations = DatabaseManager.shared.fetchCustomizations(for: dish)
+            loadCustomizations()
         }
     }
 
@@ -140,6 +140,7 @@ struct DishDetailsView: View {
 
                 Button {
 
+                    
                     toggleCustomization(customization)
 
                 } label: {
@@ -254,6 +255,11 @@ struct DishDetailsView: View {
 
     // MARK: - Methods
 
+    private func loadCustomizations() {
+
+        customizations = DatabaseManager.shared.fetchCustomizations(for: dish)
+    }
+    
     private func toggleCustomization(_ customization: DishCustomization) {
 
         if selectedCustomizations.contains(customization.id) {

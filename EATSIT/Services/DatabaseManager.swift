@@ -18,7 +18,7 @@ final class DatabaseManager {
     private let databaseName = "eatsit.sqlite"
     private let transient = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
     private var currentLanguageCode: String {
-        UserDefaults.standard.string(forKey: "selectedLanguage") ?? "ru"
+        UserDefaults.standard.string(forKey: "selectedLanguage") ?? "en"
     }
 
     // MARK: - Initialization
