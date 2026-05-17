@@ -67,7 +67,7 @@ struct DishDetailsView: View {
         Image(dish.imageName)
             .resizable()
             .scaledToFill()
-            .frame(height: 320)
+            .frame(height: 240)
             .frame(maxWidth: .infinity)
             .clipped()
     }
@@ -76,20 +76,21 @@ struct DishDetailsView: View {
 
     private var dishInfoView: some View {
 
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 14) {
 
-            HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 8) {
 
                 Text(dish.name)
                     .font(.largeTitle)
                     .fontWeight(.bold)
+                    .lineLimit(3)
+                    .minimumScaleFactor(0.75)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                Spacer()
-
-                VStack(alignment: .trailing) {
+                HStack(alignment: .bottom, spacing: 6) {
 
                     Text("$\(dish.price, specifier: "%.2f")")
-                        .font(.largeTitle)
+                        .font(.title)
                         .fontWeight(.bold)
                         .foregroundStyle(.orange)
 
@@ -102,6 +103,8 @@ struct DishDetailsView: View {
             Text(dish.description)
                 .font(.body)
                 .foregroundStyle(.gray)
+                .lineLimit(4)
+                .fixedSize(horizontal: false, vertical: true)
 
             HStack(spacing: 10) {
 
@@ -121,11 +124,11 @@ struct DishDetailsView: View {
             .fontWeight(.semibold)
         }
         .padding(20)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 28))
         .padding(.horizontal, 20)
     }
-
     // MARK: - Toppings View
 
     private var toppingsView: some View {
