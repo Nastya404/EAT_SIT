@@ -180,6 +180,7 @@
 "restaurant.deliveryTime" = "20-35 мин";
 
 "basket.itemsCount" = "%d товаров";
+"order.itemsLabel" = "товар(ов)";
 "basket.toppings" = "+ добавки";
 
 "profile.payment.visa" = "VISA •••• 1234";

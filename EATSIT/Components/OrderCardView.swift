@@ -91,14 +91,12 @@ struct OrderCardView: View {
                 .font(.title3)
                 .fontWeight(.bold)
 
-            Text(
-                String(
-                    format: String(localized: "order.itemsCount"),
-                    order.items.count
-                )
-            )
-                .font(.caption)
-                .foregroundStyle(.gray)
+            HStack(spacing: 4) {
+                Text("\(order.items.count)")
+                Text("order.itemsLabel")
+            }
+            .font(.caption)
+            .foregroundStyle(.gray)
         }
     }
 

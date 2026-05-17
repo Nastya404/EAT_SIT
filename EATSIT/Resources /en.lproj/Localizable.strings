@@ -181,6 +181,7 @@
 "restaurant.deliveryTime" = "20-35 min";
 
 "basket.itemsCount" = "%d items";
+"order.itemsLabel" = "item(s)";
 "basket.toppings" = "+ toppings";
 
 "profile.payment.visa" = "VISA •••• 1234";
