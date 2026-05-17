@@ -5,6 +5,7 @@
 //  Created by Shamruk_Polina on 15.05.2026.
 //
 
+
 import XCTest
 
 final class EATSITUITests: XCTestCase {
@@ -24,34 +25,27 @@ final class EATSITUITests: XCTestCase {
     
     // MARK: - Вспомогательные методы
     
-    // Проверка, находимся ли мы на экране логина (ищем по тексту или наличию полей)
+    // Проверка, находимся ли мы на экране логина
     private func isAtLoginScreen() -> Bool {
-        
-        // Безопасный поиск текстового поля для безопасного ввода (пароля)
-        return app.descendants(matching: .secureTextField).firstMatch.exists
+        return app.secureTextFields.firstMatch.exists
     }
     
-    // Вспомогательный метод для входа перед началом тестов главной цепочки
+    // Вспомогательный метод для входа перед началом тестов
     private func loginIfNeeded() {
-        
         if isAtLoginScreen() {
+            let emailField = app.textFields.firstMatch
+            let passwordField = app.secureTextFields.firstMatch
+            let loginButton = app.buttons.firstMatch
             
-            let emailField = app.descendants(matching: .textField).firstMatch
-            let passwordField = app.descendants(matching: .secureTextField).firstMatch
-            let loginButton = app.descendants(matching: .button).firstMatch
-            
-            if emailField.exists && passwordField.exists {
-                
+            if emailField.waitForExistence(timeout: 5) && passwordField.exists {
                 emailField.tap()
                 emailField.typeText("test@eatsit.by")
                 
                 passwordField.tap()
                 passwordField.typeText("123456")
                 
-                // Закрываем клавиатуру, если кнопка "Войти" перекрыта
                 let returnButton = app.keyboards.buttons.element(boundBy: 0)
-                
-                if returnButton.exists {
+                if returnButton.waitForExistence(timeout: 3) {
                     returnButton.tap()
                 }
                 
@@ -59,85 +53,64 @@ final class EATSITUITests: XCTestCase {
                     loginButton.tap()
                 }
                 
-                // Небольшое ожидание анимации перехода на ContentView
-                _ = app.descendants(matching: .tabBar)
-                    .firstMatch
-                    .waitForExistence(timeout: 3)
+                // Увеличили таймаут ожидания перехода на главный экран в CI
+                _ = app.tabBars.firstMatch.waitForExistence(timeout: 8)
             }
         }
     }
     
     // MARK: - Тесты Авторизации (Login & Register)
     
-    // 1. Проверка наличия элементов на экране входа
     @MainActor
     func testLoginScreenElementsExist() throws {
-        
         if isAtLoginScreen() {
-            
             XCTAssertTrue(
-                app.descendants(matching: .textField)
-                    .firstMatch
-                    .exists,
+                app.textFields.firstMatch.waitForExistence(timeout: 5),
                 "Поле Email должно существовать"
             )
-            
             XCTAssertTrue(
-                app.descendants(matching: .secureTextField)
-                    .firstMatch
-                    .exists,
+                app.secureTextFields.firstMatch.exists,
                 "Поле Пароль должно существовать"
             )
         }
     }
     
-    // 2. Проверка возможности клика по переходу на регистрацию
     @MainActor
     func testNavigationToRegisterScreen() throws {
-        
         if isAtLoginScreen() {
+            let registerButton = app.buttons.element(boundBy: 1)
             
-            // Ищем кнопку регистрации по тексту
-            let registerButton = app.descendants(matching: .button)
-                .element(boundBy: 1)
-            
-            if registerButton.waitForExistence(timeout: 2) {
-                
+            if registerButton.waitForExistence(timeout: 5) {
                 registerButton.tap()
                 
-                // На экране регистрации полей ввода становится больше
-                XCTAssertTrue(
-                    app.descendants(matching: .textField).count >= 2
-                )
+                // Ждем пока прогрузится экран регистрации
+                let textFields = app.textFields
+                _ = textFields.firstMatch.waitForExistence(timeout: 5)
+                XCTAssertTrue(textFields.count >= 2)
             }
         }
     }
     
     // MARK: - Тесты Навигации и Главного экрана
     
-    // 3. Проверка переключения вкладок в TabBar
     @MainActor
     func testTabBarNavigation() throws {
-
         loginIfNeeded()
 
-        var tabBar = app.descendants(matching: .tabBar).firstMatch
+        var tabBar = app.tabBars.firstMatch
 
         // Если вход не сработал, регистрируем тестового пользователя
-        if !tabBar.waitForExistence(timeout: 3), isAtLoginScreen() {
+        if !tabBar.waitForExistence(timeout: 5), isAtLoginScreen() {
+            let registerButton = app.buttons.element(boundBy: 1)
 
-            let registerButton = app.descendants(matching: .button).element(boundBy: 1)
-
-            if registerButton.waitForExistence(timeout: 2) {
+            if registerButton.waitForExistence(timeout: 5) {
                 registerButton.tap()
             }
 
-            let textFields = app.descendants(matching: .textField)
-            let passwordField = app.descendants(matching: .secureTextField).firstMatch
+            let textFields = app.textFields
+            let passwordField = app.secureTextFields.firstMatch
 
-            if textFields.count >= 3,
-               passwordField.waitForExistence(timeout: 2) {
-
+            if textFields.firstMatch.waitForExistence(timeout: 5), passwordField.waitForExistence(timeout: 5) {
                 textFields.element(boundBy: 0).tap()
                 textFields.element(boundBy: 0).typeText("Test User")
 
@@ -151,203 +124,135 @@ final class EATSITUITests: XCTestCase {
                 passwordField.typeText("123456")
 
                 let returnButton = app.keyboards.buttons.element(boundBy: 0)
-
                 if returnButton.exists {
                     returnButton.tap()
                 }
 
-                let createAccountButton = app.descendants(matching: .button).firstMatch
-
-                if createAccountButton.waitForExistence(timeout: 2) {
+                let createAccountButton = app.buttons.firstMatch
+                if createAccountButton.waitForExistence(timeout: 5) {
                     createAccountButton.tap()
                 }
             }
 
-            tabBar = app.descendants(matching: .tabBar).firstMatch
+            tabBar = app.tabBars.firstMatch
         }
 
         XCTAssertTrue(
-            tabBar.waitForExistence(timeout: 5),
+            tabBar.waitForExistence(timeout: 8),
             "Нижняя панель навигации должна появиться после входа или регистрации"
         )
 
         let ordersTab = tabBar.buttons.element(boundBy: 1)
-
-        XCTAssertTrue(
-            ordersTab.waitForExistence(timeout: 2),
-            "Вкладка заказов должна существовать"
-        )
-
+        XCTAssertTrue(ordersTab.waitForExistence(timeout: 5), "Вкладка заказов должна существовать")
         ordersTab.tap()
 
         let profileTab = tabBar.buttons.element(boundBy: 2)
-
-        XCTAssertTrue(
-            profileTab.waitForExistence(timeout: 2),
-            "Вкладка профиля должна существовать"
-        )
-
+        XCTAssertTrue(profileTab.waitForExistence(timeout: 5), "Вкладка профиля должна существовать")
         profileTab.tap()
 
         let homeTab = tabBar.buttons.element(boundBy: 0)
-
-        XCTAssertTrue(
-            homeTab.waitForExistence(timeout: 2),
-            "Вкладка главной страницы должна существовать"
-        )
-
+        XCTAssertTrue(homeTab.waitForExistence(timeout: 5), "Вкладка главной страницы должна существовать")
         homeTab.tap()
     }
     
-    // 4. Проверка взаимодействия с поисковой строкой на HomeView
     @MainActor
     func testHomeSearchBar() throws {
-        
         loginIfNeeded()
         
-        let searchField = app.descendants(matching: .textField).firstMatch
-        
-        XCTAssertTrue(
-            searchField.waitForExistence(timeout: 3),
-            "Поле поиска должно быть на главной"
-        )
+        let searchField = app.textFields.firstMatch
+        XCTAssertTrue(searchField.waitForExistence(timeout: 5), "Поле поиска должно быть на главной")
         
         searchField.tap()
         searchField.typeText("Pizza")
     }
     
-    // 5. Выбор категории блюд на главной
     @MainActor
     func testHomeCategorySelection() throws {
-        
         loginIfNeeded()
         
-        let scrollView = app.descendants(matching: .scrollView).firstMatch
+        let scrollView = app.scrollViews.firstMatch
+        XCTAssertTrue(scrollView.waitForExistence(timeout: 5))
         
-        XCTAssertTrue(scrollView.waitForExistence(timeout: 3))
-        
-        // Тапаем по одному из элементов категорий внутри скролла
-        let categoryButton = scrollView.descendants(matching: .button)
-            .element(boundBy: 1)
-        
-        if categoryButton.exists {
+        let categoryButton = scrollView.buttons.element(boundBy: 1)
+        if categoryButton.waitForExistence(timeout: 3) {
             categoryButton.tap()
         }
     }
     
-    // 6. Переход на карту ресторанов RestaurantMapView
     @MainActor
     func testMapScreenOpens() throws {
-        
         loginIfNeeded()
         
-        // Проверяем, существует ли объект карты в приложении
-        let mapElement = app.descendants(matching: .map).firstMatch
-        
-        if mapElement.exists {
+        let mapElement = app.maps.firstMatch
+        if mapElement.waitForExistence(timeout: 5) {
             XCTAssertTrue(mapElement.exists)
         }
     }
     
     // MARK: - Тесты Заказа (Ресторан, Блюдо, Корзина)
     
-    // 7. Имитация открытия карточки ресторана
     @MainActor
     func testOpenRestaurantMenu() throws {
-        
         loginIfNeeded()
         
-        // Находим скроллбар с ресторанами
-        let restaurantButton = app.descendants(matching: .scrollView)
-            .descendants(matching: .button)
-            .element(boundBy: 2)
-        
-        if restaurantButton.waitForExistence(timeout: 3) {
+        let restaurantButton = app.scrollViews.firstMatch.buttons.element(boundBy: 2)
+        if restaurantButton.waitForExistence(timeout: 5) {
             restaurantButton.tap()
         }
     }
     
-    // 8. Проверка открытия экрана DishDetailsView
     @MainActor
     func testDishDetailsScreenOpens() throws {
-
         loginIfNeeded()
 
-        let scrollView = app.descendants(matching: .scrollView).firstMatch
+        let scrollView = app.scrollViews.firstMatch
 
-        let firstRestaurant = scrollView
-            .descendants(matching: .button)
-            .element(boundBy: 2)
-
-        if firstRestaurant.waitForExistence(timeout: 3) {
-
+        let firstRestaurant = scrollView.buttons.element(boundBy: 2)
+        if firstRestaurant.waitForExistence(timeout: 5) {
             firstRestaurant.tap()
 
-            let firstDish = app.descendants(matching: .scrollView)
-                .descendants(matching: .button)
-                .element(boundBy: 0)
-
-            if firstDish.waitForExistence(timeout: 3) {
-
+            let firstDish = app.scrollViews.firstMatch.buttons.element(boundBy: 0)
+            if firstDish.waitForExistence(timeout: 5) {
                 firstDish.tap()
 
                 XCTAssertTrue(
-                    app.descendants(matching: .scrollView)
-                        .firstMatch
-                        .waitForExistence(timeout: 3),
+                    app.scrollViews.firstMatch.waitForExistence(timeout: 5),
                     "Экран блюда должен открыться"
                 )
             }
         }
     }
-    // 9. Переход на вкладку заказов и проверка состояния корзины
+
     @MainActor
     func testBasketAndOrdersViews() throws {
-        
         loginIfNeeded()
         
-        let tabBar = app.descendants(matching: .tabBar).firstMatch
-        
-        if tabBar.waitForExistence(timeout: 2) {
-            
-            // Переходим в OrdersView
+        let tabBar = app.tabBars.firstMatch
+        if tabBar.waitForExistence(timeout: 5) {
             tabBar.buttons.element(boundBy: 1).tap()
-            
-            XCTAssertTrue(
-                app.descendants(matching: .scrollView)
-                    .firstMatch
-                    .exists
-            )
+            XCTAssertTrue(app.scrollViews.firstMatch.waitForExistence(timeout: 5))
         }
     }
     
     // MARK: - Тесты Профиля
     
-    // 10. Проверка вызова алерта подтверждения выхода
     @MainActor
     func testProfileLogoutAlert() throws {
-        
-        let app = XCUIApplication()
-        app.activate()
+        // УДАЛЕНО: Переинициализация локального app, ломавшая стейт
         loginIfNeeded()
         
-        var tabBar = app.descendants(matching: .tabBar).firstMatch
+        var tabBar = app.tabBars.firstMatch
         
-        // Если войти не получилось, создаём тестового пользователя через регистрацию
-        if !tabBar.waitForExistence(timeout: 3), isAtLoginScreen() {
-            
-            let registerButton = app.descendants(matching: .button).element(boundBy: 1)
-            
-            if registerButton.waitForExistence(timeout: 2) {
+        if !tabBar.waitForExistence(timeout: 5), isAtLoginScreen() {
+            let registerButton = app.buttons.element(boundBy: 1)
+            if registerButton.waitForExistence(timeout: 5) {
                 registerButton.tap()
             }
             
-            let textFields = app.descendants(matching: .textField)
-            let passwordField = app.descendants(matching: .secureTextField).firstMatch
+            let textFields = app.textFields
+            let passwordField = app.secureTextFields.firstMatch
             
-            if textFields.count >= 3,
-               passwordField.waitForExistence(timeout: 2) {
-                
+            if textFields.firstMatch.waitForExistence(timeout: 5), passwordField.waitForExistence(timeout: 5) {
                 textFields.element(boundBy: 0).tap()
                 textFields.element(boundBy: 0).typeText("Test User")
                 
@@ -361,50 +266,51 @@ final class EATSITUITests: XCTestCase {
                 passwordField.typeText("123456")
                 
                 let returnButton = app.keyboards.buttons.element(boundBy: 0)
-                
                 if returnButton.exists {
                     returnButton.tap()
                 }
                 
-                let createAccountButton = app.descendants(matching: .button).firstMatch
-                
-                if createAccountButton.waitForExistence(timeout: 2) {
+                let createAccountButton = app.buttons.firstMatch
+                if createAccountButton.waitForExistence(timeout: 5) {
                     createAccountButton.tap()
                 }
             }
             
-            tabBar = app.descendants(matching: .tabBar).firstMatch
+            tabBar = app.tabBars.firstMatch
         }
         
         XCTAssertTrue(
-            tabBar.waitForExistence(timeout: 5),
+            tabBar.waitForExistence(timeout: 8),
             "Нижняя панель навигации должна появиться после входа или регистрации"
         )
         
         // Клик по вкладке профиля
         tabBar.buttons.element(boundBy: 2).tap()
         
-        // Ищем кнопку выхода
-        let logoutButton = app.descendants(matching: .button)
-            .element(
-                boundBy: app.descendants(matching: .button).count - 1
-            )
+        // СТАБИЛИЗАЦИЯ: Сначала ждем появления хотя бы одной кнопки на экране профиля
+        let allButtons = app.buttons
+        _ = allButtons.firstMatch.waitForExistence(timeout: 5)
         
-        if logoutButton.waitForExistence(timeout: 2) {
-            
+        let buttonCount = allButtons.count
+        XCTAssertTrue(buttonCount > 0, "На экране профиля не найдены кнопки")
+        
+        // Безопасно берем последнюю кнопку (Выйти)
+        let logoutButton = allButtons.element(boundBy: buttonCount - 1)
+        
+        if logoutButton.waitForExistence(timeout: 5) {
             logoutButton.tap()
             
-            // Проверяем появление системного алерта SwiftUI
+            // Проверяем появление системного алерта
             let alert = app.alerts.firstMatch
-            
             XCTAssertTrue(
-                alert.waitForExistence(timeout: 2),
+                alert.waitForExistence(timeout: 5),
                 "Алерт подтверждения выхода должен появиться"
             )
             
-            // Нажимаем отмену
-            if alert.buttons.element(boundBy: 0).exists {
-                alert.buttons.element(boundBy: 0).tap()
+            // Нажимаем отмену (первая кнопка на алерте)
+            let cancelButton = alert.buttons.element(boundBy: 0)
+            if cancelButton.waitForExistence(timeout: 3) {
+                cancelButton.tap()
             }
         }
     }
