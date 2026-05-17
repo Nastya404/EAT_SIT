@@ -32,8 +32,7 @@ jobs:
           xcodebuild \
             -project EATSIT.xcodeproj \
             -scheme EATSIT \
-            -sdk iphonesimulator \
-            -destination "platform=iOS Simulator,id=4CAE0F50-248B-4738-A684-2B454F8B1323" \
+            -destination "platform=iOS Simulator,name=iPhone SE (3rd generation),OS=17.5" \
             -enableCodeCoverage YES \
             clean test
 
