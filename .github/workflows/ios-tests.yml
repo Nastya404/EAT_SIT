@@ -21,22 +21,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Переключаемся на стабильный релиз Xcode 16.0, где симуляторы уже вшиты в систему
       - name: Select stable Xcode 16
         run: sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
 
       - name: Show Xcode version
         run: xcodebuild -version
 
-      - name: List schemes and devices
-        run: |
-          xcodebuild -list -project EATSIT.xcodeproj
-          xcrun simctl list devices available
-
-      # Запускаем тесты на гарантированно существующем iPhone 16
       - name: Run Unit + UI Tests with Coverage
-        run: xcodebuild -project EATSIT.xcodeproj -scheme EATSIT -destination "platform=iOS Simulator,name=iPhone 17,OS=26.0" -enableCodeCoverage YES clean test
-        
+        run: |
+          xcodebuild \
+            -project EATSIT.xcodeproj \
+            -scheme EATSIT \
+            -sdk iphonesimulator \
+            -destination "platform=iOS Simulator,id=4CAE0F50-248B-4738-A684-2B454F8B1323" \
+            -enableCodeCoverage YES \
+            clean test
+
       - name: Create coverage folder
         run: mkdir -p coverage
 
