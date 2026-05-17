@@ -39,23 +39,162 @@ jobs:
             SDKROOT=iphonesimulator \
             clean test
 
-      - name: Create coverage folder
-        run: mkdir -p coverage
+      - name: Create coverage folders
+        run: |
+          mkdir -p coverage
+          mkdir -p coverage_html
 
       - name: Export coverage report
         run: |
           RESULT_BUNDLE=$(find ~/Library/Developer/Xcode/DerivedData -name "*.xcresult" | head -1)
           echo "Using result bundle: $RESULT_BUNDLE"
           xcrun xccov view --report "$RESULT_BUNDLE" > coverage/coverage-report.txt
+          xcrun xccov view --report --json "$RESULT_BUNDLE" > coverage/coverage-report.json
+
+      - name: Generate HTML coverage report
+        run: |
+          python3 - <<'PY'
+          import json
+          import html
+
+          with open("coverage/coverage-report.json", "r") as file:
+              data = json.load(file)
+
+          targets = data.get("targets", [])
+
+          rows = []
+
+          for target in targets:
+              target_name = target.get("name", "Unknown target")
+              target_coverage = target.get("lineCoverage", 0) * 100
+              rows.append((target_name, target_coverage, "Target"))
+
+              for file_data in target.get("files", []):
+                  file_name = file_data.get("name", "Unknown file")
+                  file_coverage = file_data.get("lineCoverage", 0) * 100
+                  rows.append((file_name, file_coverage, "File"))
+
+          def coverage_class(value):
+              if value >= 80:
+                  return "high"
+              if value >= 50:
+                  return "medium"
+              return "low"
+
+          html_rows = ""
+
+          for name, coverage, item_type in rows:
+              css_class = coverage_class(coverage)
+              html_rows += f"""
+              <tr>
+                  <td>{html.escape(item_type)}</td>
+                  <td>{html.escape(name)}</td>
+                  <td class="{css_class}">{coverage:.2f}%</td>
+              </tr>
+              """
+
+          page = f"""
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <title>EATSIT Coverage Report</title>
+              <style>
+                  body {{
+                      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                      margin: 40px;
+                      background: #f6f7fb;
+                      color: #222;
+                  }}
+
+                  h1 {{
+                      margin-bottom: 10px;
+                  }}
+
+                  .subtitle {{
+                      color: #666;
+                      margin-bottom: 24px;
+                  }}
+
+                  table {{
+                      width: 100%;
+                      border-collapse: collapse;
+                      background: white;
+                      border-radius: 14px;
+                      overflow: hidden;
+                      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+                  }}
+
+                  th, td {{
+                      padding: 14px 18px;
+                      border-bottom: 1px solid #eee;
+                      text-align: left;
+                  }}
+
+                  th {{
+                      background: #ff8a24;
+                      color: white;
+                      font-weight: 700;
+                  }}
+
+                  tr:hover {{
+                      background: #fff4ea;
+                  }}
+
+                  .high {{
+                      color: #22a447;
+                      font-weight: 700;
+                  }}
+
+                  .medium {{
+                      color: #d89200;
+                      font-weight: 700;
+                  }}
+
+                  .low {{
+                      color: #d93025;
+                      font-weight: 700;
+                  }}
+              </style>
+          </head>
+          <body>
+              <h1>EATSIT Coverage Report</h1>
+              <div class="subtitle">Generated automatically by GitHub Actions</div>
+
+              <table>
+                  <thead>
+                      <tr>
+                          <th>Type</th>
+                          <th>Name</th>
+                          <th>Coverage</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {html_rows}
+                  </tbody>
+              </table>
+          </body>
+          </html>
+          """
+
+          with open("coverage_html/index.html", "w") as file:
+              file.write(page)
+          PY
 
       - name: Show coverage report
         run: cat coverage/coverage-report.txt
 
-      - name: Upload coverage artifact
+      - name: Upload coverage text report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: EATSIT/coverage/
+
+      - name: Upload coverage HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: EATSIT/coverage_html/
 
       - name: Upload xcresult bundle
         uses: actions/upload-artifact@v4
