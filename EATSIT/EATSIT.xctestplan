@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "52A97363-C6F0-4DB1-A6BC-5D0FCD362B6E",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:EATSIT.xcodeproj",
+      "identifier" : "81B0F9302FB73F260019ADDE",
+      "name" : "EATSIT"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:EATSIT.xcodeproj",
+        "identifier" : "81B0F93D2FB73F270019ADDE",
+        "name" : "EATSITTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:EATSIT.xcodeproj",
+        "identifier" : "81B0F9472FB73F270019ADDE",
+        "name" : "EATSITUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

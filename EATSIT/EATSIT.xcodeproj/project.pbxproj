@@ -73,6 +73,7 @@
 		810B48E02FB9154F004ECF88 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		810B48E22FB9157B004ECF88 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		81557CE52FB99E27007AE491 /* eatsit.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = eatsit.sqlite; sourceTree = "<group>"; };
+		81557D072FB9FD06007AE491 /* EATSIT.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = EATSIT.xctestplan; sourceTree = "<group>"; };
 		817F53622FB78BBB00D75CA7 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
 		817F53642FB78BEE00D75CA7 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
 		817F53662FB78C2D00D75CA7 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 		81B0F9282FB73F260019ADDE = {
 			isa = PBXGroup;
 			children = (
+				81557D072FB9FD06007AE491 /* EATSIT.xctestplan */,
 				81B0F9622FB740F40019ADDE /* Models */,
 				81B0F9612FB740B30019ADDE /* Helpers */,
 				81B0F9602FB740A90019ADDE /* Resources  */,
