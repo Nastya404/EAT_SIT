@@ -11,7 +11,7 @@ on:
 
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: macos-15
 
     defaults:
       run:
@@ -21,21 +21,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Select stable Xcode 16
-        run: sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
+      # Берем самую свежую стабильную версию Xcode на macos-15 раннере
+      - name: Select stable Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
       - name: Show Xcode version
         run: xcodebuild -version
 
+      # Запускаем тесты, насильно перетирая целевую SDK на симулятор по умолчанию
       - name: Run Unit + UI Tests with Coverage
         run: |
           xcodebuild \
             -project EATSIT.xcodeproj \
             -scheme EATSIT \
-            -destination "platform=iOS Simulator,name=iPhone SE (3rd generation),OS=17.5" \
+            -destination "platform=iOS Simulator,name=iPhone SE (3rd generation)" \
             -enableCodeCoverage YES \
+            IPHONEOS_DEPLOYMENT_TARGET=17.0 \
+            SDKROOT=iphonesimulator \
             clean test
 
+       Alexander: Create coverage folder
       - name: Create coverage folder
         run: mkdir -p coverage
 
