@@ -48,11 +48,11 @@ struct DishDetailsView: View {
                 toppingsView
                 quantityView
             }
-            .padding(.bottom, 120)
+            .padding(.bottom, 170)
         }
         .background(Color(.systemGray6))
         .safeAreaInset(edge: .bottom) {
-            addToBasketButton
+            bottomButtonsView
         }
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
@@ -93,7 +93,7 @@ struct DishDetailsView: View {
                         .fontWeight(.bold)
                         .foregroundStyle(.orange)
 
-                    Text(LocalizedStringKey("dish.perItem"))
+                    Text("dish.perItem")
                         .font(.subheadline)
                         .foregroundStyle(.gray)
                 }
@@ -105,7 +105,7 @@ struct DishDetailsView: View {
 
             HStack(spacing: 10) {
 
-                Label(LocalizedStringKey("dish.popular"), systemImage: "flame.fill")
+                Label("dish.popular", systemImage: "flame.fill")
                     .foregroundStyle(.orange)
                     .padding(8)
                     .background(Color.orange.opacity(0.12))
@@ -132,7 +132,7 @@ struct DishDetailsView: View {
 
         VStack(alignment: .leading, spacing: 18) {
 
-            Text(LocalizedStringKey("dish.addToppings"))
+            Text("dish.addToppings")
                 .font(.title2)
                 .fontWeight(.bold)
 
@@ -182,7 +182,7 @@ struct DishDetailsView: View {
 
         VStack(alignment: .leading, spacing: 18) {
 
-            Text(LocalizedStringKey("dish.quantity"))
+            Text("dish.quantity")
                 .font(.title2)
                 .fontWeight(.bold)
 
@@ -222,6 +222,23 @@ struct DishDetailsView: View {
         .padding(.horizontal, 20)
     }
 
+    // MARK: - Bottom Buttons View
+
+    private var bottomButtonsView: some View {
+
+        VStack(spacing: 10) {
+
+            addToBasketButton
+
+            if !cartViewModel.items.isEmpty {
+                basketNavigationButton
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 10)
+        .background(.ultraThinMaterial)
+    }
+
     // MARK: - Add To Basket Button
 
     private var addToBasketButton: some View {
@@ -238,17 +255,45 @@ struct DishDetailsView: View {
 
         } label: {
 
-            Text("\(String(localized: "dish.addToBasket")) — $\(totalPrice, specifier: "%.2f")")
-                .font(.title3)
-                .fontWeight(.bold)
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.orange)
-                .clipShape(RoundedRectangle(cornerRadius: 22))
-                .padding(.horizontal, 20)
-                .padding(.top, 10)
-                .background(.ultraThinMaterial)
+            HStack(spacing: 6) {
+
+                Text("dish.addToBasket")
+                Text(String(format: "— $%.2f", totalPrice))
+            }
+            .font(.title3)
+            .fontWeight(.bold)
+            .foregroundStyle(.white)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.orange)
+            .clipShape(RoundedRectangle(cornerRadius: 22))
+        }
+    }
+
+    // MARK: - Basket Navigation Button
+
+    private var basketNavigationButton: some View {
+
+        NavigationLink {
+
+            BasketView()
+
+        } label: {
+
+            HStack {
+
+                Image(systemName: "basket.fill")
+                Text("restaurant.viewBasket")
+                Spacer()
+                Image(systemName: "chevron.right")
+            }
+            .font(.headline)
+            .fontWeight(.bold)
+            .foregroundStyle(.orange)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
         }
     }
 
