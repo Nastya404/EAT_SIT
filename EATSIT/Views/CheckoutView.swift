@@ -185,9 +185,17 @@ struct CheckoutView: View {
 
                 Spacer()
 
-                Label("checkout.addMoreItems", systemImage: "plus.circle")
-                    .font(.headline)
-                    .foregroundStyle(.orange)
+                Button {
+
+                    dismiss()
+
+                } label: {
+
+                    Label("checkout.addMoreItems", systemImage: "plus.circle")
+                        .font(.headline)
+                        .foregroundStyle(.orange)
+                }
+                .buttonStyle(.plain)
             }
         }
         .padding(20)
