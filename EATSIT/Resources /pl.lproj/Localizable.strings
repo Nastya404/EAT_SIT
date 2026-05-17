@@ -181,3 +181,9 @@
 
 "basket.itemsCount" = "%d produktów";
 "basket.toppings" = "+ dodatki";
+
+"profile.payment.visa" = "VISA •••• 1234";
+"profile.payment.cash" = "Gotówka przy odbiorze";
+"profile.payment.erip" = "Płatność ERIP";
+"profile.status.active" = "Aktywny";
+"profile.memberSince.value" = "2026";

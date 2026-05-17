@@ -11,8 +11,6 @@ struct ProfileView: View {
 
     // MARK: - Properties
 
-    // MARK: - Properties
-
     @EnvironmentObject private var authViewModel: AuthViewModel
     @EnvironmentObject private var orderViewModel: OrderViewModel
     @State private var showLogoutAlert = false
@@ -36,6 +34,7 @@ struct ProfileView: View {
     private var pointsCount: String {
         "\(orderViewModel.orders.count * 10)"
     }
+
     // MARK: - Body
 
     var body: some View {
@@ -229,10 +228,10 @@ struct ProfileView: View {
             ProfileInfoView(
                 titleKey: "profile.paymentMethods",
                 iconName: "creditcard.fill",
-                rows: [
-                    "VISA •••• 1234",
-                    "Cash on Delivery",
-                    "ERIP Payment"
+                rowKeys: [
+                    "profile.payment.visa",
+                    "profile.payment.cash",
+                    "profile.payment.erip"
                 ]
             )
 
@@ -240,9 +239,9 @@ struct ProfileView: View {
             ProfileInfoView(
                 titleKey: "profile.deliveryAddresses",
                 iconName: "location.fill",
-                rows: [
-                    String(localized: "checkout.address.homeValue"),
-                    String(localized: "checkout.address.officeValue")
+                rowKeys: [
+                    "checkout.address.homeValue",
+                    "checkout.address.officeValue"
                 ]
             )
 
@@ -256,10 +255,10 @@ struct ProfileView: View {
             ProfileInfoView(
                 titleKey: "profile.help",
                 iconName: "questionmark.circle.fill",
-                rows: [
-                    String(localized: "profile.help.faq"),
-                    String(localized: "profile.help.support"),
-                    String(localized: "profile.help.terms")
+                rowKeys: [
+                    "profile.help.faq",
+                    "profile.help.support",
+                    "profile.help.terms"
                 ]
             )
 
@@ -267,7 +266,7 @@ struct ProfileView: View {
             ProfileInfoView(
                 titleKey: option.titleKey,
                 iconName: option.iconName,
-                rows: []
+                rowKeys: []
             )
         }
     }
@@ -298,8 +297,8 @@ private struct ProfileDetailsView: View {
 
             Section("profile.account") {
 
-                profileRow(titleKey: "profile.status", value: "Active")
-                profileRow(titleKey: "profile.memberSince", value: "2026")
+                profileRow(titleKey: "profile.status", valueKey: "profile.status.active")
+                profileRow(titleKey: "profile.memberSince", valueKey: "profile.memberSince.value")
             }
         }
         .navigationTitle("profile.details")
@@ -319,6 +318,19 @@ private struct ProfileDetailsView: View {
                 .foregroundStyle(.gray)
         }
     }
+
+    private func profileRow(titleKey: String, valueKey: String) -> some View {
+
+        HStack {
+
+            Text(LocalizedStringKey(titleKey))
+
+            Spacer()
+
+            Text(LocalizedStringKey(valueKey))
+                .foregroundStyle(.gray)
+        }
+    }
 }
 
 // MARK: - Profile Info View
@@ -329,7 +341,7 @@ private struct ProfileInfoView: View {
 
     let titleKey: String
     let iconName: String
-    let rows: [String]
+    let rowKeys: [String]
 
     // MARK: - Body
 
@@ -337,21 +349,21 @@ private struct ProfileInfoView: View {
 
         List {
 
-            if rows.isEmpty {
+            if rowKeys.isEmpty {
 
                 Text("profile.emptySection")
                     .foregroundStyle(.gray)
 
             } else {
 
-                ForEach(rows, id: \.self) { row in
+                ForEach(rowKeys, id: \.self) { rowKey in
 
                     HStack(spacing: 12) {
 
                         Image(systemName: iconName)
                             .foregroundStyle(.orange)
 
-                        Text(row)
+                        Text(LocalizedStringKey(rowKey))
                     }
                 }
             }
@@ -390,4 +402,5 @@ private struct NotificationsSettingsView: View {
 
     ProfileView()
         .environmentObject(AuthViewModel())
+        .environmentObject(OrderViewModel())
 }

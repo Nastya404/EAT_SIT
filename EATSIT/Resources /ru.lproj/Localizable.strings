@@ -181,3 +181,9 @@
 
 "basket.itemsCount" = "%d товаров";
 "basket.toppings" = "+ добавки";
+
+"profile.payment.visa" = "VISA •••• 1234";
+"profile.payment.cash" = "Оплата наличными";
+"profile.payment.erip" = "Оплата через ЕРИП";
+"profile.status.active" = "Активен";
+"profile.memberSince.value" = "2026";
