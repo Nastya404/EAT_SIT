@@ -219,6 +219,39 @@ final class DatabaseManager {
         }
     }
 
+    // MARK: - Fetch Customizations For Dish
+
+    func fetchCustomizations(for dish: Dish) -> [DishCustomization] {
+
+        let query = """
+        SELECT name, price
+        FROM dish_customizations
+        WHERE dish_id = ?;
+        """
+
+        var customizations: [DishCustomization] = []
+        var statement: OpaquePointer?
+
+        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+
+            sqlite3_bind_text(statement, 1, dish.id, -1, transient)
+
+            while sqlite3_step(statement) == SQLITE_ROW {
+
+                let customization = DishCustomization(
+                    name: String(cString: sqlite3_column_text(statement, 0)),
+                    price: sqlite3_column_double(statement, 1)
+                )
+
+                customizations.append(customization)
+            }
+        } else {
+            print("Fetch customizations query preparation failed")
+        }
+
+        sqlite3_finalize(statement)
+        return customizations
+    }
     // MARK: - Insert Order
 
     func insertOrder(_ order: Order) {

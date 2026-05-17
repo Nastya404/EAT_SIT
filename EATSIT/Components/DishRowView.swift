@@ -95,7 +95,16 @@ struct DishRowView: View {
 #Preview {
 
     DishRowView(
-        dish: MockData.dishes[0]
+        dish: Dish(
+            id: "preview_dish",
+            restaurantId: "preview_restaurant",
+            name: "Preview Dish",
+            description: "Preview description",
+            price: 12.99,
+            imageName: "dish_snickers_cake",
+            category: "desserts",
+            restaurantName: "Preview Restaurant"
+        )
     )
     .environmentObject(CartViewModel())
 }

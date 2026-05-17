@@ -175,9 +175,27 @@ struct BasketItemView: View {
 
     BasketItemView(
         item: CartItem(
-            dish: MockData.dishes[0],
+            dish: Dish(
+                id: "preview_dish",
+                restaurantId: "preview_restaurant",
+                name: "Cheese Burger",
+                description: "Juicy burger with cheddar cheese",
+                price: 12.99,
+                imageName: "dish_cheese_burger",
+                category: "fast_food",
+                restaurantName: "Burger King"
+            ),
             quantity: 1,
-            selectedToppings: MockData.customizations
+            selectedToppings: [
+                DishCustomization(
+                    name: "Extra Cheese",
+                    price: 1.00
+                ),
+                DishCustomization(
+                    name: "Bacon",
+                    price: 2.00
+                )
+            ]
         )
     )
     .environmentObject(CartViewModel())

@@ -16,16 +16,17 @@ struct DishDetailsView: View {
     @EnvironmentObject private var cartViewModel: CartViewModel
 
     @State private var quantity = 1
+    @State private var customizations: [DishCustomization] = []
     @State private var selectedCustomizations: Set<UUID> = []
 
     private var toppingsTotal: Double {
-        MockData.customizations
+        customizations
             .filter { selectedCustomizations.contains($0.id) }
             .reduce(0) { $0 + $1.price }
     }
 
     private var selectedToppings: [DishCustomization] {
-        MockData.customizations.filter {
+        customizations.filter {
             selectedCustomizations.contains($0.id)
         }
     }
@@ -54,6 +55,9 @@ struct DishDetailsView: View {
             addToBasketButton
         }
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            customizations = DatabaseManager.shared.fetchCustomizations(for: dish)
+        }
     }
 
     // MARK: - Dish Image View
@@ -132,7 +136,7 @@ struct DishDetailsView: View {
                 .font(.title2)
                 .fontWeight(.bold)
 
-            ForEach(MockData.customizations) { customization in
+            ForEach(customizations) { customization in
 
                 Button {
 
@@ -279,7 +283,16 @@ struct DishDetailsView: View {
     NavigationStack {
 
         DishDetailsView(
-            dish: MockData.dishes[0]
+            dish: Dish(
+                id: "preview",
+                restaurantId: "preview",
+                name: "Preview Dish",
+                description: "Preview description",
+                price: 12.00,
+                imageName: "dish_snickers_cake",
+                category: "desserts",
+                restaurantName: "Preview Restaurant"
+            )
         )
         .environmentObject(CartViewModel())
     }

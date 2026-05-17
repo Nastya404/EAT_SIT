@@ -103,9 +103,22 @@ struct RestaurantCardView: View {
 
 // MARK: - Preview
 
+// MARK: - Preview
+
 #Preview {
 
     RestaurantCardView(
-        restaurant: MockData.restaurants[0]
+        restaurant: Restaurant(
+            id: "preview_restaurant",
+            name: "Burger King",
+            imageName: "restaurant_burger_king",
+            rating: 4.8,
+            deliveryTime: "20-30 min",
+            deliveryPrice: "2.99 BYN Delivery",
+            isPopular: true,
+            category: "fast_food",
+            latitude: 52.2297,
+            longitude: 21.0122
+        )
     )
 }
