@@ -1,0 +1,194 @@
+/* 
+  Localizable.strings
+  EATSIT
+
+  Created by Shamruk_Polina on 15.05.2026.
+  
+*/
+
+"tab.home" = "Главная";
+"tab.orders" = "Заказы";
+"tab.profile" = "Профиль";
+
+"profile.title" = "Профиль";
+"profile.orders" = "Заказы";
+"profile.reviews" = "Отзывы";
+"profile.points" = "Баллы";
+"profile.logout" = "Выйти";
+"profile.paymentMethods" = "Способы оплаты";
+"profile.deliveryAddresses" = "Адреса доставки";
+"profile.notifications" = "Уведомления";
+"profile.language" = "Язык";
+"profile.help" = "Помощь и поддержка";
+
+"language.title" = "Язык";
+
+"home.deliveringTo" = "ДОСТАВКА ПО АДРЕСУ";
+"home.address" = "Дом";
+"home.question" = "Что хотите заказать сегодня? 🍔";
+"home.search" = "Поиск ресторанов";
+"home.category.pizza" = "🍕 Пицца";
+"home.category.sushi" = "🍣 Суши";
+"home.category.burgers" = "🍔 Бургеры";
+"home.category.healthy" = "🥗 Здоровое";
+"home.category.desserts" = "🍰 Десерты";
+"home.popularNearYou" = "🔥 Популярное рядом";
+"home.seeAll" = "Все";
+
+"orders.title" = "Мои заказы";
+"orders.subtitle" = "Отслеживайте и повторяйте заказы";
+"orders.pastOrders" = "ПРОШЛЫЕ ЗАКАЗЫ";
+"orders.emptyTitle" = "Заказов пока нет";
+"orders.emptySubtitle" = "Здесь появятся ваши завершённые заказы.";
+
+"basket.title" = "Моя корзина";
+"basket.item" = "товар";
+"basket.items" = "товаров";
+
+"basket.yourOrder" = "ВАШ ЗАКАЗ";
+"basket.empty" = "Корзина пуста";
+
+"basket.summary" = "СВОДКА ЗАКАЗА";
+"basket.itemsTotal" = "Стоимость блюд";
+"basket.deliveryFee" = "Стоимость доставки";
+"basket.totalToPay" = "Итого к оплате";
+
+"basket.freeDelivery" = "Бесплатно";
+"basket.deliveryInfo" = "Бесплатная доставка на первый заказ! Примерное время 15–20 мин.";
+
+"basket.checkout" = "Оформить";
+
+"checkout.title" = "Оформление";
+"checkout.secure" = "Безопасно";
+"checkout.orderSummary" = "Состав заказа";
+"checkout.addMoreItems" = "Добавить ещё";
+
+"checkout.deliveryAddress" = "Адрес доставки";
+"checkout.savedAddresses" = "Сохранено: %d";
+"checkout.address.home" = "Дом";
+"checkout.address.office" = "Офис";
+"checkout.address.homeValue" = "42 Riverside Drive, кв. 3B";
+"checkout.address.officeValue" = "10 Business Center, этаж 5";
+"checkout.address.default" = "ПО УМОЛЧАНИЮ";
+"checkout.addNewAddress" = "Добавить новый адрес";
+
+"checkout.instructions" = "Комментарий к доставке";
+"checkout.instructionsPlaceholder" = "Например: оставить у двери, позвонить по прибытии, код домофона #1234...";
+
+"checkout.paymentMethod" = "Способ оплаты";
+"checkout.cardTitle" = "•••• •••• •••• 1234";
+"checkout.cardSubtitle" = "Действует до 09/28";
+"checkout.cashTitle" = "Оплата наличными";
+"checkout.cashSubtitle" = "Оплата при получении заказа";
+"checkout.eripTitle" = "Оплата через ЕРИП";
+"checkout.eripSubtitle" = "Оплата через систему ЕРИП";
+
+"checkout.totalBreakdown" = "Итоговая сумма";
+"checkout.items" = "Блюда";
+"checkout.deliveryFee" = "Стоимость доставки";
+"checkout.free" = "Бесплатно";
+"checkout.serviceFee" = "Сервисный сбор";
+"checkout.totalToPay" = "Итого к оплате";
+
+"checkout.deliveryEstimate" = "Примерно 15–20 мин\nдоставка";
+"checkout.placeOrder" = "Оформить заказ";
+"checkout.success" = "Заказ успешно оформлен!";
+"checkout.ok" = "OK";
+
+"order.delivered" = "Доставлен";
+"order.itemsCount" = "%d товар(ов)";
+"order.restaurantFallback" = "Ресторан";
+
+"home.category.all" = "🍽 Все";
+"home.category.desserts" = "🍰 Десерты";
+"home.category.shawarma" = "🌯 Шаурма";
+"home.category.pizza" = "🍕 Пицца";
+"home.category.sushi" = "🍣 Суши";
+"home.category.fastFood" = "🍔 Фаст-фуд";
+"home.category.asian" = "🥢 Азиатская кухня";
+
+"checkout.address.custom" = "Новый адрес";
+"checkout.addressEditor.title" = "Адрес доставки";
+"checkout.addressEditor.description" = "Введите или измените адрес доставки.";
+"checkout.addressEditor.placeholder" = "Адрес";
+"checkout.cancel" = "Отмена";
+"checkout.save" = "Сохранить";
+
+"checkout.deleteAddress" = "Удалить адрес";
+
+"profile.logoutTitle" = "Выход";
+"profile.logoutMessage" = "Вы уверены, что хотите выйти?";
+"profile.cancel" = "Отмена";
+"profile.details" = "Детали профиля";
+"profile.personalInfo" = "Личная информация";
+"profile.name" = "Имя";
+"profile.email" = "Электронная почта";
+"profile.phone" = "Телефон";
+"profile.account" = "Аккаунт";
+"profile.status" = "Статус";
+"profile.memberSince" = "С нами с";
+"profile.emptySection" = "Пока нет данных";
+"profile.notifications.orderUpdates" = "Обновления заказа";
+"profile.notifications.promotions" = "Акции и скидки";
+"profile.notifications.deliveryStatus" = "Статус доставки";
+"profile.help.faq" = "Частые вопросы";
+"profile.help.support" = "Связаться с поддержкой";
+"profile.help.terms" = "Условия использования";
+
+"auth.login.title" = "С возвращением";
+"auth.login.subtitle" = "Войдите, чтобы продолжить заказывать любимую еду.";
+"auth.login.button" = "Войти";
+"auth.login.noAccount" = "Нет аккаунта?";
+"auth.login.signUp" = "Зарегистрироваться";
+
+"auth.register.title" = "Создать аккаунт";
+"auth.register.subtitle" = "Присоединяйтесь к EAT&SIT и заказывайте еду быстрее.";
+"auth.register.button" = "Создать аккаунт";
+"auth.register.hasAccount" = "Уже есть аккаунт?";
+"auth.register.signIn" = "Войти";
+
+"auth.name" = "Имя";
+"auth.email" = "Электронная почта";
+"auth.phone" = "Телефон";
+"auth.password" = "Пароль";
+
+"auth.error.emptyFields" = "Заполните все поля.";
+"auth.error.noUser" = "Пользователь не найден. Создайте аккаунт.";
+"auth.error.invalidCredentials" = "Неверная почта или пароль.";
+
+"home.selectAddress" = "Выберите адрес доставки";
+"home.currentLocation" = "Текущее местоположение";
+
+"dish.addToBasket" = "В корзину";
+
+"dish.perItem" = "за штуку";
+"dish.popular" = "Популярное";
+"dish.addToppings" = "Добавки (+$)";
+"dish.quantity" = "Количество";
+
+"basket.itemsTotal" = "Стоимость блюд";
+"basket.totalToPay" = "Итого к оплате";
+"basket.checkout" = "Оформить";
+"basket.quantity" = "Количество";
+
+"checkout.placeOrder" = "Оформить заказ";
+
+"restaurant.viewBasket" = "Посмотреть корзину";
+"restaurant.open" = "Открыть";
+
+"restaurant.deliveryPrice" = "Доставка 2.99 BYN";
+"restaurant.deliveryTime" = "20-35 мин";
+
+"basket.itemsCount" = "%d товаров";
+"order.itemsLabel" = "товар(ов)";
+"basket.toppings" = "+ добавки";
+
+"profile.payment.visa" = "VISA •••• 1234";
+"profile.payment.cash" = "Оплата наличными";
+"profile.payment.erip" = "Оплата через ЕРИП";
+"profile.status.active" = "Активен";
+"profile.memberSince.value" = "2026";
+
+"map.title" = "Карта";
+"map.nearestRestaurant" = "Ближайший ресторан:";
+"map.findNearestRestaurant" = "Найти ближайший ресторан";

@@ -1,0 +1,195 @@
+/* 
+  Localizable.strings
+  EATSIT
+
+  Created by Shamruk_Polina on 15.05.2026.
+  
+*/
+
+"tab.home" = "Home";
+"tab.orders" = "Orders";
+"tab.profile" = "Profile";
+
+"profile.title" = "Profile";
+"profile.orders" = "Orders";
+"profile.reviews" = "Reviews";
+"profile.points" = "Points";
+"profile.logout" = "Log Out";
+"profile.paymentMethods" = "Payment Methods";
+"profile.deliveryAddresses" = "Delivery Addresses";
+"profile.notifications" = "Notifications";
+"profile.language" = "Language";
+"profile.help" = "Help & Support";
+
+"language.title" = "Language";
+
+"home.deliveringTo" = "DELIVERING TO";
+"home.address" = "Home";
+"home.question" = "What are you craving today? 🍔";
+"home.search" = "Search restaurants";
+"home.category.pizza" = "🍕 Pizza";
+"home.category.sushi" = "🍣 Sushi";
+"home.category.burgers" = "🍔 Burgers";
+"home.category.healthy" = "🥗 Healthy";
+"home.category.desserts" = "🍰 Desserts";
+"home.popularNearYou" = "🔥 Popular Near You";
+"home.seeAll" = "See all";
+
+"orders.title" = "My Orders";
+"orders.subtitle" = "Track and reorder your meals";
+"orders.pastOrders" = "PAST ORDERS";
+"orders.emptyTitle" = "No orders yet";
+"orders.emptySubtitle" = "Your completed orders will appear here.";
+
+"basket.title" = "My Basket";
+"basket.item" = "item";
+"basket.items" = "items";
+
+"basket.yourOrder" = "YOUR ORDER";
+"basket.empty" = "Your basket is empty";
+
+"basket.summary" = "ORDER SUMMARY";
+"basket.itemsTotal" = "Items Total";
+"basket.deliveryFee" = "Delivery Fee";
+"basket.totalToPay" = "Total to Pay";
+
+"basket.freeDelivery" = "Free";
+"basket.deliveryInfo" = "Free delivery on your first order! Estimated 15–20 min.";
+
+"basket.checkout" = "Checkout";
+
+"checkout.title" = "Checkout";
+"checkout.secure" = "Secure";
+"checkout.orderSummary" = "Order Summary";
+"checkout.addMoreItems" = "Add more items";
+
+"checkout.deliveryAddress" = "Delivery Address";
+"checkout.savedAddresses" = "%d saved";
+"checkout.address.home" = "Home";
+"checkout.address.office" = "Office";
+"checkout.address.homeValue" = "42 Riverside Drive, Apt 3B";
+"checkout.address.officeValue" = "10 Business Center, Floor 5";
+"checkout.address.default" = "DEFAULT";
+"checkout.addNewAddress" = "Add New Address";
+
+"checkout.instructions" = "Delivery Instructions";
+"checkout.instructionsPlaceholder" = "e.g. Leave at the door, call on arrival, gate code #1234...";
+
+"checkout.paymentMethod" = "Payment Method";
+"checkout.cardTitle" = "•••• •••• •••• 1234";
+"checkout.cardSubtitle" = "Expires 09/28";
+"checkout.cashTitle" = "Cash on Delivery";
+"checkout.cashSubtitle" = "Pay when your order arrives";
+"checkout.eripTitle" = "ERIP Payment";
+"checkout.eripSubtitle" = "Pay via ERIP system";
+
+"checkout.totalBreakdown" = "Total Breakdown";
+"checkout.items" = "Items";
+"checkout.deliveryFee" = "Delivery Fee";
+"checkout.free" = "Free";
+"checkout.serviceFee" = "Service Fee";
+"checkout.totalToPay" = "Total to Pay";
+
+"checkout.deliveryEstimate" = "Est. 15–20 min\ndelivery";
+"checkout.placeOrder" = "Place Order";
+"checkout.success" = "Order successfully placed!";
+"checkout.ok" = "OK";
+
+"order.delivered" = "Delivered";
+"order.itemsCount" = "%d item(s)";
+"order.restaurantFallback" = "Restaurant";
+
+"home.category.all" = "🍽 All";
+"home.category.desserts" = "🍰 Desserts";
+"home.category.shawarma" = "🌯 Shawarma";
+"home.category.pizza" = "🍕 Pizza";
+"home.category.sushi" = "🍣 Sushi";
+"home.category.fastFood" = "🍔 Fast Food";
+"home.category.asian" = "🥢 Asian";
+
+
+"checkout.address.custom" = "Custom";
+"checkout.addressEditor.title" = "Delivery Address";
+"checkout.addressEditor.description" = "Enter or edit your delivery address.";
+"checkout.addressEditor.placeholder" = "Address";
+"checkout.cancel" = "Cancel";
+"checkout.save" = "Save";
+
+"checkout.deleteAddress" = "Delete Address";
+
+"profile.logoutTitle" = "Log Out";
+"profile.logoutMessage" = "Are you sure you want to log out?";
+"profile.cancel" = "Cancel";
+"profile.details" = "Profile Details";
+"profile.personalInfo" = "Personal Information";
+"profile.name" = "Name";
+"profile.email" = "Email";
+"profile.phone" = "Phone";
+"profile.account" = "Account";
+"profile.status" = "Status";
+"profile.memberSince" = "Member Since";
+"profile.emptySection" = "No data yet";
+"profile.notifications.orderUpdates" = "Order updates";
+"profile.notifications.promotions" = "Promotions";
+"profile.notifications.deliveryStatus" = "Delivery status";
+"profile.help.faq" = "FAQ";
+"profile.help.support" = "Contact support";
+"profile.help.terms" = "Terms and conditions";
+
+"auth.login.title" = "Welcome Back";
+"auth.login.subtitle" = "Sign in to continue ordering your favorite meals.";
+"auth.login.button" = "Sign In";
+"auth.login.noAccount" = "Don't have an account?";
+"auth.login.signUp" = "Sign Up";
+
+"auth.register.title" = "Create Account";
+"auth.register.subtitle" = "Join EAT&SIT and start ordering food faster.";
+"auth.register.button" = "Create Account";
+"auth.register.hasAccount" = "Already have an account?";
+"auth.register.signIn" = "Sign In";
+
+"auth.name" = "Name";
+"auth.email" = "Email";
+"auth.phone" = "Phone";
+"auth.password" = "Password";
+
+"auth.error.emptyFields" = "Please fill in all fields.";
+"auth.error.noUser" = "No registered user found. Please create an account.";
+"auth.error.invalidCredentials" = "Invalid email or password.";
+
+"home.selectAddress" = "Select delivery address";
+"home.currentLocation" = "Current location";
+
+"dish.addToBasket" = "Add to Basket";
+
+"dish.perItem" = "per item";
+"dish.popular" = "Popular";
+"dish.addToppings" = "Add Toppings (+$)";
+"dish.quantity" = "Quantity";
+
+"basket.itemsTotal" = "Items Total";
+"basket.totalToPay" = "Total to Pay";
+"basket.checkout" = "Checkout";
+"basket.quantity" = "Quantity";
+
+"checkout.placeOrder" = "Place Order";
+
+"restaurant.viewBasket" = "View Basket";
+"restaurant.open" = "Open";
+
+"restaurant.deliveryPrice" = "2.99 BYN Delivery";
+"restaurant.deliveryTime" = "20-35 min";
+
+"basket.itemsCount" = "%d items";
+"order.itemsLabel" = "item(s)";
+"basket.toppings" = "+ toppings";
+
+"profile.payment.visa" = "VISA •••• 1234";
+"profile.payment.cash" = "Cash on Delivery";
+"profile.payment.erip" = "ERIP Payment";
+"profile.status.active" = "Active";
+"profile.memberSince.value" = "2026";
+
+"map.title" = "Map";
+"map.nearestRestaurant" = "Nearest restaurant:";
+"map.findNearestRestaurant" = "Find nearest restaurant";

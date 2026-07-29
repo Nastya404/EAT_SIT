@@ -1,0 +1,194 @@
+/* 
+  Localizable.strings
+  EATSIT
+
+  Created by Shamruk_Polina on 15.05.2026.
+  
+*/
+
+"tab.home" = "Główna";
+"tab.orders" = "Zamówienia";
+"tab.profile" = "Profil";
+
+"profile.title" = "Profil";
+"profile.orders" = "Zamówienia";
+"profile.reviews" = "Opinie";
+"profile.points" = "Punkty";
+"profile.logout" = "Wyloguj";
+"profile.paymentMethods" = "Metody płatności";
+"profile.deliveryAddresses" = "Adresy dostawy";
+"profile.notifications" = "Powiadomienia";
+"profile.language" = "Język";
+"profile.help" = "Pomoc i wsparcie";
+
+"language.title" = "Język";
+
+"home.deliveringTo" = "DOSTAWA DO";
+"home.address" = "Dom";
+"home.question" = "Na co masz dziś ochotę? 🍔";
+"home.search" = "Szukaj restauracji";
+"home.category.pizza" = "🍕 Pizza";
+"home.category.sushi" = "🍣 Sushi";
+"home.category.burgers" = "🍔 Burgery";
+"home.category.healthy" = "🥗 Zdrowe";
+"home.category.desserts" = "🍰 Desery";
+"home.popularNearYou" = "🔥 Popularne w pobliżu";
+"home.seeAll" = "Zobacz wszystkie";
+
+"orders.title" = "Moje zamówienia";
+"orders.subtitle" = "Śledź i zamawiaj ponownie";
+"orders.pastOrders" = "POPRZEDNIE ZAMÓWIENIA";
+"orders.emptyTitle" = "Brak zamówień";
+"orders.emptySubtitle" = "Tutaj pojawią się zakończone zamówienia.";
+
+"basket.title" = "Mój koszyk";
+"basket.item" = "produkt";
+"basket.items" = "produktów";
+
+"basket.yourOrder" = "TWOJE ZAMÓWIENIE";
+"basket.empty" = "Koszyk jest pusty";
+
+"basket.summary" = "PODSUMOWANIE";
+"basket.itemsTotal" = "Koszt dań";
+"basket.deliveryFee" = "Koszt dostawy";
+"basket.totalToPay" = "Łącznie do zapłaty";
+
+"basket.freeDelivery" = "Darmowa";
+"basket.deliveryInfo" = "Darmowa dostawa przy pierwszym zamówieniu! Szacowany czas 15–20 min.";
+
+"basket.checkout" = "Przejdź do płatności";
+
+"checkout.title" = "Zamówienie";
+"checkout.secure" = "Bezpieczne";
+"checkout.orderSummary" = "Podsumowanie zamówienia";
+"checkout.addMoreItems" = "Dodaj więcej";
+
+"checkout.deliveryAddress" = "Adres dostawy";
+"checkout.savedAddresses" = "%d zapisane";
+"checkout.address.home" = "Dom";
+"checkout.address.office" = "Biuro";
+"checkout.address.homeValue" = "42 Riverside Drive, lok. 3B";
+"checkout.address.officeValue" = "10 Business Center, piętro 5";
+"checkout.address.default" = "DOMYŚLNY";
+"checkout.addNewAddress" = "Dodaj nowy adres";
+
+"checkout.instructions" = "Instrukcje dostawy";
+"checkout.instructionsPlaceholder" = "np. zostawić pod drzwiami, zadzwonić po przyjeździe, kod #1234...";
+
+"checkout.paymentMethod" = "Metoda płatności";
+"checkout.cardTitle" = "•••• •••• •••• 1234";
+"checkout.cardSubtitle" = "Ważna do 09/28";
+"checkout.cashTitle" = "Gotówka przy odbiorze";
+"checkout.cashSubtitle" = "Zapłać po dostarczeniu zamówienia";
+"checkout.eripTitle" = "Płatność ERIP";
+"checkout.eripSubtitle" = "Zapłać przez system ERIP";
+
+"checkout.totalBreakdown" = "Podsumowanie kosztów";
+"checkout.items" = "Dania";
+"checkout.deliveryFee" = "Koszt dostawy";
+"checkout.free" = "Darmowa";
+"checkout.serviceFee" = "Opłata serwisowa";
+"checkout.totalToPay" = "Łącznie do zapłaty";
+
+"checkout.deliveryEstimate" = "Szac. 15–20 min\ndostawa";
+"checkout.placeOrder" = "Złóż zamówienie";
+"checkout.success" = "Zamówienie zostało złożone!";
+"checkout.ok" = "OK";
+
+"order.delivered" = "Dostarczono";
+"order.itemsCount" = "%d produkt(ów)";
+"order.restaurantFallback" = "Restauracja";
+
+"home.category.all" = "🍽 Wszystko";
+"home.category.desserts" = "🍰 Desery";
+"home.category.shawarma" = "🌯 Shawarma";
+"home.category.pizza" = "🍕 Pizza";
+"home.category.sushi" = "🍣 Sushi";
+"home.category.fastFood" = "🍔 Fast food";
+"home.category.asian" = "🥢 Kuchnia azjatycka";
+
+"checkout.address.custom" = "Nowy adres";
+"checkout.addressEditor.title" = "Adres dostawy";
+"checkout.addressEditor.description" = "Wpisz lub edytuj adres dostawy.";
+"checkout.addressEditor.placeholder" = "Adres";
+"checkout.cancel" = "Anuluj";
+"checkout.save" = "Zapisz";
+
+"checkout.deleteAddress" = "Usuń adres";
+
+"profile.logoutTitle" = "Wylogowanie";
+"profile.logoutMessage" = "Czy na pewno chcesz się wylogować?";
+"profile.cancel" = "Anuluj";
+"profile.details" = "Szczegóły profilu";
+"profile.personalInfo" = "Dane osobowe";
+"profile.name" = "Imię";
+"profile.email" = "E-mail";
+"profile.phone" = "Telefon";
+"profile.account" = "Konto";
+"profile.status" = "Status";
+"profile.memberSince" = "Użytkownik od";
+"profile.emptySection" = "Brak danych";
+"profile.notifications.orderUpdates" = "Aktualizacje zamówień";
+"profile.notifications.promotions" = "Promocje i rabaty";
+"profile.notifications.deliveryStatus" = "Status dostawy";
+"profile.help.faq" = "Najczęstsze pytania";
+"profile.help.support" = "Kontakt z pomocą";
+"profile.help.terms" = "Warunki korzystania";
+
+"auth.login.title" = "Witamy ponownie";
+"auth.login.subtitle" = "Zaloguj się, aby dalej zamawiać ulubione jedzenie.";
+"auth.login.button" = "Zaloguj się";
+"auth.login.noAccount" = "Nie masz konta?";
+"auth.login.signUp" = "Zarejestruj się";
+
+"auth.register.title" = "Utwórz konto";
+"auth.register.subtitle" = "Dołącz do EAT&SIT i zamawiaj jedzenie szybciej.";
+"auth.register.button" = "Utwórz konto";
+"auth.register.hasAccount" = "Masz już konto?";
+"auth.register.signIn" = "Zaloguj się";
+
+"auth.name" = "Imię";
+"auth.email" = "E-mail";
+"auth.phone" = "Telefon";
+"auth.password" = "Hasło";
+
+"auth.error.emptyFields" = "Wypełnij wszystkie pola.";
+"auth.error.noUser" = "Nie znaleziono użytkownika. Utwórz konto.";
+"auth.error.invalidCredentials" = "Nieprawidłowy e-mail lub hasło.";
+
+"home.selectAddress" = "Wybierz adres dostawy";
+"home.currentLocation" = "Bieżąca lokalizacja";
+
+"dish.addToBasket" = "Dodaj do koszyka";
+
+"dish.perItem" = "za sztukę";
+"dish.popular" = "Popularne";
+"dish.addToppings" = "Dodatki (+$)";
+"dish.quantity" = "Ilość";
+
+"basket.itemsTotal" = "Suma dań";
+"basket.totalToPay" = "Razem do zapłaty";
+"basket.checkout" = "Przejdź do kasy";
+"basket.quantity" = "Ilość";
+
+"checkout.placeOrder" = "Złóż zamówienie";
+
+"restaurant.viewBasket" = "Zobacz koszyk";
+"restaurant.open" = "Otwórz";
+
+"restaurant.deliveryPrice" = "Dostawa 2.99 BYN";
+"restaurant.deliveryTime" = "20-35 min";
+
+"basket.itemsCount" = "%d produktów";
+"order.itemsLabel" = "produkt(ów)";
+"basket.toppings" = "+ dodatki";
+
+"profile.payment.visa" = "VISA •••• 1234";
+"profile.payment.cash" = "Gotówka przy odbiorze";
+"profile.payment.erip" = "Płatność ERIP";
+"profile.status.active" = "Aktywny";
+"profile.memberSince.value" = "2026";
+
+"map.title" = "Mapa";
+"map.nearestRestaurant" = "Najbliższa restauracja:";
+"map.findNearestRestaurant" = "Znajdź najbliższą restaurację";
